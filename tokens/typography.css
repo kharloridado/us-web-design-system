@@ -4,16 +4,106 @@
  * A type ramp is often DEVICE-RESPONSIVE in the design source: the same token name can
  * resolve to a different size on desktop / tablet / mobile. That axis is usually invisible
  * on the design system's type page and only shows up in a component's example frames.
- * If a size is mode-bound, emit per-device tokens — do not freeze one device's value here. */
+ * If a size is mode-bound, emit per-device tokens — do not freeze one device's value here.
+ *
+ * THIS FILE IS SHARED BY TWO ITEMS. The nine-step SIZE RAMP below is item `tok-font-sizes`
+ * (node 1892-7566) and is final. The family / weight / line-height declarations are still
+ * template placeholders owned by item `tok-typography` (node 63-49) — leave them for that
+ * item to replace. */
 :root {
+  /* ---- Font family / weight / line-height — PLACEHOLDERS, owned by tok-typography ----
+   * Not from any ref. Item 3 (node 63-49) replaces these. The Font sizes page renders its
+   * samples in a face it never names, so emitting a family from that ref would be
+   * inventing a value the design did not state. */
   --font-family-base: system-ui, sans-serif; /* TODO: brand font */
   --font-weight-regular: 400;
   --font-weight-medium:  500;
   --font-weight-bold:    700;
 
-  --font-size-s:  14px;
-  --font-size-m:  16px;
-  --font-size-l:  20px;
-  --font-size-xl: 24px;
+  /* ---- Font size — the nine-step ramp -------------------------------------------
+   * SOURCE OF RECORD: loop/refs/tok-font-sizes/ (Figma file tJnXUZbEL3fRWG7h1z0ij7,
+   * node 1892-7566, pulled 2026-08-20). NOT Figma variables — that node exposes only two
+   * colours: the sizes are literal TEXT STYLES, so there is nothing to bind to. The
+   * authoritative value of each step is that sample's own text style, read via
+   * get_design_context (the 2xl sample reports text-[40px]). All nine were re-pulled that
+   * way in round 2 and are exact.
+   *   A LAYER NAME IS NOT A MEASUREMENT. The ref first sourced these from the node's
+   * text-layer names (get_metadata reports layers literally named "13px", "2", "h6") and
+   * called the labels in the rendered figma.png an independent confirmation. They are not
+   * independent: the layer name and the printed label are the SAME design-authored string,
+   * and neither measures a glyph, so they agree even when a row is mislabelled. That is
+   * exactly what happened at 2xl — the page says 42px while its own sample is styled 40px.
+   * The design-side mislabel is filed separately as a consistency finding; 40px is built.
+   *
+   * NAMING — `--font-size-<step>` using the design's OWN step names, in the design's order.
+   * Three reasons this and not a project-prefixed name:
+   *   1. The design system names its steps 3xs…3xl; renaming them breaks the mapping back
+   *      to the design and to upstream USWDS.
+   *   2. It is the OutSystems UI custom-property convention (--font-size-base,
+   *      --font-size-s, --font-size-xs), and redefining OSUI's own :root variables is the
+   *      documented re-branding mechanism, not a collision defect.
+   *   3. build/gen-type-utilities.mjs parses exactly /^\s*--font-size-([\w-]+)\s*:/m per
+   *      line to emit .font-size-<step>. A prefixed name, or two tokens on one line, would
+   *      silently produce zero utilities.
+   *
+   * THE SCALE INDEX IS PROVENANCE, NOT A SEQUENCE. Upstream USWDS's scale runs further than
+   * this; the design system selects nine steps of it, so the indices are sparse (2,3,4,5,6,
+   * 9,12,14,15 — 7,8,10,11,13 are absent by design). Do not interpolate the gaps and do not
+   * renumber the ramp to be contiguous.
+   *
+   * SIZES ONLY — NO ROLES. The ref's right-hand column maps steps onto h1–h6 / body /
+   * intro / Display. That mapping is semantic and belongs to the semantic-role layer (and
+   * to OSUI's --font-size-h1…h6 / --font-size-base / --font-size-display, which this file
+   * deliberately does NOT touch). `2xs` and `md` carry no heading role in the design ("//"
+   * in the role column) — that is a missing ROLE, not a missing size; both are real steps.
+   *
+   * UNITS ARE `px`, AS DESIGNED. The ref states 13px, not 0.8125rem, and observation 6
+   * requires any relative-unit conversion to be a declared decision. Kept as px: it is what
+   * the design says, and it is the unit OSUI's own type variables use (--font-size-base:
+   * 16px), so the redefinitions below stay unit-consistent with the framework rules that
+   * consume them. Trade-off, recorded: px does not respond to a browser's default-font-size
+   * setting (page zoom still scales it, so WCAG 2.2 AA 1.4.4 is met). Every value here is
+   * an exact binary fraction of 16px, so a later switch to rem would be lossless — that is
+   * a brand-owner decision, not a silent one.
+   *
+   * NO MODE AXIS was observable on this node: one value per step, no device or breakpoint
+   * variants. Per the ref, treat that as an ASSUMPTION TO RE-TEST at the first component
+   * ref that specifies type, not as settled. If type turns out to be device-bound these
+   * become per-breakpoint tokens and the ref is stale.
+   *
+   * FRAMEWORK NAME COLLISION — ONE, AND IT IS LOAD-BEARING. Measured in the compiled
+   * framework (preview/vendor/outsystems-ui/outsystems-ui.css): of the nine names below
+   * only `xs` is already declared by OSUI (line 272, --font-size-xs: 12px), and it has 26
+   * var(--font-size-xs) consumers in real widget rules. Redefining it moves those from 12px
+   * to the design's 15px. That is intended: this ramp contains no 12px step at all, so
+   * OSUI's default is off-brand by construction. The other eight names have zero
+   * declarations and zero consumers in the framework.
+   *   NOT affected: --font-size-s (OSUI line 271, 14px, 25 consumers), --font-size-base
+   *   (16px, 22), --font-size-label (11px, 3) and --font-size-h1…h6 / display are neither
+   *   declared nor referenced here, so they keep their framework values until the
+   *   semantic / outsystems-ui-overrides layer maps them onto this ramp on purpose.
+   *   OSUI's own .font-size-xs utility class resolves through the variable, so it tracks
+   *   the override; .font-size-s and the role classes are untouched.
+   *   REPLACED: the template placeholders --font-size-s/m/l/xl. `s` (14px) is redundant —
+   *   OSUI declares its own identical 14px, so its consumers are unchanged. `m`/`l`/`xl`
+   *   had no framework consumers; inside this repo the only references are the two worked
+   *   examples under src/examples/ (template reference components, which is why they are
+   *   not linked from preview/index.html and are outside the theme build) — and both
+   *   already carry explicit var(--font-size-m, 16px) / var(--font-size-l, 20px)
+   *   fallbacks, so they render identically with the token gone.
+   *
+   *   step  USWDS index  role stated by the design (mapping only — not emitted here) */
+  --font-size-3xs: 13px; /*  2   h6            */
+  --font-size-2xs: 14px; /*  3   —             */
+  --font-size-xs:  15px; /*  4   h5            */
+  --font-size-sm:  16px; /*  5   h4 + body     */
+  --font-size-md:  17px; /*  6   —             */
+  --font-size-lg:  22px; /*  9   h3 + intro    */
+  --font-size-xl:  32px; /* 12   h2            */
+  --font-size-2xl: 40px; /* 14   h1            */
+  --font-size-3xl: 48px; /* 15   Display       */
+
+  /* ---- Line height — PLACEHOLDER, owned by tok-typography ----
+   * The Font sizes ref states no line-heights. Item 3 (node 63-49) replaces this. */
   --line-height-base: 1.5;
 }
