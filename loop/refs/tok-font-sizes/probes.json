@@ -1,5 +1,5 @@
 {
-  "_comment": "Checker-authored probes for item tok-font-sizes. The preview ships no type specimen, so a probe of :root alone would only re-read the declaration we are supposed to be auditing. Every ramp probe therefore INJECTS a real consumer element into the live cascade (OSUI base + dist/theme.css) and reads the USED font-size back out of getComputedStyle. The collateral probes measure OSUI's own widgets, which is the only way to see what redefining --font-size-xs actually does to the framework.",
+  "_comment": "Checker-authored probes for item tok-font-sizes. The preview ships no type specimen, so a probe of :root alone would only re-read the declaration under audit. Every ramp probe therefore INJECTS a real consumer element into the live cascade (OSUI base + dist/theme.css) and reads the USED font-size back out of getComputedStyle. The collateral probes measure OSUI own widgets, which is the only way to see what redefining --font-size-xs actually does to the framework.",
   "waitFor": "main",
   "viewports": [
     {
@@ -124,23 +124,24 @@
     },
     {
       "name": "overflow / .badge.badge-small 2 digits",
-      "js": "(()=>{const e=document.createElement('span');e.className='badge badge-small';e.textContent='99';document.body.appendChild(e);const r={clip_x:e.scrollWidth-e.clientWidth,clip_y:e.scrollHeight-e.clientHeight,sw:e.scrollWidth,cw:e.clientWidth,sh:e.scrollHeight,ch:e.clientHeight,fs:getComputedStyle(e).fontSize};e.remove();return r;})()"
+      "js": "(()=>{const e=document.createElement('span');e.className='badge badge-small';e.textContent='99';document.body.appendChild(e);const cs=getComputedStyle(e);const r={rendered:e.clientWidth>0&&e.clientHeight>0,clips_x:e.scrollWidth>e.clientWidth,clips_y:e.scrollHeight>e.clientHeight,fontSize:cs.fontSize,height:e.clientHeight};e.remove();return r;})()"
     },
     {
       "name": "overflow / .avatar-small initials",
-      "js": "(()=>{const e=document.createElement('div');e.className='avatar avatar-small';e.textContent='AB';document.body.appendChild(e);const r={clip_x:e.scrollWidth-e.clientWidth,clip_y:e.scrollHeight-e.clientHeight,sw:e.scrollWidth,cw:e.clientWidth,sh:e.scrollHeight,ch:e.clientHeight,fs:getComputedStyle(e).fontSize};e.remove();return r;})()"
+      "js": "(()=>{const e=document.createElement('div');e.className='avatar avatar-small';e.textContent='AB';document.body.appendChild(e);const cs=getComputedStyle(e);const r={rendered:e.clientWidth>0&&e.clientHeight>0,clips_x:e.scrollWidth>e.clientWidth,clips_y:e.scrollHeight>e.clientHeight,fontSize:cs.fontSize,height:e.clientHeight};e.remove();return r;})()"
     },
     {
       "name": "overflow / .tag.tag-small",
-      "js": "(()=>{const e=document.createElement('span');e.className='tag tag-small';e.textContent='Active';document.body.appendChild(e);const r={clip_x:e.scrollWidth-e.clientWidth,clip_y:e.scrollHeight-e.clientHeight,sw:e.scrollWidth,cw:e.clientWidth,sh:e.scrollHeight,ch:e.clientHeight,fs:getComputedStyle(e).fontSize};e.remove();return r;})()"
+      "js": "(()=>{const e=document.createElement('span');e.className='tag tag-small';e.textContent='Active';document.body.appendChild(e);const cs=getComputedStyle(e);const r={rendered:e.clientWidth>0&&e.clientHeight>0,clips_x:e.scrollWidth>e.clientWidth,clips_y:e.scrollHeight>e.clientHeight,fontSize:cs.fontSize,height:e.clientHeight};e.remove();return r;})()"
     },
     {
       "name": "overflow / .btn.btn-small",
-      "js": "(()=>{const e=document.createElement('button');e.className='btn btn-small';e.textContent='Save changes';document.body.appendChild(e);const r={clip_x:e.scrollWidth-e.clientWidth,clip_y:e.scrollHeight-e.clientHeight,sw:e.scrollWidth,cw:e.clientWidth,sh:e.scrollHeight,ch:e.clientHeight,fs:getComputedStyle(e).fontSize};e.remove();return r;})()"
+      "js": "(()=>{const e=document.createElement('button');e.className='btn btn-small';e.textContent='Save changes';document.body.appendChild(e);const cs=getComputedStyle(e);const r={rendered:e.clientWidth>0&&e.clientHeight>0,clips_x:e.scrollWidth>e.clientWidth,clips_y:e.scrollHeight>e.clientHeight,fontSize:cs.fontSize,height:e.clientHeight};e.remove();return r;})()"
     },
     {
       "name": "overflow / .badge.badge-small at OSUI default 12px (control)",
-      "js": "(()=>{const e=document.createElement('span');e.className='badge badge-small';e.style.setProperty('--font-size-xs','12px');e.textContent='99';document.body.appendChild(e);const r={clip_x:e.scrollWidth-e.clientWidth,clip_y:e.scrollHeight-e.clientHeight,sw:e.scrollWidth,cw:e.clientWidth,fs:getComputedStyle(e).fontSize};e.remove();return r;})()"
+      "js": "(()=>{const e=document.createElement('span');e.className='badge badge-small';e.style.setProperty('--font-size-xs','12px');e.textContent='99';document.body.appendChild(e);const cs=getComputedStyle(e);const r={rendered:e.clientWidth>0&&e.clientHeight>0,clips_x:e.scrollWidth>e.clientWidth,clips_y:e.scrollHeight>e.clientHeight,fontSize:cs.fontSize,height:e.clientHeight};e.remove();return r;})()"
     }
-  ]
+  ],
+  "_probe_typing_rule": "PORTABILITY RULE — READ BEFORE ADDING A PROBE. compare-measurements.mjs diffs js probe results EXACTLY (that exactness is what catches a webfont silently falling back); only rect/ink geometry gets the 1.5px tolerance. An injected element cannot be a rect probe, so everything here is a js probe and therefore exact-compared. A js probe may return ONLY values invariant under FONT SUBSTITUTION: (a) token-derived computed lengths (font-size, line-height, padding, custom property values), (b) box dimensions that CSS fixes outright, (c) boolean invariants. It must NEVER return a text ADVANCE width — scrollWidth/clientWidth/offsetWidth of a content-sized box, or a bounding width around text. Measured 2026-08-20: .tag-small \"Active\" at a constant 15px renders sw 57 (Liberation/DejaVu/monospace), 58 (Segoe UI), 61 (Arial), 62 (Comic Sans); .btn-small \"Save changes\" renders 101-107 locally and 116 on a bare ubuntu-latest runner. Same size, same zero clipping, different glyph advances — a baseline carrying those numbers is not portable and fails CI on any machine with different fonts installed. The overflow probes below therefore assert the INVARIANT (does it clip? yes/no) instead of reporting the ENVIRONMENT (how wide is this string in whatever font this machine has). Heights are kept because OSUI fixes them in CSS — .btn-small{height:32px}, .tag.tag-small{height:24px}, .badge-small{height:24px;min-width:24px}, .avatar-small{height:24px;width:24px}, .form-control.input-small{height:32px} — verified identical across six forced font families."
 }
