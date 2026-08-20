@@ -25,7 +25,7 @@
     "after_primitives": "pause",
     "after_composites": "continue"
   },
-  "iteration": 0,
+  "iteration": 1,
   "tiers": [
     "foundations",
     "primitives",
@@ -38,8 +38,15 @@
       "id": "tok-color-palette",
       "tier": "foundations",
       "node": "287-98",
-      "status": "queued",
-      "rounds": 0
+      "status": "built",
+      "rounds": 2,
+      "level": "L1",
+      "artifact": "tokens/colors.css",
+      "risk_tier": "core",
+      "det_gate": "pass",
+      "visual": "pass",
+      "confidence": "high",
+      "decision_log": "Maker: --color-<leaf> naming, unprefixed, deliberately colliding with 10 OSUI :root names because that IS the re-branding mechanism (149 consumers of var(--color-primary)); ramps preserved non-uniform; accent-cool and info both emitted at #00BDE3, not aliased; no white/black invented. Checker: core depth, 52/52 measured twice by two methods across 2 viewports, cascade provenance verified, framework consequences settled by measuring rendered widgets rather than reading declarations — which is what surfaced FND-001. Round 2 corrected a comment that inferred consumption from naming."
     },
     {
       "id": "tok-font-sizes",
@@ -161,7 +168,18 @@
       "rounds": 0
     }
   ],
-  "findings": [],
+  "findings": [
+    {
+      "id": "FND-001",
+      "item": "tok-color-palette",
+      "type": "a11y/contrast",
+      "severity": "high",
+      "disposition": "filed",
+      "issue": 1,
+      "node": "287-98",
+      "summary": ".alert-info 2.24:1 and .alert-success/.btn-success 3.14:1 — OSUI pairs a white foreground with the base colour token. WCAG 2.1 SC 1.4.3. Built faithfully; remedy belongs in the override/semantic layer or the Alert item."
+    }
+  ],
   "handover_epics": [],
   "consistency_passes": []
 }

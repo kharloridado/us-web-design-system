@@ -1,21 +1,151 @@
 /* @section Colors / Primitives */
-/* colors.css — brand color tokens (source for build:theme)
- * Fill these from design/brand-guidelines.md. These ARE the brand palette.
- * Accessibility note: build to these values exactly. If a pairing fails
- * WCAG 2.2 AA contrast, that is a FINDING (findings/), not a reason to edit here. */
+/* colors.css — the USWDS colour primitives.
+ *
+ * SOURCE OF RECORD: loop/refs/tok-color-palette/ (Figma file tJnXUZbEL3fRWG7h1z0ij7,
+ * node 287-98, pulled 2026-08-20). All 52 frozen variables, emitted byte-for-byte in the
+ * ref's own order — Theme palette then State palette, light to dark within each ramp,
+ * matching the swatch order in figma.png.
+ *
+ * FIDELITY: these values ARE the brand. Build to them exactly. If a pairing fails WCAG 2.2
+ * AA that is a FINDING (findings/), never an edit here. The ref specifies swatches only —
+ * no foreground/background pairings — so contrast is NOT judgeable from this file. It
+ * becomes judgeable when a component ref states a real pairing (button fill vs label,
+ * alert background vs body text); raise it there, against that usage.
+ *
+ * NO MODE AXIS: the pull returned exactly one value per variable, so nothing here is
+ * size-, device- or theme-bound. These are single tokens, not per-mode tokens. If a mode
+ * axis appears upstream, this ref is stale and these must become per-mode.
+ *
+ * NAMING — `--color-<source-leaf-name>`: the Figma variable name with its group prefix
+ * dropped, since the group is already repeated in the leaf (Base/base-ink -> base-ink).
+ * Two reasons this and not a project-prefixed name:
+ *   1. It is the OutSystems UI custom-property convention (--color-primary,
+ *      --color-neutral-0, --color-error-light), and overriding OSUI's own :root variables
+ *      is the documented re-branding mechanism.
+ *   2. build/gen-color-utilities.mjs parses exactly `--color-<name>:` inside a
+ *      `---- Title ----` group to emit .background-<name> / .text-<name>. A prefixed name
+ *      would silently produce zero utilities.
+ *
+ * SOURCE NAMES ARE PRESERVED VERBATIM, including the non-uniform ramp lengths: Base runs
+ * lightest -> ink (7 steps, no `vivid`); Primary and Secondary carry a `vivid` step and no
+ * `lightest`; the accents and the state ramps run lighter -> darker (5 steps); Disabled has
+ * 3. `base-ink` is named for its role (the design's body-text colour), not its position.
+ * Normalising these into a synthetic uniform scale would break the mapping back to the
+ * design and to upstream USWDS.
+ *
+ * accent-cool and info are BOTH #00BDE3 and are both emitted. Two distinct semantic names
+ * resolving to one literal is deliberate in the source design system. Aliasing one to the
+ * other would couple them, so a future change to one would silently move the other.
+ *
+ * FRAMEWORK NAME COLLISIONS ARE THE MECHANISM, NOT A DEFECT. Ten names below are already
+ * declared on OutSystems UI's own :root — --color-primary, --color-secondary,
+ * --color-error, --color-error-light, --color-warning, --color-warning-light,
+ * --color-success, --color-success-light, --color-info, --color-info-light (verified in
+ * preview/vendor/outsystems-ui/outsystems-ui.css). Redefining them is how the framework
+ * renders in USWDS colours with no framework edit and no hard-coded value.
+ *   HEADS-UP for the semantic-role and outsystems-ui-overrides layers — and the `-light`
+ *   step is NOT where the risk is. Measured in the compiled framework, var(--color-error-light)
+ *   has exactly TWO consumers: the .background-error-light and .text-error-light utility
+ *   classes (preview/vendor/outsystems-ui/outsystems-ui.css:16648 and :16673). Warning,
+ *   success and info are identical. No widget RULE consumes the `-light` step: the alert
+ *   widget takes the BASE step, and the badge has no state-colour rule at all — it paints a
+ *   white foreground and takes its fill from whichever `.background-*` utility a developer
+ *   applies, which CAN be the `-light` step. Under the USWDS values those two utilities
+ *   measure clean (.background-error-light 6.19:1, .background-info-light 9.49:1), so the
+ *   override improves them rather than breaking them.
+ *     The consequence that DOES need carrying forward is on the base step. `.alert` paints
+ *   a white foreground, and `.alert-info` / `.alert-success` take their fill straight from
+ *   --color-info / --color-success (outsystems-ui.css:6953-6964). Under this palette that
+ *   renders #FFFFFF on #00BDE3 = 2.24:1 and #FFFFFF on #00A91C = 3.14:1, against WCAG 2.1 AA
+ *   SC 1.4.3. Info fails BOTH thresholds (4.5:1 normal text, 3:1 large); success fails the
+ *   normal-text threshold only, since 3.14:1 clears the 3:1 large-text bar. On the native
+ *   widget, with no developer opt-in. `.btn-success` is the same 3.14:1. Note OSUI already special-cases
+ *   `.alert-warning` to a dark foreground and does NOT do so for info or success.
+ *     That is filed as a Bug through the findings pipeline. It is NOT fixed by editing a
+ *   value in this file — fidelity first, the design is built as designed. The remedy belongs
+ *   in the override / semantic-role layer or the Alert item, where two options measure
+ *   AA-clean: a dark foreground (--color-base-ink #1B1B1B gives 7.70:1 on #00BDE3 and
+ *   5.49:1 on #00A91C), or keeping white text and re-pointing the fill at the `-darker`
+ *   step (#2E6276 = 6.72:1, #446443 = 6.67:1). Neither is implemented here.
+ *
+ * NOT HERE, ON PURPOSE: the ref contains no white, black or neutral ramp, so none is
+ * invented — OSUI keeps its own --color-neutral-0..10 until an override item re-points
+ * them. No semantic role layer, no utility classes, no component tokens: separate files,
+ * separate work items. */
 :root {
-  /* Neutrals */
-  --color-neutral-0: #FFFFFF;
-  --color-neutral-1: #F8FAFC;
-  --color-neutral-9: #1E293B;
+  /* ============================== Theme palette ============================== */
 
-  /* Brand */
-  --color-primary:   #000000;  /* TODO: brand primary */
-  --color-secondary: #000000;  /* TODO: brand secondary */
+  /* ---- Base ---- */
+  --color-base-lightest: #F0F0F0;
+  --color-base-lighter:  #DCDEE0;
+  --color-base-light:    #A9AEB1;
+  --color-base:          #71767A;
+  --color-base-dark:     #565C65;
+  --color-base-darker:   #3D4551;
+  --color-base-ink:      #1B1B1B;
 
-  /* Semantic */
-  --color-success: #16A34A;
-  --color-warning: #D97706;
-  --color-error:   #DC2626;
-  --color-info:    #2563EB;
+  /* ---- Primary ---- */
+  --color-primary-lighter: #D9E8F6;
+  --color-primary-light:   #73B3E7;
+  --color-primary:         #005EA2;
+  --color-primary-vivid:   #0050D8;
+  --color-primary-dark:    #1A4480;
+  --color-primary-darker:  #162E51;
+
+  /* ---- Secondary ---- */
+  --color-secondary-lighter: #F8DFE2;
+  --color-secondary-light:   #F2938C;
+  --color-secondary:         #D83933;
+  --color-secondary-vivid:   #E41D3D;
+  --color-secondary-dark:    #B51D09;
+  --color-secondary-darker:  #8B1303;
+
+  /* ---- Accent cool ---- */
+  --color-accent-cool-lighter: #E1F3F8;
+  --color-accent-cool-light:   #97D4EA;
+  --color-accent-cool:         #00BDE3;
+  --color-accent-cool-dark:    #28A0CB;
+  --color-accent-cool-darker:  #07648D;
+
+  /* ---- Accent warm ---- */
+  --color-accent-warm-lighter: #F2E4D4;
+  --color-accent-warm-light:   #FFBC78;
+  --color-accent-warm:         #FA9441;
+  --color-accent-warm-dark:    #C05600;
+  --color-accent-warm-darker:  #775540;
+
+  /* ============================== State palette ============================== */
+
+  /* ---- Info ---- */
+  --color-info-lighter: #E7F6F8;
+  --color-info-light:   #99DEEA;
+  --color-info:         #00BDE3;
+  --color-info-dark:    #009EC1;
+  --color-info-darker:  #2E6276;
+
+  /* ---- Error ---- */
+  --color-error-lighter: #F4E3DB;
+  --color-error-light:   #F39268;
+  --color-error:         #D54309;
+  --color-error-dark:    #B50909;
+  --color-error-darker:  #6F3331;
+
+  /* ---- Warning ---- */
+  --color-warning-lighter: #FAF3D1;
+  --color-warning-light:   #FEE685;
+  --color-warning:         #FFBE2E;
+  --color-warning-dark:    #E5A000;
+  --color-warning-darker:  #936F38;
+
+  /* ---- Success ---- */
+  --color-success-lighter: #ECF3EC;
+  --color-success-light:   #70E17B;
+  --color-success:         #00A91C;
+  --color-success-dark:    #4D8055;
+  --color-success-darker:  #446443;
+
+  /* ---- Disabled ---- */
+  --color-disabled-light: #E6E6E6;
+  --color-disabled:       #C9C9C9;
+  --color-disabled-dark:  #ADADAD;
 }
