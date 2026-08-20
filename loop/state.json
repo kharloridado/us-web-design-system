@@ -166,6 +166,21 @@
       "node": "1892-2033",
       "status": "queued",
       "rounds": 0
+    },
+    {
+      "id": "sg-palette-specimen",
+      "tier": "foundations",
+      "node": null,
+      "spec_text": "loop/refs/sg-palette-specimen/spec.md",
+      "level": "L2",
+      "artifact": "build/gen-palette-specimen.mjs + style-guide/palette-specimen.css",
+      "status": "built",
+      "rounds": 0,
+      "risk_tier": "trivial",
+      "det_gate": "pass",
+      "visual": "pass",
+      "confidence": "high",
+      "decision_log": "Generated from tokens/colors.css rather than hand-written, because the harness rule keeps preview chrome token-only and class-only; a hand-maintained specimen drifts from the palette and a drifted specimen shows a colour the build no longer emits. Hex is text content, never a CSS value, so a chip disagreeing with its own label is visible. Generator exits non-zero on a token matching no ramp rather than silently omitting it."
     }
   ],
   "findings": [
