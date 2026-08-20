@@ -1,10 +1,10 @@
-# Loop Goal — <<DESIGN_SYSTEM_NAME>>
+# Loop Goal — US Web Design System
 
 The run contract for `/outsystems-loop:design-loop`. Fill in every `<…>` before the first run. The orchestrator, `@outsystems-loop:maker` and `@outsystems-loop:checker` all read this file; anything not written here has not been agreed, and the loop must not assume it.
 
 ## Goal
 
-<One sentence. e.g. "Translate the <<DESIGN_SYSTEM_NAME>> Figma library into OutSystems faithfully, tier by tier, as theme tokens + block CSS + Web Components handed over as GitHub Tasks.">
+Translate the U.S. Web Design System Figma library into OutSystems ODC faithfully, tier by tier, as theme tokens + block CSS + Web Components, each handed over as a GitHub Task.
 
 ## Inventory of record — REQUIRED
 
@@ -12,13 +12,41 @@ The loop does not build from a Figma page, a screenshot, or a conversation. It b
 
 | Field | Value |
 |---|---|
-| **Inventory source** | `<board \| artifact>` |
-| Inventory artifact | `<the node / sheet / doc holding the confirmed list — or, when source is "board", the Project board URL + the generated deliverables.md>` |
-| Signed off by | `<name, role — someone who can actually commit to the list>` |
-| Date signed off | `<yyyy-mm-dd>` |
-| Supersedes | `<previous inventory, if any>` |
+| **Inventory source** | `artifact` |
+| Inventory artifact | **The inventory table in this file** (below). `git log loop/goal.md` is the audit trail. |
+| Signed off by | Kharlo Ridado, OutSystems Professional Services (supplied the list, 2026-08-20) |
+| Date signed off | 2026-08-20 |
+| Supersedes | none — first inventory for this engagement |
 
 **Hard rule: no component enters the build queue without a row in the inventory of record.**
+
+### The inventory
+
+Ordered by dependency. The loop builds top to bottom and stops at each tier checkpoint.
+
+| # | Component | Tier | Figma node | Notes |
+|---|---|---|---|---|
+| 1 | Color palette | `foundations` | [`287-98`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=287-98&m=dev) | 52 Figma variables verified readable via get_variable_defs |
+| 2 | Font sizes | `foundations` | [`1892-7566`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-7566&m=dev) | Type scale ramp |
+| 3 | Typography | `foundations` | [`63-49`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=63-49&m=dev) | Families, weights, line-heights |
+| 4 | Buttons | `primitives` | [`1868-83`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1868-83&m=dev) | Restyle native OSUI .btn |
+| 5 | Button group | `primitives` | [`1892-3789`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-3789&m=dev) | Depends on Buttons |
+| 6 | Inputs | `primitives` | [`1892-3213`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-3213&m=dev) | Restyle native OSUI input |
+| 7 | Alert | `primitives` | [`1879-1235`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1879-1235&m=dev) |  |
+| 8 | Breadcrumbs | `primitives` | [`1892-3816`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-3816&m=dev) |  |
+| 9 | Pagination | `primitives` | [`1892-4485`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-4485&m=dev) |  |
+| 10 | Inputs with labels and character counts | `composites` | [`1892-3838`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-3838&m=dev) | Depends on Inputs |
+| 11 | Combo box / Select / Dropdown | `composites` | [`1892-3864`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-3864&m=dev) | Check OSUI Dropdown + virtual-select provider first |
+| 12 | Date picker | `composites` | [`1892-3927`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-3927&m=dev) | Check OSUI DatePicker + flatpickr provider first |
+| 13 | Date range picker | `composites` | [`1892-4051`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-4051&m=dev) | Depends on Date picker |
+| 14 | File input | `composites` | [`1892-4140`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-4140&m=dev) |  |
+| 15 | Cards | `composites` | [`1892-5111`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-5111&m=dev) |  |
+| 16 | Accordion | `composites` | [`1890-62`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1890-62&m=dev) |  |
+| 17 | Table | `composites` | [`1892-2502`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-2502&m=dev) |  |
+| 18 | Modal / Popup | `patterns` | [`1892-2033`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-2033&m=dev) |  |
+
+**18 deliverables.** Every row carries a Figma node id, so every item can have a ref frozen; none is blocked on a missing spec.
+
 
 - When **`Inventory source = artifact`**, the row is a line in the signed table named above. A component that is in Figma but not in the inventory is `needs-human`, not `queued`.
 - When **`Inventory source = board`**, the row *is* the card, and the signature is a scope owner having moved it to **`Ready`**. A card that reached `Ready` any other way, or whose "in the agreed scope" box is unticked, is `Blocked` — not `queued`. The loop never moves a card into `Ready` itself.
@@ -36,10 +64,10 @@ This section is first, and required, because of what it costs when it is missing
 
 | Field | Value |
 |---|---|
-| Library URL | <<FIGMA_URL>> |
-| **File key** | `<<FIGMA_FILE_KEY>>` |
-| In scope | `<"entire library" | named pages / frames / node ids>` |
-| Out of scope | `<pages deliberately excluded — state them explicitly>` |
+| Library URL | https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community- |
+| **File key** | `tJnXUZbEL3fRWG7h1z0ij7` |
+| In scope | The 18 nodes listed in the inventory table above |
+| Out of scope | Everything else in the library — banners, footers, identifiers, icons, side navigation, step indicators, tags, tooltips, process lists, summary boxes. Not refused, just not in this inventory; add a row to bring one in. |
 
 **Track the file key, not just the URL.** Design libraries get duplicated, forked and re-versioned, and a fork carries a *different file key* while looking identical in conversation and in a screenshot. Every frozen ref records the file key it was pulled from (`loop/refs/<item-id>/spec.md`). If that key differs from the key above, **the ref is stale**: the item becomes `needs-re-ref`, and neither the maker nor the checker may trust the values it froze. On the source project a second library file appeared mid-build and silently re-versioned component values; every ref frozen against the old key quietly became wrong. Record every key change in `design/figma-links.md`.
 
@@ -48,16 +76,21 @@ This section is first, and required, because of what it costs when it is missing
 - `single` — one screen or a handful of components; flat queue, no tier gates.
 - `library` — full design system: dependency-ordered, tier by tier, with human checkpoints.
 
-Mode for this run: `<single | library>`.
+Mode for this run: `library`.
 
 ## This run — scope
 
 State exactly what this run does and where it stops. A run that "does everything" has no checkpoint and no reviewable output.
 
-<e.g. "Phase 0 (foundations/tokens) only. Hard stop at the after-tokens checkpoint. No component work executes this run.">
+Phase 0 (foundations/tokens) only. **Hard stop at the after-tokens checkpoint.** No component work
+executes this run: a wrong token cascades into all 15 components downstream, so the foundation is
+reviewed before anything is built on it.
 
-- [ ] <scope item>
-- [ ] <scope item>
+- [ ] Color palette (`287-98`) → the colour token layer
+- [ ] Font sizes (`1892-7566`) → the type-scale token layer
+- [ ] Typography (`63-49`) → families, weights, line-heights
+- [ ] `dist/theme.css` regenerated, TOC + section banners intact, every `var(--token)` resolving
+- [ ] One PR per item, left open for review — the loop never merges
 
 ## The three outcomes — every audited component gets exactly one
 
@@ -90,13 +123,15 @@ Mirror these in `state.json.checkpoints`. A checkpoint set to `pause` is a hard 
 
 ## Done-criteria
 
-**This run:** <restate the stopping condition for the scope above, in terms someone can check.>
+**This run:** all three foundation items are `built` (maker + checker PASS with `VISUAL: pass`), each on its
+own open PR, `npm run build:theme` exits 0, and the run has stopped at `after_tokens` awaiting brand-owner
+sign-off. Zero components started.
 
 **Program (full library):** every component in the signed inventory is either **built** (maker + checker PASS, committed, on the Project board, handover Task opened) or **needs-human** (logged with the blocker). All findings filed as Bugs. A consistency pass has run per tier.
 
 ## Checker gates
 
-The deterministic gate runs first — `npm run build:theme` exits 0, the token schema resolves, contrast is computed — and a failure there is an instant FAIL before any subjective judgment. Then: fidelity against the frozen ref, token-only (no hard-coded values), BEM with the `<<CLASS_PREFIX>>` prefix, Web Component correctness, and accessibility on a flag-don't-fix basis. The full procedure lives in the `@outsystems-loop:checker` agent definition.
+The deterministic gate runs first — `npm run build:theme` exits 0, the token schema resolves, contrast is computed — and a failure there is an instant FAIL before any subjective judgment. Then: fidelity against the frozen ref, token-only (no hard-coded values), BEM with the `uswds-` prefix, Web Component correctness, and accessibility on a flag-don't-fix basis. The full procedure lives in the `@outsystems-loop:checker` agent definition.
 
 ## Caps and guardrails
 
@@ -112,7 +147,7 @@ The deterministic gate runs first — `npm run build:theme` exits 0, the token s
 - the loop **never builds a component absent from the inventory of record**, and **never builds an item that has no frozen ref**
 - in board mode the loop **never builds a card a scope owner has not moved to `Ready`**, and **never moves a card into `Ready`, `Approved` or `Done` itself**
 - in board mode the handover Task is opened **after** the PR merges to `main`, never at checker-PASS — a handover ticket says "paste this into a live environment", and it must not point at unmerged work
-- findings are GitHub **Bugs** (Bug issue type + `bug` label); handovers are GitHub **Tasks** assigned to the developer; both in `<<OWNER/REPO>>`
+- findings are GitHub **Bugs** (Bug issue type + `bug` label); handovers are GitHub **Tasks** assigned to the developer; both in `kharloridado/us-web-design-system`
 - **dedup:** every issue carries `[node:<figma-node-id>]` in its body; search before creating, so a re-run never duplicates
 - conventions marked `TBD` in `project.config.json` are **not rules** — the checker must not enforce them and must not raise findings against them
 

@@ -1,4 +1,4 @@
-# Findings Register — `<<CUSTOMER>>` / `<<PROJECT>>`
+# Findings Register — `US Federal Government` / `USWDS`
 > Next ID: FND-001
 >
 > Local mirror of design-conformance findings. Live tracker = GitHub Issues labeled `finding`.

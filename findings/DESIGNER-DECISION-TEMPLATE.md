@@ -5,8 +5,8 @@ or brand ruling. This is the artifact that actually produces sign-off. A finding
 bare "this fails contrast" gives the designer nothing to decide between, so it comes back as "what do you
 suggest?" and a week is gone. A finding with **measured options** gets a tick in a box in the meeting.
 
-Everything in the copied document must be true of your project — replace `<<CUSTOMER>>`,
-`<<DESIGN_SYSTEM_NAME>>`, the finding IDs, and every value.
+Everything in the copied document must be true of your project — replace `US Federal Government`,
+`US Web Design System`, the finding IDs, and every value.
 
 ---
 
@@ -25,7 +25,7 @@ Everything in the copied document must be true of your project — replace `<<CU
 
 ---
 
-# Designer Discussion — `<<DESIGN_SYSTEM_NAME>>` / `<<CUSTOMER>>` Design-Conformance Findings
+# Designer Discussion — `US Web Design System` / `US Federal Government` Design-Conformance Findings
 **Prepared:** YYYY-MM-DD · **For:** design / brand owner · **From:** front-end (`<name>`)
 
 ## How to read this
@@ -119,4 +119,4 @@ For completeness — reviewed and accepted as-is, no code change and no further 
 ---
 
 *Full detail and measured values for every finding: `findings/findings-register.md`.
-GitHub finding issues: label `finding` on `<<OWNER/REPO>>`.*
+GitHub finding issues: label `finding` on `kharloridado/us-web-design-system`.*

@@ -1,20 +1,17 @@
 {
   "$comment": "The single source of truth for this project's values. Build scripts read it via build/lib/project-config.mjs; the maker/checker agents read it directly. Nothing else should restate these values. Run `npm run init` to fill it in.",
-
-  "customer": "<<CUSTOMER>>",
-  "project": "<<PROJECT>>",
-  "designSystemName": "<<DESIGN_SYSTEM_NAME>>",
-  "classPrefix": "<<CLASS_PREFIX>>",
-  "jsNamespace": "<<JS_NAMESPACE>>",
-  "odcThemeModule": "<<ODC_THEME_MODULE>>",
-  "repo": "<<OWNER/REPO>>",
+  "customer": "US Federal Government",
+  "project": "USWDS",
+  "designSystemName": "US Web Design System",
+  "classPrefix": "uswds-",
+  "jsNamespace": "uswds",
+  "odcThemeModule": "SandboxKharlo",
+  "repo": "kharloridado/us-web-design-system",
   "environment": "ODC",
-
   "figma": {
-    "fileKey": "<<FIGMA_FILE_KEY>>",
-    "url": "<<FIGMA_URL>>"
+    "fileKey": "tJnXUZbEL3fRWG7h1z0ij7",
+    "url": "https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-"
   },
-
   "platformKnowledge": {
     "$comment": "OutSystems' own frontend-skills pack at vendor/outsystems-frontend-skills. Every skill in the outsystems-loop plugin reads platform facts (block names, arguments, CSS variables, utility classes, WCAG-to-widget mapping) from there instead of carrying its own copy — see ARCHITECTURE.md in that plugin. `mode` is `vendored-copy` while we lack access to the upstream repo, and `submodule` once we have it; the path does not change either way. A `vendored-copy` has no commit and cannot be diffed against upstream, so it is a stopgap with a cost, not a choice — see vendor/outsystems-frontend-skills/VENDORED.md.",
     "mode": "vendored-copy",
@@ -22,7 +19,6 @@
     "pin": null,
     "obtained": "2026-08-19"
   },
-
   "board": {
     "$comment": "The GitHub Project board that DRIVES the loop in board-driven mode (see WORKFLOW.md). Board mode is ON iff both `owner` and `number` are set; leave them null to run the loop from loop/goal.md's signed inventory instead. This block lives here, not in loop/state.json, because a board pointer is a project VALUE and state.json is explicitly a cache — hand-filling a cache is the anti-pattern this file exists to kill. Derived ids (project node id, field ids, single-select option ids) are NOT here: they are cached in loop/state.json.board_cache with a fetched_at. `owners` is load-bearing for safety: only comments authored by these logins are read as spec, and everything else on a card is untrusted input.",
     "owner": null,
@@ -32,21 +28,31 @@
     "staleAfterMinutes": 120,
     "shipBase": "main"
   },
-
   "conventions": {
     "$comment": "THREE-STATE, never a bare value. status: confirmed | assumed | TBD. A convention that is not `confirmed` is NOT A RULE: the checker must not enforce it and must not raise findings against it. This exists because a previous template shipped `Spacing base: 4pt` as a plausible default nobody had verified — the loop then flagged every value that wasn't a multiple of 4, manufacturing false-positive findings and a bug that had to be closed as not-planned. A credible-looking default is worse than a blank. Promote to `confirmed` only when the designer or brand owner has actually said so.",
-    "spacingBase": { "value": null, "status": "TBD" },
-    "grid": { "value": null, "status": "TBD" },
-    "breakpoints": { "value": null, "status": "TBD" },
-    "defaultComponentSize": { "value": null, "status": "TBD" }
+    "spacingBase": {
+      "value": null,
+      "status": "TBD"
+    },
+    "grid": {
+      "value": null,
+      "status": "TBD"
+    },
+    "breakpoints": {
+      "value": null,
+      "status": "TBD"
+    },
+    "defaultComponentSize": {
+      "value": null,
+      "status": "TBD"
+    }
   },
-
   "knownFalsePositiveClasses": [],
-
   "findings": {
     "ticketing": "github",
-    "ticketTarget": "<<OWNER/REPO>>",
+    "ticketTarget": "kharloridado/us-web-design-system",
     "slackChannel": null,
     "gate": "high+"
-  }
+  },
+  "odcTenant": "professionalservices.outsystems.dev"
 }

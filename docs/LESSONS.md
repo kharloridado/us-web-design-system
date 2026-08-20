@@ -116,7 +116,7 @@ touch a URL.
 The escalation order is: use the framework widget as-is → configure it → **override its own classes**
 (`.btn`, `.card`, `.dropdown`, the switch, the text field) with `ExtendedClass` → and only when the
 framework genuinely has no widget for the thing, build a vanilla JS Web Component. Do not build a
-parallel `<<CLASS_PREFIX>>button` / `<<CLASS_PREFIX>>card` system alongside the framework's own. A
+parallel `uswds-button` / `uswds-card` system alongside the framework's own. A
 parallel system inherits none of the framework's accessibility, state handling, or form integration, and
 every consuming developer has to be told which one to use.
 
@@ -125,7 +125,7 @@ colour utility classes were all built, reviewed, and then **reversed** — each 
 the framework's own class. That is three components' worth of work spent twice.
 
 Colour and typography utilities are the same story: override the framework's existing bare utility
-classes; introduce a prefixed `<<CLASS_PREFIX>>`-namespaced class only for a role the framework genuinely
+classes; introduce a prefixed `uswds-`-namespaced class only for a role the framework genuinely
 does not have.
 
 ### 2.2 Verify a restyle against the LIVE RENDERED DOM, not the vendored SCSS

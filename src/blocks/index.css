@@ -11,7 +11,7 @@
  *
  * Two rules worth repeating here, because both have cost real rework:
  *   1. Restyle the NATIVE widget. Override `.btn`, `.card`, `.dropdown` — do not build a
- *      parallel `<<CLASS_PREFIX>>button` system alongside the framework's own.
+ *      parallel `uswds-button` system alongside the framework's own.
  *   2. Every file you add here must ALSO be <link>ed in preview/index.html. A block whose
  *      CSS never loads in the preview will pass review and break in production.
  *

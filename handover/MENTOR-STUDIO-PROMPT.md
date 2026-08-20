@@ -25,7 +25,7 @@ Two OutSystems realities the prompts bake in:
 
 - **Element ids are platform-generated.** You can't hand-type an `id` and address it from
   JS. Give the element/Block a **Name** and pass its runtime `.Id` to the helper
-  (`window.<<JS_NAMESPACE>>X.show($parameters.WidgetId)` where `WidgetId = <WidgetName>.Id`). Don't add a
+  (`window.uswdsX.show($parameters.WidgetId)` where `WidgetId = <WidgetName>.Id`). Don't add a
   string `Id` input or bind the `id` attribute.
 - **Enumerable inputs are Static Entities.** Model `Type`/`Variant`/`Size`/`Position`/`Status`
   as Static Entities — one record per value, with a single Text attribute (e.g. `Value`) set
@@ -41,14 +41,14 @@ Two OutSystems realities the prompts bake in:
 
 ```
 Goal: In ODC Studio, wire up an OutSystems Block that wraps the already-imported
-custom Web Component <<<<CLASS_PREFIX>>COMPONENT>> for the <<DESIGN_SYSTEM_NAME>> design system.
+custom Web Component <<uswds-COMPONENT>> for the US Web Design System design system.
 
 Context (already done manually — do NOT re-create or edit these):
 - The brand Theme CSS (dist/theme.css) and any block CSS are already pasted into the
   ODC Theme editor.
-- The Web Component script <<<<CLASS_PREFIX>>COMPONENT.js>> is already imported as a Script
+- The Web Component script <<uswds-COMPONENT.js>> is already imported as a Script
   resource on the Theme/Library, Include = <<Always | When invoked>>. It defines the
-  custom element <<<<CLASS_PREFIX>>COMPONENT>> and a global helper <<window.<<JS_NAMESPACE>>COMPONENT>>.
+  custom element <<uswds-COMPONENT>> and a global helper <<window.uswdsCOMPONENT>>.
 - Do not write CSS, do not author or modify JavaScript, and do not edit the Theme.
   Your job is only the Block, its public interface, the attribute bindings, the event
   wiring, and the Client Action(s) that drive the component.
@@ -69,7 +69,7 @@ Task — create these elements, referencing every element by the exact name give
    Web Component expects — NOT free Text. Do **not** add a string `Id` input or set the
    element's `id`: OutSystems generates element ids at runtime (see step 4 for addressing).
 
-2. In the Block, place an HTML element <<<<CLASS_PREFIX>>COMPONENT>>. On it, set one attribute per
+2. In the Block, place an HTML element <<uswds-COMPONENT>>. On it, set one attribute per
    Block input using a Value expression (ODC requires an expression on every attribute):
    <<  type        = Type            // Static-Entity input binds directly (Value is the identifier)
        title       = Title
@@ -89,11 +89,11 @@ Task — create these elements, referencing every element by the exact name give
    handover ships the exact OnReady + OnDestroy code in its "## Event wiring (OnReady / OnDestroy)"
    section — paste it verbatim (placement, not authoring).
 
-4. To address a specific instance, give the <<<<CLASS_PREFIX>>COMPONENT>> element (or its Block) a
+4. To address a specific instance, give the <<uswds-COMPONENT>> element (or its Block) a
    **Name**, then create a client action "<<Show COMPONENT>>" with a "Run JavaScript" node
    whose `WidgetId` input is the widget's **platform-generated** `.Id` (e.g. `<<MyWidget>>.Id`)
    — never a hand-typed string:
-   <<  window.<<JS_NAMESPACE>>COMPONENT.show($parameters.WidgetId);  >>
+   <<  window.uswdsCOMPONENT.show($parameters.WidgetId);  >>
    Add sibling client actions for any other helper methods (<<hide, toggle>>) the same way.
 
 Constraints / fidelity rules (must hold):
@@ -114,20 +114,20 @@ conversation, not one shot.
 
 ---
 
-## B) Worked example — `<<CLASS_PREFIX>>toast`
+## B) Worked example — `uswds-toast`
 
-Filled from [`handover/<<CLASS_PREFIX>>toast.md`](<<CLASS_PREFIX>>toast.md).
+Filled from [`handover/uswds-toast.md`](uswds-toast.md).
 
 ```
 Goal: In ODC Studio, wire up an OutSystems Block that wraps the already-imported custom
-Web Component <<<CLASS_PREFIX>>toast> for the <<DESIGN_SYSTEM_NAME>> design system (transient toast
+Web Component <uswds-toast> for the US Web Design System design system (transient toast
 notification at a configurable screen position).
 
 Context (already done manually — do NOT re-create or edit these):
-- dist/theme.css (brand + component tokens, incl. --<<CLASS_PREFIX>>toast-*) is already pasted into
+- dist/theme.css (brand + component tokens, incl. --uswds-toast-*) is already pasted into
   the ODC Theme editor.
-- <<CLASS_PREFIX>>toast.js is already imported as a Script resource on the Theme/Library, Include =
-  Always. It defines the custom element <<<CLASS_PREFIX>>toast> and the global helper window.<<JS_NAMESPACE>>Toast
+- uswds-toast.js is already imported as a Script resource on the Theme/Library, Include =
+  Always. It defines the custom element <uswds-toast> and the global helper window.uswdsToast
   with methods show(idOrEl, opts), hide(idOrEl), toggle(idOrEl, force).
 - Do NOT write CSS, do NOT author or modify JavaScript, do NOT edit the Theme. Your job is
   only the Block, its inputs/events, the attribute bindings, the event wiring, and the
@@ -152,7 +152,7 @@ Task — create these elements, referencing each by the exact name given:
    - ToastPosition: Bottom="bottom", Top="top", BottomLeft="bottom-left", BottomRight="bottom-right", TopLeft="top-left", TopRight="top-right"
    Do NOT add a string Id input or set the element's id — OutSystems generates ids at runtime.
 
-2. In the Block, place an HTML element <<<CLASS_PREFIX>>toast>. Set one attribute per input via a
+2. In the Block, place an HTML element <uswds-toast>. Set one attribute per input via a
    Value expression:
      type         = Type
      position     = Position
@@ -167,19 +167,19 @@ Task — create these elements, referencing each by the exact name given:
 
 3. Wire CustomEvents to Block events: the element's "action" CustomEvent triggers OnAction,
    and its "dismiss" CustomEvent triggers OnDismiss. Do this in the Block's **OnReady** (a
-   "Run JavaScript" node that addEventListener's both events on the <<<CLASS_PREFIX>>toast> element,
+   "Run JavaScript" node that addEventListener's both events on the <uswds-toast> element,
    storing each handler on `$public`, and raises the Block events) and clean up in **OnDestroy**
    (a second "Run JavaScript" node that removeEventListener's them) — not via the declarative
    "Handle Events" path. Paste the verbatim code from the handover's "## Event wiring
    (OnReady / OnDestroy)" section.
 
 4. OutSystems generates element ids at runtime, so address a specific toast by its widget's
-   platform .Id — not a hand-typed string. Give the <<<CLASS_PREFIX>>toast> element (or its Block) a
+   platform .Id — not a hand-typed string. Give the <uswds-toast> element (or its Block) a
    Name, then create client actions whose "Run JavaScript" node takes a WidgetId input set to
    <thatWidgetName>.Id and calls the helper:
-     - "ShowToast":   window.<<JS_NAMESPACE>>Toast.show($parameters.WidgetId);
-     - "HideToast":   window.<<JS_NAMESPACE>>Toast.hide($parameters.WidgetId);
-     - "ToggleToast": window.<<JS_NAMESPACE>>Toast.toggle($parameters.WidgetId);
+     - "ShowToast":   window.uswdsToast.show($parameters.WidgetId);
+     - "HideToast":   window.uswdsToast.hide($parameters.WidgetId);
+     - "ToggleToast": window.uswdsToast.toggle($parameters.WidgetId);
 
 Constraints:
 - Never edit the OutSystems UI module; no hard-coded colors/sizes (styling already comes

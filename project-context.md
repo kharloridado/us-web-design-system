@@ -12,10 +12,10 @@ disagreed about it for its entire life. Values there; context, judgment and hist
 
 ## Identity
 
-- Customer: `<<CUSTOMER>>`
-- Project: `<<PROJECT>>`
-- Design system: `<<DESIGN_SYSTEM_NAME>>`
-- Repo: `<<OWNER/REPO>>`
+- Customer: `US Federal Government`
+- Project: `USWDS`
+- Design system: `US Web Design System`
+- Repo: `kharloridado/us-web-design-system`
 - Start date: `<YYYY-MM-DD>`
 - Target environment: ODC (if this project is O11, change it here **and** in `project.config.json`)
 

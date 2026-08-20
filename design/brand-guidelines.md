@@ -1,4 +1,4 @@
-# Brand Guidelines — <<DESIGN_SYSTEM_NAME>>
+# Brand Guidelines — US Web Design System
 
 The source of truth for brand conformance. Findings reference this file, and the loop reads it. Fill it in at kickoff; leave a field blank rather than guessing — a plausible-looking default that nobody confirmed becomes a rule the checker enforces, and manufactures false findings against real design work.
 

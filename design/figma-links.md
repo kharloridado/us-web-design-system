@@ -4,7 +4,7 @@ Every component, page and token source the loop pulls from, with the **file key*
 
 | Component / page | Figma file key | Node id | Pulled on | Supersedes |
 |---|---|---|---|---|
-| `<e.g. Button>` | `<<FIGMA_FILE_KEY>>` | `<12345-678>` | `<yyyy-mm-dd>` | `<earlier key:node this replaces, or —>` |
+| `<e.g. Button>` | `tJnXUZbEL3fRWG7h1z0ij7` | `<12345-678>` | `<yyyy-mm-dd>` | `<earlier key:node this replaces, or —>` |
 | | | | | |
 
 ## Why the file key is tracked, not just the URL
