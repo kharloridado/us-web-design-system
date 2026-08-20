@@ -47,7 +47,11 @@
       "status": "TBD"
     }
   },
-  "knownFalsePositiveClasses": [],
+  "knownFalsePositiveClasses": [
+    "custom-property-prefix: unprefixed --color-* names colliding with OutSystems UI :root names are the re-branding mechanism, not a defect. classPrefix governs BEM class names only. Refuted FND-002.",
+    "osui-light-step-shift: --color-*-light has no widget-RULE consumers — only the .background-*-light / .text-*-light utilities, which measure 6.19:1 and 9.49:1 under USWDS (improved). The badge takes whichever .background-* utility is applied, so it IS affected; but badge white-on-light-fill is a pre-existing OutSystems UI defect (1.08-1.16:1 on OSUI defaults) that this palette improves (1.24-2.30:1) rather than creates. Refuted FND-003. Does NOT cover a future Badge/Alert ref that specifies a light fill with a real foreground — that is a finding against that usage.",
+    "secondary-hue-inversion: --color-secondary differing from the OSUI default is only consumed by two opt-in utilities that nothing applies. Refuted FND-004."
+  ],
   "findings": {
     "ticketing": "github",
     "ticketTarget": "kharloridado/us-web-design-system",

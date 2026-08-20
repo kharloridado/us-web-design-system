@@ -1,0 +1,75 @@
+{
+  "_meta": {
+    "source": "Figma MCP get_variable_defs, verbatim",
+    "figma_file_key": "tJnXUZbEL3fRWG7h1z0ij7",
+    "figma_node_id": "287-98",
+    "node_name": "Colors",
+    "pulled": "2026-08-20",
+    "pulled_by": "orchestrator (subagents have no Figma MCP access)",
+    "variable_count": 52,
+    "mode_axis": "none exposed — the pull returned exactly one value per variable, so no size/device/theme mode binding was observable for this node. If a mode axis is added upstream, this ref is stale and the tokens must become per-mode."
+  },
+  "variables": {
+    "Base/base-ink": "#1B1B1B",
+    "Base/base-darker": "#3D4551",
+    "Base/base-dark": "#565C65",
+    "Base/base": "#71767A",
+    "Base/base-light": "#A9AEB1",
+    "Base/base-lighter": "#DCDEE0",
+    "Base/base-lightest": "#F0F0F0",
+
+    "Primary/primary-lighter": "#D9E8F6",
+    "Primary/primary-light": "#73B3E7",
+    "Primary/primary": "#005EA2",
+    "Primary/primary-vivid": "#0050D8",
+    "Primary/primary-dark": "#1A4480",
+    "Primary/primary-darker": "#162E51",
+
+    "Secondary/secondary-lighter": "#F8DFE2",
+    "Secondary/secondary-light": "#F2938C",
+    "Secondary/secondary": "#D83933",
+    "Secondary/secondary-vivid": "#E41D3D",
+    "Secondary/secondary-dark": "#B51D09",
+    "Secondary/secondary-darker": "#8B1303",
+
+    "Accent cool/accent-cool-lighter": "#E1F3F8",
+    "Accent cool/accent-cool-light": "#97D4EA",
+    "Accent cool/accent-cool": "#00BDE3",
+    "Accent cool/accent-cool-dark": "#28A0CB",
+    "Accent cool/accent-cool-darker": "#07648D",
+
+    "Accent warm/accent-warm-lighter": "#F2E4D4",
+    "Accent warm/accent-warm-light": "#FFBC78",
+    "Accent warm/accent-warm": "#FA9441",
+    "Accent warm/accent-warm-dark": "#C05600",
+    "Accent warm/accent-warm-darker": "#775540",
+
+    "Info/info-lighter": "#E7F6F8",
+    "Info/info-light": "#99DEEA",
+    "Info/info": "#00BDE3",
+    "Info/info-dark": "#009EC1",
+    "Info/info-darker": "#2E6276",
+
+    "Error/error-lighter": "#F4E3DB",
+    "Error/error-light": "#F39268",
+    "Error/error": "#D54309",
+    "Error/error-dark": "#B50909",
+    "Error/error-darker": "#6F3331",
+
+    "Warning/warning-lighter": "#FAF3D1",
+    "Warning/warning-light": "#FEE685",
+    "Warning/warning": "#FFBE2E",
+    "Warning/warning-dark": "#E5A000",
+    "Warning/warning-darker": "#936F38",
+
+    "Success/success-lighter": "#ECF3EC",
+    "Success/success-light": "#70E17B",
+    "Success/success": "#00A91C",
+    "Success/success-dark": "#4D8055",
+    "Success/success-darker": "#446443",
+
+    "Disabled/disabled-light": "#E6E6E6",
+    "Disabled/disabled": "#C9C9C9",
+    "Disabled/disabled-dark": "#ADADAD"
+  }
+}

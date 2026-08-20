@@ -1,0 +1,101 @@
+{
+  "waitFor": ":root",
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1280,
+      "height": 900
+    },
+    {
+      "name": "mobile",
+      "width": 375,
+      "height": 812
+    }
+  ],
+  "probes": [
+    {
+      "name": "theme palette / authored-computed custom properties (29 ref rows)",
+      "selector": ":root",
+      "props": [
+        "--color-base-ink",
+        "--color-base-darker",
+        "--color-base-dark",
+        "--color-base",
+        "--color-base-light",
+        "--color-base-lighter",
+        "--color-base-lightest",
+        "--color-primary-lighter",
+        "--color-primary-light",
+        "--color-primary",
+        "--color-primary-vivid",
+        "--color-primary-dark",
+        "--color-primary-darker",
+        "--color-secondary-lighter",
+        "--color-secondary-light",
+        "--color-secondary",
+        "--color-secondary-vivid",
+        "--color-secondary-dark",
+        "--color-secondary-darker",
+        "--color-accent-cool-lighter",
+        "--color-accent-cool-light",
+        "--color-accent-cool",
+        "--color-accent-cool-dark",
+        "--color-accent-cool-darker",
+        "--color-accent-warm-lighter",
+        "--color-accent-warm-light",
+        "--color-accent-warm",
+        "--color-accent-warm-dark",
+        "--color-accent-warm-darker"
+      ]
+    },
+    {
+      "name": "state palette / authored-computed custom properties (23 ref rows)",
+      "selector": ":root",
+      "props": [
+        "--color-info-lighter",
+        "--color-info-light",
+        "--color-info",
+        "--color-info-dark",
+        "--color-info-darker",
+        "--color-error-lighter",
+        "--color-error-light",
+        "--color-error",
+        "--color-error-dark",
+        "--color-error-darker",
+        "--color-warning-lighter",
+        "--color-warning-light",
+        "--color-warning",
+        "--color-warning-dark",
+        "--color-warning-darker",
+        "--color-success-lighter",
+        "--color-success-light",
+        "--color-success",
+        "--color-success-dark",
+        "--color-success-darker",
+        "--color-disabled-light",
+        "--color-disabled",
+        "--color-disabled-dark"
+      ]
+    },
+    {
+      "name": "all 52 / RESOLVED rendered colour (var() painted, read back as rgb)",
+      "js": "(()=>{const P=[\"--color-base-ink\",\"--color-base-darker\",\"--color-base-dark\",\"--color-base\",\"--color-base-light\",\"--color-base-lighter\",\"--color-base-lightest\",\"--color-primary-lighter\",\"--color-primary-light\",\"--color-primary\",\"--color-primary-vivid\",\"--color-primary-dark\",\"--color-primary-darker\",\"--color-secondary-lighter\",\"--color-secondary-light\",\"--color-secondary\",\"--color-secondary-vivid\",\"--color-secondary-dark\",\"--color-secondary-darker\",\"--color-accent-cool-lighter\",\"--color-accent-cool-light\",\"--color-accent-cool\",\"--color-accent-cool-dark\",\"--color-accent-cool-darker\",\"--color-accent-warm-lighter\",\"--color-accent-warm-light\",\"--color-accent-warm\",\"--color-accent-warm-dark\",\"--color-accent-warm-darker\",\"--color-info-lighter\",\"--color-info-light\",\"--color-info\",\"--color-info-dark\",\"--color-info-darker\",\"--color-error-lighter\",\"--color-error-light\",\"--color-error\",\"--color-error-dark\",\"--color-error-darker\",\"--color-warning-lighter\",\"--color-warning-light\",\"--color-warning\",\"--color-warning-dark\",\"--color-warning-darker\",\"--color-success-lighter\",\"--color-success-light\",\"--color-success\",\"--color-success-dark\",\"--color-success-darker\",\"--color-disabled-light\",\"--color-disabled\",\"--color-disabled-dark\"];const d=document.createElement(\"div\");d.style.position=\"absolute\";d.style.left=\"-9999px\";d.style.width=\"10px\";d.style.height=\"10px\";document.body.appendChild(d);const o={};for(const p of P){d.style.backgroundColor=\"rgb(1, 2, 3)\";d.style.backgroundColor=\"var(\"+p+\")\";o[p]=getComputedStyle(d).backgroundColor;}d.remove();return o;})()"
+    },
+    {
+      "name": "OSUI :root collisions — 10 overridden + 7 that must remain framework-owned",
+      "js": "(()=>{const cs=getComputedStyle(document.documentElement);const own=[\"--color-primary\",\"--color-secondary\",\"--color-error\",\"--color-error-light\",\"--color-warning\",\"--color-warning-light\",\"--color-success\",\"--color-success-light\",\"--color-info\",\"--color-info-light\"];const untouched=[\"--color-neutral-0\",\"--color-neutral-10\",\"--color-primary-hover\",\"--color-primary-lightest\",\"--color-red-lightest\",\"--color-focus-outer\",\"--color-background-body\"];const o={overridden:{},osui_untouched:{}};for(const p of own)o.overridden[p]=cs.getPropertyValue(p).trim();for(const p of untouched)o.osui_untouched[p]=cs.getPropertyValue(p).trim();return o;})()"
+    },
+    {
+      "name": "cascade provenance — sheets loaded, and which :root block declares --color-* in what order",
+      "js": "(()=>{const out=[];for(const s of document.styleSheets){let n=0;try{n=s.cssRules.length}catch(e){n=-1}const h=s.href||\"(inline)\";out.push({sheet:h.split(\"/\").slice(-2).join(\"/\"),rules:n});}const root=[];let order=0;for(const s of document.styleSheets){order++;let r=null;try{r=s.cssRules}catch(e){continue}for(const rule of r){if(rule.selectorText===\":root\"){let c=0;for(let i=0;i<rule.style.length;i++){if(rule.style[i].indexOf(\"--color-\")===0)c++;}root.push({order:order,sheet:(s.href||\"(inline)\").split(\"/\").slice(-1)[0],colorVarsInRoot:c});}}}return{sheets:out,rootBlocks:root};})()"
+    },
+    {
+      "name": "native OSUI widgets under the USWDS theme — framework-declared fg/bg pairs + contrast",
+      "js": "(()=>{\nconst cases=[[\"alert alert-info\",\"Alert / info\"],[\"alert alert-error\",\"Alert / error\"],[\"alert alert-warning\",\"Alert / warning\"],[\"alert alert-success\",\"Alert / success\"],[\"btn btn-error\",\"Button / error\"],[\"btn btn-success\",\"Button / success\"],[\"btn btn-primary\",\"Button / primary\"],[\"background-error-light\",\"Utility / .background-error-light\"],[\"background-info-light\",\"Utility / .background-info-light\"]];\nfunction parts(c){return c.replace(/[^0-9,.]/g,\"\").split(\",\").map(Number)}\nfunction lum(c){const m=parts(c);const f=(v)=>{v=v/255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)};return 0.2126*f(m[0])+0.7152*f(m[1])+0.0722*f(m[2])}\nfunction cr(a,b){const l1=lum(a),l2=lum(b);const hi=Math.max(l1,l2),lo=Math.min(l1,l2);return Math.round(((hi+0.05)/(lo+0.05))*100)/100}\nconst host=document.createElement(\"div\");host.style.position=\"absolute\";host.style.left=\"-9999px\";host.style.width=\"400px\";document.body.appendChild(host);\nconst out={};\nfor(let i=0;i<cases.length;i++){const cls=cases[i][0],label=cases[i][1];\nconst el=document.createElement(\"div\");el.className=cls;el.textContent=\"Sample message\";host.appendChild(el);\nconst cs=getComputedStyle(el);const bg=cs.backgroundColor;const fg=cs.color;\nconst rec={fg:fg,bg:bg};\nif(bg.indexOf(\"rgba(0, 0, 0, 0)\")===-1&&bg!==\"transparent\"){rec.contrast=cr(fg,bg)}else{rec.contrast=\"no-own-background\"}\nout[label]=rec;}\nhost.remove();return out;})()"
+    },
+    {
+      "name": "badge widget vs the -light step — USWDS override compared against the OSUI baseline",
+      "js": "(()=>{\nfunction parts(c){return c.replace(/[^0-9,.]/g,\"\").split(\",\").map(Number)}\nfunction lum(c){const m=parts(c);const f=(v)=>{v=v/255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)};return 0.2126*f(m[0])+0.7152*f(m[1])+0.0722*f(m[2])}\nfunction cr(a,b){const l1=lum(a),l2=lum(b);const hi=Math.max(l1,l2),lo=Math.min(l1,l2);return Math.round(((hi+0.05)/(lo+0.05))*100)/100}\nconst host=document.createElement(\"div\");host.style.position=\"absolute\";host.style.left=\"-9999px\";document.body.appendChild(host);\nconst out={};\nconst themed=[\"background-error-light\",\"background-info-light\",\"background-success-light\",\"background-warning-light\",\"background-error\",\"background-info\",\"background-success\"];\nfor(let i=0;i<themed.length;i++){const el=document.createElement(\"div\");el.className=\"badge \"+themed[i];el.textContent=\"9\";host.appendChild(el);const cs=getComputedStyle(el);out[\"badge .\"+themed[i]+\" (USWDS theme)\"]={fg:cs.color,bg:cs.backgroundColor,contrast:cr(cs.color,cs.backgroundColor)};}\nconst osuiDefaults=[[\"error-light\",\"#fceaea\"],[\"info-light\",\"#e5f5fc\"],[\"success-light\",\"#eaf3eb\"],[\"warning-light\",\"#fdf6e5\"]];\nfor(let i=0;i<osuiDefaults.length;i++){const el=document.createElement(\"div\");el.className=\"badge\";el.textContent=\"9\";el.style.backgroundColor=osuiDefaults[i][1];host.appendChild(el);const cs=getComputedStyle(el);out[\"badge .background-\"+osuiDefaults[i][0]+\" (OSUI baseline \"+osuiDefaults[i][1]+\")\"]={fg:cs.color,bg:cs.backgroundColor,contrast:cr(cs.color,cs.backgroundColor)};}\nhost.remove();return out;})()"
+    }
+  ]
+}

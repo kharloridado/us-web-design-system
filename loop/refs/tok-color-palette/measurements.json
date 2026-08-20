@@ -1,0 +1,662 @@
+{
+  "schema": "measure-fidelity/1",
+  "generatedBy": "build/gate/measure-fidelity.mjs",
+  "generatedAt": "2026-08-20T16:49:12.027Z",
+  "playwright": "1.62.1",
+  "browser": {
+    "channel": "chrome",
+    "version": "151.0.7922.169"
+  },
+  "url": "http://127.0.0.1:65168/preview/index.html",
+  "probesFile": "loop/refs/tok-color-palette/probes.json",
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1280,
+      "height": 900,
+      "status": "measured",
+      "failedRequests": [],
+      "probes": [
+        {
+          "name": "theme palette / authored-computed custom properties (29 ref rows)",
+          "status": "measured",
+          "selector": ":root",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "--color-base-ink": "#1B1B1B",
+            "--color-base-darker": "#3D4551",
+            "--color-base-dark": "#565C65",
+            "--color-base": "#71767A",
+            "--color-base-light": "#A9AEB1",
+            "--color-base-lighter": "#DCDEE0",
+            "--color-base-lightest": "#F0F0F0",
+            "--color-primary-lighter": "#D9E8F6",
+            "--color-primary-light": "#73B3E7",
+            "--color-primary": "#005EA2",
+            "--color-primary-vivid": "#0050D8",
+            "--color-primary-dark": "#1A4480",
+            "--color-primary-darker": "#162E51",
+            "--color-secondary-lighter": "#F8DFE2",
+            "--color-secondary-light": "#F2938C",
+            "--color-secondary": "#D83933",
+            "--color-secondary-vivid": "#E41D3D",
+            "--color-secondary-dark": "#B51D09",
+            "--color-secondary-darker": "#8B1303",
+            "--color-accent-cool-lighter": "#E1F3F8",
+            "--color-accent-cool-light": "#97D4EA",
+            "--color-accent-cool": "#00BDE3",
+            "--color-accent-cool-dark": "#28A0CB",
+            "--color-accent-cool-darker": "#07648D",
+            "--color-accent-warm-lighter": "#F2E4D4",
+            "--color-accent-warm-light": "#FFBC78",
+            "--color-accent-warm": "#FA9441",
+            "--color-accent-warm-dark": "#C05600",
+            "--color-accent-warm-darker": "#775540"
+          }
+        },
+        {
+          "name": "state palette / authored-computed custom properties (23 ref rows)",
+          "status": "measured",
+          "selector": ":root",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "--color-info-lighter": "#E7F6F8",
+            "--color-info-light": "#99DEEA",
+            "--color-info": "#00BDE3",
+            "--color-info-dark": "#009EC1",
+            "--color-info-darker": "#2E6276",
+            "--color-error-lighter": "#F4E3DB",
+            "--color-error-light": "#F39268",
+            "--color-error": "#D54309",
+            "--color-error-dark": "#B50909",
+            "--color-error-darker": "#6F3331",
+            "--color-warning-lighter": "#FAF3D1",
+            "--color-warning-light": "#FEE685",
+            "--color-warning": "#FFBE2E",
+            "--color-warning-dark": "#E5A000",
+            "--color-warning-darker": "#936F38",
+            "--color-success-lighter": "#ECF3EC",
+            "--color-success-light": "#70E17B",
+            "--color-success": "#00A91C",
+            "--color-success-dark": "#4D8055",
+            "--color-success-darker": "#446443",
+            "--color-disabled-light": "#E6E6E6",
+            "--color-disabled": "#C9C9C9",
+            "--color-disabled-dark": "#ADADAD"
+          }
+        },
+        {
+          "name": "all 52 / RESOLVED rendered colour (var() painted, read back as rgb)",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const P=[\"--color-base-ink\",\"--color-base-darker\",\"--color-base-dark\",\"--color-base\",\"--color-base-light\",\"--color-base-lighter\",\"--color-base-lightest\",\"--color-primary-lighter\",\"--color-primary-light\",\"--color-primary\",\"--color-primary-vivid\",\"--color-primary-dark\",\"--color-primary-darker\",\"--color-secondary-lighter\",\"--color-secondary-light\",\"--color-secondary\",\"--color-secondary-vivid\",\"--color-secondary-dark\",\"--color-secondary-darker\",\"--color-accent-cool-lighter\",\"--color-accent-cool-light\",\"--color-accent-cool\",\"--color-accent-cool-dark\",\"--color-accent-cool-darker\",\"--color-accent-warm-lighter\",\"--color-accent-warm-light\",\"--color-accent-warm\",\"--color-accent-warm-dark\",\"--color-accent-warm-darker\",\"--color-info-lighter\",\"--color-info-light\",\"--color-info\",\"--color-info-dark\",\"--color-info-darker\",\"--color-error-lighter\",\"--color-error-light\",\"--color-error\",\"--color-error-dark\",\"--color-error-darker\",\"--color-warning-lighter\",\"--color-warning-light\",\"--color-warning\",\"--color-warning-dark\",\"--color-warning-darker\",\"--color-success-lighter\",\"--color-success-light\",\"--color-success\",\"--color-success-dark\",\"--color-success-darker\",\"--color-disabled-light\",\"--color-disabled\",\"--color-disabled-dark\"];const d=document.createElement(\"div\");d.style.position=\"absolute\";d.style.left=\"-9999px\";d.style.width=\"10px\";d.style.height=\"10px\";document.body.appendChild(d);const o={};for(const p of P){d.style.backgroundColor=\"rgb(1, 2, 3)\";d.style.backgroundColor=\"var(\"+p+\")\";o[p]=getComputedStyle(d).backgroundColor;}d.remove();return o;})()",
+          "value": {
+            "--color-base-ink": "rgb(27, 27, 27)",
+            "--color-base-darker": "rgb(61, 69, 81)",
+            "--color-base-dark": "rgb(86, 92, 101)",
+            "--color-base": "rgb(113, 118, 122)",
+            "--color-base-light": "rgb(169, 174, 177)",
+            "--color-base-lighter": "rgb(220, 222, 224)",
+            "--color-base-lightest": "rgb(240, 240, 240)",
+            "--color-primary-lighter": "rgb(217, 232, 246)",
+            "--color-primary-light": "rgb(115, 179, 231)",
+            "--color-primary": "rgb(0, 94, 162)",
+            "--color-primary-vivid": "rgb(0, 80, 216)",
+            "--color-primary-dark": "rgb(26, 68, 128)",
+            "--color-primary-darker": "rgb(22, 46, 81)",
+            "--color-secondary-lighter": "rgb(248, 223, 226)",
+            "--color-secondary-light": "rgb(242, 147, 140)",
+            "--color-secondary": "rgb(216, 57, 51)",
+            "--color-secondary-vivid": "rgb(228, 29, 61)",
+            "--color-secondary-dark": "rgb(181, 29, 9)",
+            "--color-secondary-darker": "rgb(139, 19, 3)",
+            "--color-accent-cool-lighter": "rgb(225, 243, 248)",
+            "--color-accent-cool-light": "rgb(151, 212, 234)",
+            "--color-accent-cool": "rgb(0, 189, 227)",
+            "--color-accent-cool-dark": "rgb(40, 160, 203)",
+            "--color-accent-cool-darker": "rgb(7, 100, 141)",
+            "--color-accent-warm-lighter": "rgb(242, 228, 212)",
+            "--color-accent-warm-light": "rgb(255, 188, 120)",
+            "--color-accent-warm": "rgb(250, 148, 65)",
+            "--color-accent-warm-dark": "rgb(192, 86, 0)",
+            "--color-accent-warm-darker": "rgb(119, 85, 64)",
+            "--color-info-lighter": "rgb(231, 246, 248)",
+            "--color-info-light": "rgb(153, 222, 234)",
+            "--color-info": "rgb(0, 189, 227)",
+            "--color-info-dark": "rgb(0, 158, 193)",
+            "--color-info-darker": "rgb(46, 98, 118)",
+            "--color-error-lighter": "rgb(244, 227, 219)",
+            "--color-error-light": "rgb(243, 146, 104)",
+            "--color-error": "rgb(213, 67, 9)",
+            "--color-error-dark": "rgb(181, 9, 9)",
+            "--color-error-darker": "rgb(111, 51, 49)",
+            "--color-warning-lighter": "rgb(250, 243, 209)",
+            "--color-warning-light": "rgb(254, 230, 133)",
+            "--color-warning": "rgb(255, 190, 46)",
+            "--color-warning-dark": "rgb(229, 160, 0)",
+            "--color-warning-darker": "rgb(147, 111, 56)",
+            "--color-success-lighter": "rgb(236, 243, 236)",
+            "--color-success-light": "rgb(112, 225, 123)",
+            "--color-success": "rgb(0, 169, 28)",
+            "--color-success-dark": "rgb(77, 128, 85)",
+            "--color-success-darker": "rgb(68, 100, 67)",
+            "--color-disabled-light": "rgb(230, 230, 230)",
+            "--color-disabled": "rgb(201, 201, 201)",
+            "--color-disabled-dark": "rgb(173, 173, 173)"
+          }
+        },
+        {
+          "name": "OSUI :root collisions — 10 overridden + 7 that must remain framework-owned",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const cs=getComputedStyle(document.documentElement);const own=[\"--color-primary\",\"--color-secondary\",\"--color-error\",\"--color-error-light\",\"--color-warning\",\"--color-warning-light\",\"--color-success\",\"--color-success-light\",\"--color-info\",\"--color-info-light\"];const untouched=[\"--color-neutral-0\",\"--color-neutral-10\",\"--color-primary-hover\",\"--color-primary-lightest\",\"--color-red-lightest\",\"--color-focus-outer\",\"--color-background-body\"];const o={overridden:{},osui_untouched:{}};for(const p of own)o.overridden[p]=cs.getPropertyValue(p).trim();for(const p of untouched)o.osui_untouched[p]=cs.getPropertyValue(p).trim();return o;})()",
+          "value": {
+            "overridden": {
+              "--color-primary": "#005EA2",
+              "--color-secondary": "#D83933",
+              "--color-error": "#D54309",
+              "--color-error-light": "#F39268",
+              "--color-warning": "#FFBE2E",
+              "--color-warning-light": "#FEE685",
+              "--color-success": "#00A91C",
+              "--color-success-light": "#70E17B",
+              "--color-info": "#00BDE3",
+              "--color-info-light": "#99DEEA"
+            },
+            "osui_untouched": {
+              "--color-neutral-0": "#ffffff",
+              "--color-neutral-10": "#101213",
+              "--color-primary-hover": "#295fd6",
+              "--color-primary-lightest": "linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9))",
+              "--color-red-lightest": "#faeaea",
+              "--color-focus-outer": "#ffd337",
+              "--color-background-body": "#f3f6f8"
+            }
+          }
+        },
+        {
+          "name": "cascade provenance — sheets loaded, and which :root block declares --color-* in what order",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const out=[];for(const s of document.styleSheets){let n=0;try{n=s.cssRules.length}catch(e){n=-1}const h=s.href||\"(inline)\";out.push({sheet:h.split(\"/\").slice(-2).join(\"/\"),rules:n});}const root=[];let order=0;for(const s of document.styleSheets){order++;let r=null;try{r=s.cssRules}catch(e){continue}for(const rule of r){if(rule.selectorText===\":root\"){let c=0;for(let i=0;i<rule.style.length;i++){if(rule.style[i].indexOf(\"--color-\")===0)c++;}root.push({order:order,sheet:(s.href||\"(inline)\").split(\"/\").slice(-1)[0],colorVarsInRoot:c});}}}return{sheets:out,rootBlocks:root};})()",
+          "value": {
+            "sheets": [
+              {
+                "sheet": "outsystems-ui/outsystems-ui.css",
+                "rules": 3654
+              },
+              {
+                "sheet": "dist/theme.css",
+                "rules": 1
+              }
+            ],
+            "rootBlocks": [
+              {
+                "order": 1,
+                "sheet": "outsystems-ui.css",
+                "colorVarsInRoot": 112
+              },
+              {
+                "order": 1,
+                "sheet": "outsystems-ui.css",
+                "colorVarsInRoot": 0
+              },
+              {
+                "order": 2,
+                "sheet": "theme.css",
+                "colorVarsInRoot": 52
+              }
+            ]
+          }
+        },
+        {
+          "name": "native OSUI widgets under the USWDS theme — framework-declared fg/bg pairs + contrast",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{\nconst cases=[[\"alert alert-info\",\"Alert / info\"],[\"alert alert-error\",\"Alert / error\"],[\"alert alert-warning\",\"Alert / warning\"],[\"alert alert-success\",\"Alert / success\"],[\"btn btn-error\",\"Button / error\"],[\"btn btn-success\",\"Button / success\"],[\"btn btn-primary\",\"Button / primary\"],[\"background-error-light\",\"Utility / .background-error-light\"],[\"background-info-light\",\"Utility / .background-info-light\"]];\nfunction parts(c){return c.replace(/[^0-9,.]/g,\"\").split(\",\").map(Number)}\nfunction lum(c){const m=parts(c);const f=(v)=>{v=v/255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)};return 0.2126*f(m[0])+0.7152*f(m[1])+0.0722*f(m[2])}\nfunction cr(a,b){const l1=lum(a),l2=lum(b);const hi=Math.max(l1,l2),lo=Math.min(l1,l2);return Math.round(((hi+0.05)/(lo+0.05))*100)/100}\nconst host=document.createElement(\"div\");host.style.position=\"absolute\";host.style.left=\"-9999px\";host.style.width=\"400px\";document.body.appendChild(host);\nconst out={};\nfor(let i=0;i<cases.length;i++){const cls=cases[i][0],label=cases[i][1];\nconst el=document.createElement(\"div\");el.className=cls;el.textContent=\"Sample message\";host.appendChild(el);\nconst cs=getComputedStyle(el);const bg=cs.backgroundColor;const fg=cs.color;\nconst rec={fg:fg,bg:bg};\nif(bg.indexOf(\"rgba(0, 0, 0, 0)\")===-1&&bg!==\"transparent\"){rec.contrast=cr(fg,bg)}else{rec.contrast=\"no-own-background\"}\nout[label]=rec;}\nhost.remove();return out;})()",
+          "value": {
+            "Alert / info": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(0, 189, 227)",
+              "contrast": 2.24
+            },
+            "Alert / error": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(213, 67, 9)",
+              "contrast": 4.53
+            },
+            "Alert / warning": {
+              "fg": "rgb(16, 18, 19)",
+              "bg": "rgb(255, 190, 46)",
+              "contrast": 11.32
+            },
+            "Alert / success": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(0, 169, 28)",
+              "contrast": 3.14
+            },
+            "Button / error": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(213, 67, 9)",
+              "contrast": 4.53
+            },
+            "Button / success": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(0, 169, 28)",
+              "contrast": 3.14
+            },
+            "Button / primary": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(0, 94, 162)",
+              "contrast": 6.72
+            },
+            "Utility / .background-error-light": {
+              "fg": "rgb(39, 43, 48)",
+              "bg": "rgb(243, 146, 104)",
+              "contrast": 6.19
+            },
+            "Utility / .background-info-light": {
+              "fg": "rgb(39, 43, 48)",
+              "bg": "rgb(153, 222, 234)",
+              "contrast": 9.49
+            }
+          }
+        },
+        {
+          "name": "badge widget vs the -light step — USWDS override compared against the OSUI baseline",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{\nfunction parts(c){return c.replace(/[^0-9,.]/g,\"\").split(\",\").map(Number)}\nfunction lum(c){const m=parts(c);const f=(v)=>{v=v/255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)};return 0.2126*f(m[0])+0.7152*f(m[1])+0.0722*f(m[2])}\nfunction cr(a,b){const l1=lum(a),l2=lum(b);const hi=Math.max(l1,l2),lo=Math.min(l1,l2);return Math.round(((hi+0.05)/(lo+0.05))*100)/100}\nconst host=document.createElement(\"div\");host.style.position=\"absolute\";host.style.left=\"-9999px\";document.body.appendChild(host);\nconst out={};\nconst themed=[\"background-error-light\",\"background-info-light\",\"background-success-light\",\"background-warning-light\",\"background-error\",\"background-info\",\"background-success\"];\nfor(let i=0;i<themed.length;i++){const el=document.createElement(\"div\");el.className=\"badge \"+themed[i];el.textContent=\"9\";host.appendChild(el);const cs=getComputedStyle(el);out[\"badge .\"+themed[i]+\" (USWDS theme)\"]={fg:cs.color,bg:cs.backgroundColor,contrast:cr(cs.color,cs.backgroundColor)};}\nconst osuiDefaults=[[\"error-light\",\"#fceaea\"],[\"info-light\",\"#e5f5fc\"],[\"success-light\",\"#eaf3eb\"],[\"warning-light\",\"#fdf6e5\"]];\nfor(let i=0;i<osuiDefaults.length;i++){const el=document.createElement(\"div\");el.className=\"badge\";el.textContent=\"9\";el.style.backgroundColor=osuiDefaults[i][1];host.appendChild(el);const cs=getComputedStyle(el);out[\"badge .background-\"+osuiDefaults[i][0]+\" (OSUI baseline \"+osuiDefaults[i][1]+\")\"]={fg:cs.color,bg:cs.backgroundColor,contrast:cr(cs.color,cs.backgroundColor)};}\nhost.remove();return out;})()",
+          "value": {
+            "badge .background-error-light (USWDS theme)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(243, 146, 104)",
+              "contrast": 2.3
+            },
+            "badge .background-info-light (USWDS theme)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(153, 222, 234)",
+              "contrast": 1.5
+            },
+            "badge .background-success-light (USWDS theme)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(112, 225, 123)",
+              "contrast": 1.65
+            },
+            "badge .background-warning-light (USWDS theme)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(254, 230, 133)",
+              "contrast": 1.24
+            },
+            "badge .background-error (USWDS theme)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(213, 67, 9)",
+              "contrast": 4.53
+            },
+            "badge .background-info (USWDS theme)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(0, 189, 227)",
+              "contrast": 2.24
+            },
+            "badge .background-success (USWDS theme)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(0, 169, 28)",
+              "contrast": 3.14
+            },
+            "badge .background-error-light (OSUI baseline #fceaea)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(252, 234, 234)",
+              "contrast": 1.16
+            },
+            "badge .background-info-light (OSUI baseline #e5f5fc)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(229, 245, 252)",
+              "contrast": 1.12
+            },
+            "badge .background-success-light (OSUI baseline #eaf3eb)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(234, 243, 235)",
+              "contrast": 1.13
+            },
+            "badge .background-warning-light (OSUI baseline #fdf6e5)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(253, 246, 229)",
+              "contrast": 1.08
+            }
+          }
+        }
+      ],
+      "screenshot": "loop/refs/tok-color-palette/rendered.desktop.png"
+    },
+    {
+      "name": "mobile",
+      "width": 375,
+      "height": 812,
+      "status": "measured",
+      "failedRequests": [],
+      "probes": [
+        {
+          "name": "theme palette / authored-computed custom properties (29 ref rows)",
+          "status": "measured",
+          "selector": ":root",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "--color-base-ink": "#1B1B1B",
+            "--color-base-darker": "#3D4551",
+            "--color-base-dark": "#565C65",
+            "--color-base": "#71767A",
+            "--color-base-light": "#A9AEB1",
+            "--color-base-lighter": "#DCDEE0",
+            "--color-base-lightest": "#F0F0F0",
+            "--color-primary-lighter": "#D9E8F6",
+            "--color-primary-light": "#73B3E7",
+            "--color-primary": "#005EA2",
+            "--color-primary-vivid": "#0050D8",
+            "--color-primary-dark": "#1A4480",
+            "--color-primary-darker": "#162E51",
+            "--color-secondary-lighter": "#F8DFE2",
+            "--color-secondary-light": "#F2938C",
+            "--color-secondary": "#D83933",
+            "--color-secondary-vivid": "#E41D3D",
+            "--color-secondary-dark": "#B51D09",
+            "--color-secondary-darker": "#8B1303",
+            "--color-accent-cool-lighter": "#E1F3F8",
+            "--color-accent-cool-light": "#97D4EA",
+            "--color-accent-cool": "#00BDE3",
+            "--color-accent-cool-dark": "#28A0CB",
+            "--color-accent-cool-darker": "#07648D",
+            "--color-accent-warm-lighter": "#F2E4D4",
+            "--color-accent-warm-light": "#FFBC78",
+            "--color-accent-warm": "#FA9441",
+            "--color-accent-warm-dark": "#C05600",
+            "--color-accent-warm-darker": "#775540"
+          }
+        },
+        {
+          "name": "state palette / authored-computed custom properties (23 ref rows)",
+          "status": "measured",
+          "selector": ":root",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "--color-info-lighter": "#E7F6F8",
+            "--color-info-light": "#99DEEA",
+            "--color-info": "#00BDE3",
+            "--color-info-dark": "#009EC1",
+            "--color-info-darker": "#2E6276",
+            "--color-error-lighter": "#F4E3DB",
+            "--color-error-light": "#F39268",
+            "--color-error": "#D54309",
+            "--color-error-dark": "#B50909",
+            "--color-error-darker": "#6F3331",
+            "--color-warning-lighter": "#FAF3D1",
+            "--color-warning-light": "#FEE685",
+            "--color-warning": "#FFBE2E",
+            "--color-warning-dark": "#E5A000",
+            "--color-warning-darker": "#936F38",
+            "--color-success-lighter": "#ECF3EC",
+            "--color-success-light": "#70E17B",
+            "--color-success": "#00A91C",
+            "--color-success-dark": "#4D8055",
+            "--color-success-darker": "#446443",
+            "--color-disabled-light": "#E6E6E6",
+            "--color-disabled": "#C9C9C9",
+            "--color-disabled-dark": "#ADADAD"
+          }
+        },
+        {
+          "name": "all 52 / RESOLVED rendered colour (var() painted, read back as rgb)",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const P=[\"--color-base-ink\",\"--color-base-darker\",\"--color-base-dark\",\"--color-base\",\"--color-base-light\",\"--color-base-lighter\",\"--color-base-lightest\",\"--color-primary-lighter\",\"--color-primary-light\",\"--color-primary\",\"--color-primary-vivid\",\"--color-primary-dark\",\"--color-primary-darker\",\"--color-secondary-lighter\",\"--color-secondary-light\",\"--color-secondary\",\"--color-secondary-vivid\",\"--color-secondary-dark\",\"--color-secondary-darker\",\"--color-accent-cool-lighter\",\"--color-accent-cool-light\",\"--color-accent-cool\",\"--color-accent-cool-dark\",\"--color-accent-cool-darker\",\"--color-accent-warm-lighter\",\"--color-accent-warm-light\",\"--color-accent-warm\",\"--color-accent-warm-dark\",\"--color-accent-warm-darker\",\"--color-info-lighter\",\"--color-info-light\",\"--color-info\",\"--color-info-dark\",\"--color-info-darker\",\"--color-error-lighter\",\"--color-error-light\",\"--color-error\",\"--color-error-dark\",\"--color-error-darker\",\"--color-warning-lighter\",\"--color-warning-light\",\"--color-warning\",\"--color-warning-dark\",\"--color-warning-darker\",\"--color-success-lighter\",\"--color-success-light\",\"--color-success\",\"--color-success-dark\",\"--color-success-darker\",\"--color-disabled-light\",\"--color-disabled\",\"--color-disabled-dark\"];const d=document.createElement(\"div\");d.style.position=\"absolute\";d.style.left=\"-9999px\";d.style.width=\"10px\";d.style.height=\"10px\";document.body.appendChild(d);const o={};for(const p of P){d.style.backgroundColor=\"rgb(1, 2, 3)\";d.style.backgroundColor=\"var(\"+p+\")\";o[p]=getComputedStyle(d).backgroundColor;}d.remove();return o;})()",
+          "value": {
+            "--color-base-ink": "rgb(27, 27, 27)",
+            "--color-base-darker": "rgb(61, 69, 81)",
+            "--color-base-dark": "rgb(86, 92, 101)",
+            "--color-base": "rgb(113, 118, 122)",
+            "--color-base-light": "rgb(169, 174, 177)",
+            "--color-base-lighter": "rgb(220, 222, 224)",
+            "--color-base-lightest": "rgb(240, 240, 240)",
+            "--color-primary-lighter": "rgb(217, 232, 246)",
+            "--color-primary-light": "rgb(115, 179, 231)",
+            "--color-primary": "rgb(0, 94, 162)",
+            "--color-primary-vivid": "rgb(0, 80, 216)",
+            "--color-primary-dark": "rgb(26, 68, 128)",
+            "--color-primary-darker": "rgb(22, 46, 81)",
+            "--color-secondary-lighter": "rgb(248, 223, 226)",
+            "--color-secondary-light": "rgb(242, 147, 140)",
+            "--color-secondary": "rgb(216, 57, 51)",
+            "--color-secondary-vivid": "rgb(228, 29, 61)",
+            "--color-secondary-dark": "rgb(181, 29, 9)",
+            "--color-secondary-darker": "rgb(139, 19, 3)",
+            "--color-accent-cool-lighter": "rgb(225, 243, 248)",
+            "--color-accent-cool-light": "rgb(151, 212, 234)",
+            "--color-accent-cool": "rgb(0, 189, 227)",
+            "--color-accent-cool-dark": "rgb(40, 160, 203)",
+            "--color-accent-cool-darker": "rgb(7, 100, 141)",
+            "--color-accent-warm-lighter": "rgb(242, 228, 212)",
+            "--color-accent-warm-light": "rgb(255, 188, 120)",
+            "--color-accent-warm": "rgb(250, 148, 65)",
+            "--color-accent-warm-dark": "rgb(192, 86, 0)",
+            "--color-accent-warm-darker": "rgb(119, 85, 64)",
+            "--color-info-lighter": "rgb(231, 246, 248)",
+            "--color-info-light": "rgb(153, 222, 234)",
+            "--color-info": "rgb(0, 189, 227)",
+            "--color-info-dark": "rgb(0, 158, 193)",
+            "--color-info-darker": "rgb(46, 98, 118)",
+            "--color-error-lighter": "rgb(244, 227, 219)",
+            "--color-error-light": "rgb(243, 146, 104)",
+            "--color-error": "rgb(213, 67, 9)",
+            "--color-error-dark": "rgb(181, 9, 9)",
+            "--color-error-darker": "rgb(111, 51, 49)",
+            "--color-warning-lighter": "rgb(250, 243, 209)",
+            "--color-warning-light": "rgb(254, 230, 133)",
+            "--color-warning": "rgb(255, 190, 46)",
+            "--color-warning-dark": "rgb(229, 160, 0)",
+            "--color-warning-darker": "rgb(147, 111, 56)",
+            "--color-success-lighter": "rgb(236, 243, 236)",
+            "--color-success-light": "rgb(112, 225, 123)",
+            "--color-success": "rgb(0, 169, 28)",
+            "--color-success-dark": "rgb(77, 128, 85)",
+            "--color-success-darker": "rgb(68, 100, 67)",
+            "--color-disabled-light": "rgb(230, 230, 230)",
+            "--color-disabled": "rgb(201, 201, 201)",
+            "--color-disabled-dark": "rgb(173, 173, 173)"
+          }
+        },
+        {
+          "name": "OSUI :root collisions — 10 overridden + 7 that must remain framework-owned",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const cs=getComputedStyle(document.documentElement);const own=[\"--color-primary\",\"--color-secondary\",\"--color-error\",\"--color-error-light\",\"--color-warning\",\"--color-warning-light\",\"--color-success\",\"--color-success-light\",\"--color-info\",\"--color-info-light\"];const untouched=[\"--color-neutral-0\",\"--color-neutral-10\",\"--color-primary-hover\",\"--color-primary-lightest\",\"--color-red-lightest\",\"--color-focus-outer\",\"--color-background-body\"];const o={overridden:{},osui_untouched:{}};for(const p of own)o.overridden[p]=cs.getPropertyValue(p).trim();for(const p of untouched)o.osui_untouched[p]=cs.getPropertyValue(p).trim();return o;})()",
+          "value": {
+            "overridden": {
+              "--color-primary": "#005EA2",
+              "--color-secondary": "#D83933",
+              "--color-error": "#D54309",
+              "--color-error-light": "#F39268",
+              "--color-warning": "#FFBE2E",
+              "--color-warning-light": "#FEE685",
+              "--color-success": "#00A91C",
+              "--color-success-light": "#70E17B",
+              "--color-info": "#00BDE3",
+              "--color-info-light": "#99DEEA"
+            },
+            "osui_untouched": {
+              "--color-neutral-0": "#ffffff",
+              "--color-neutral-10": "#101213",
+              "--color-primary-hover": "#295fd6",
+              "--color-primary-lightest": "linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9))",
+              "--color-red-lightest": "#faeaea",
+              "--color-focus-outer": "#ffd337",
+              "--color-background-body": "#f3f6f8"
+            }
+          }
+        },
+        {
+          "name": "cascade provenance — sheets loaded, and which :root block declares --color-* in what order",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const out=[];for(const s of document.styleSheets){let n=0;try{n=s.cssRules.length}catch(e){n=-1}const h=s.href||\"(inline)\";out.push({sheet:h.split(\"/\").slice(-2).join(\"/\"),rules:n});}const root=[];let order=0;for(const s of document.styleSheets){order++;let r=null;try{r=s.cssRules}catch(e){continue}for(const rule of r){if(rule.selectorText===\":root\"){let c=0;for(let i=0;i<rule.style.length;i++){if(rule.style[i].indexOf(\"--color-\")===0)c++;}root.push({order:order,sheet:(s.href||\"(inline)\").split(\"/\").slice(-1)[0],colorVarsInRoot:c});}}}return{sheets:out,rootBlocks:root};})()",
+          "value": {
+            "sheets": [
+              {
+                "sheet": "outsystems-ui/outsystems-ui.css",
+                "rules": 3654
+              },
+              {
+                "sheet": "dist/theme.css",
+                "rules": 1
+              }
+            ],
+            "rootBlocks": [
+              {
+                "order": 1,
+                "sheet": "outsystems-ui.css",
+                "colorVarsInRoot": 112
+              },
+              {
+                "order": 1,
+                "sheet": "outsystems-ui.css",
+                "colorVarsInRoot": 0
+              },
+              {
+                "order": 2,
+                "sheet": "theme.css",
+                "colorVarsInRoot": 52
+              }
+            ]
+          }
+        },
+        {
+          "name": "native OSUI widgets under the USWDS theme — framework-declared fg/bg pairs + contrast",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{\nconst cases=[[\"alert alert-info\",\"Alert / info\"],[\"alert alert-error\",\"Alert / error\"],[\"alert alert-warning\",\"Alert / warning\"],[\"alert alert-success\",\"Alert / success\"],[\"btn btn-error\",\"Button / error\"],[\"btn btn-success\",\"Button / success\"],[\"btn btn-primary\",\"Button / primary\"],[\"background-error-light\",\"Utility / .background-error-light\"],[\"background-info-light\",\"Utility / .background-info-light\"]];\nfunction parts(c){return c.replace(/[^0-9,.]/g,\"\").split(\",\").map(Number)}\nfunction lum(c){const m=parts(c);const f=(v)=>{v=v/255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)};return 0.2126*f(m[0])+0.7152*f(m[1])+0.0722*f(m[2])}\nfunction cr(a,b){const l1=lum(a),l2=lum(b);const hi=Math.max(l1,l2),lo=Math.min(l1,l2);return Math.round(((hi+0.05)/(lo+0.05))*100)/100}\nconst host=document.createElement(\"div\");host.style.position=\"absolute\";host.style.left=\"-9999px\";host.style.width=\"400px\";document.body.appendChild(host);\nconst out={};\nfor(let i=0;i<cases.length;i++){const cls=cases[i][0],label=cases[i][1];\nconst el=document.createElement(\"div\");el.className=cls;el.textContent=\"Sample message\";host.appendChild(el);\nconst cs=getComputedStyle(el);const bg=cs.backgroundColor;const fg=cs.color;\nconst rec={fg:fg,bg:bg};\nif(bg.indexOf(\"rgba(0, 0, 0, 0)\")===-1&&bg!==\"transparent\"){rec.contrast=cr(fg,bg)}else{rec.contrast=\"no-own-background\"}\nout[label]=rec;}\nhost.remove();return out;})()",
+          "value": {
+            "Alert / info": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(0, 189, 227)",
+              "contrast": 2.24
+            },
+            "Alert / error": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(213, 67, 9)",
+              "contrast": 4.53
+            },
+            "Alert / warning": {
+              "fg": "rgb(16, 18, 19)",
+              "bg": "rgb(255, 190, 46)",
+              "contrast": 11.32
+            },
+            "Alert / success": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(0, 169, 28)",
+              "contrast": 3.14
+            },
+            "Button / error": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(213, 67, 9)",
+              "contrast": 4.53
+            },
+            "Button / success": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(0, 169, 28)",
+              "contrast": 3.14
+            },
+            "Button / primary": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(0, 94, 162)",
+              "contrast": 6.72
+            },
+            "Utility / .background-error-light": {
+              "fg": "rgb(39, 43, 48)",
+              "bg": "rgb(243, 146, 104)",
+              "contrast": 6.19
+            },
+            "Utility / .background-info-light": {
+              "fg": "rgb(39, 43, 48)",
+              "bg": "rgb(153, 222, 234)",
+              "contrast": 9.49
+            }
+          }
+        },
+        {
+          "name": "badge widget vs the -light step — USWDS override compared against the OSUI baseline",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{\nfunction parts(c){return c.replace(/[^0-9,.]/g,\"\").split(\",\").map(Number)}\nfunction lum(c){const m=parts(c);const f=(v)=>{v=v/255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)};return 0.2126*f(m[0])+0.7152*f(m[1])+0.0722*f(m[2])}\nfunction cr(a,b){const l1=lum(a),l2=lum(b);const hi=Math.max(l1,l2),lo=Math.min(l1,l2);return Math.round(((hi+0.05)/(lo+0.05))*100)/100}\nconst host=document.createElement(\"div\");host.style.position=\"absolute\";host.style.left=\"-9999px\";document.body.appendChild(host);\nconst out={};\nconst themed=[\"background-error-light\",\"background-info-light\",\"background-success-light\",\"background-warning-light\",\"background-error\",\"background-info\",\"background-success\"];\nfor(let i=0;i<themed.length;i++){const el=document.createElement(\"div\");el.className=\"badge \"+themed[i];el.textContent=\"9\";host.appendChild(el);const cs=getComputedStyle(el);out[\"badge .\"+themed[i]+\" (USWDS theme)\"]={fg:cs.color,bg:cs.backgroundColor,contrast:cr(cs.color,cs.backgroundColor)};}\nconst osuiDefaults=[[\"error-light\",\"#fceaea\"],[\"info-light\",\"#e5f5fc\"],[\"success-light\",\"#eaf3eb\"],[\"warning-light\",\"#fdf6e5\"]];\nfor(let i=0;i<osuiDefaults.length;i++){const el=document.createElement(\"div\");el.className=\"badge\";el.textContent=\"9\";el.style.backgroundColor=osuiDefaults[i][1];host.appendChild(el);const cs=getComputedStyle(el);out[\"badge .background-\"+osuiDefaults[i][0]+\" (OSUI baseline \"+osuiDefaults[i][1]+\")\"]={fg:cs.color,bg:cs.backgroundColor,contrast:cr(cs.color,cs.backgroundColor)};}\nhost.remove();return out;})()",
+          "value": {
+            "badge .background-error-light (USWDS theme)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(243, 146, 104)",
+              "contrast": 2.3
+            },
+            "badge .background-info-light (USWDS theme)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(153, 222, 234)",
+              "contrast": 1.5
+            },
+            "badge .background-success-light (USWDS theme)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(112, 225, 123)",
+              "contrast": 1.65
+            },
+            "badge .background-warning-light (USWDS theme)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(254, 230, 133)",
+              "contrast": 1.24
+            },
+            "badge .background-error (USWDS theme)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(213, 67, 9)",
+              "contrast": 4.53
+            },
+            "badge .background-info (USWDS theme)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(0, 189, 227)",
+              "contrast": 2.24
+            },
+            "badge .background-success (USWDS theme)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(0, 169, 28)",
+              "contrast": 3.14
+            },
+            "badge .background-error-light (OSUI baseline #fceaea)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(252, 234, 234)",
+              "contrast": 1.16
+            },
+            "badge .background-info-light (OSUI baseline #e5f5fc)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(229, 245, 252)",
+              "contrast": 1.12
+            },
+            "badge .background-success-light (OSUI baseline #eaf3eb)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(234, 243, 235)",
+              "contrast": 1.13
+            },
+            "badge .background-warning-light (OSUI baseline #fdf6e5)": {
+              "fg": "rgb(255, 255, 255)",
+              "bg": "rgb(253, 246, 229)",
+              "contrast": 1.08
+            }
+          }
+        }
+      ],
+      "screenshot": "loop/refs/tok-color-palette/rendered.mobile.png"
+    }
+  ],
+  "summary": {
+    "viewports": 2,
+    "probes": 14,
+    "measured": 14,
+    "unmeasured": 0,
+    "criticalFailedRequests": 0
+  },
+  "exitCode": 0
+}
