@@ -9,14 +9,19 @@
 }
 
 .uswds-specimen__ramp {
+  /* One ramp per row, never wrapped. A ramp split across two rows stops reading as a
+   * progression, which is the one thing a palette specimen has to show. */
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--space-xs, 0.5rem);
   margin-block-end: var(--space-m, 1rem);
 }
 
 .uswds-specimen__item {
-  inline-size: 13.5rem;
+  /* Equal columns that share the row, so a 7-step ramp and a 3-step ramp both span the
+   * full width and the steps stay comparable across ramps. */
+  flex: 1 1 0;
+  min-inline-size: 0;
 }
 
 .uswds-specimen__chip {

@@ -1,13 +1,13 @@
 {
   "schema": "measure-fidelity/1",
   "generatedBy": "build/gate/measure-fidelity.mjs",
-  "generatedAt": "2026-08-20T16:49:12.027Z",
+  "generatedAt": "2026-08-20T17:26:26.312Z",
   "playwright": "1.62.1",
   "browser": {
     "channel": "chrome",
     "version": "151.0.7922.169"
   },
-  "url": "http://127.0.0.1:65168/preview/index.html",
+  "url": "http://127.0.0.1:57663/preview/index.html",
   "probesFile": "loop/refs/tok-color-palette/probes.json",
   "viewports": [
     {
@@ -177,38 +177,19 @@
           }
         },
         {
-          "name": "cascade provenance — sheets loaded, and which :root block declares --color-* in what order",
+          "name": "cascade invariant — the real OSUI base is loaded, theme.css follows it, declares 52 :root --color-*, and nothing after it redefines them",
           "status": "measured",
           "kind": "js",
-          "expression": "(()=>{const out=[];for(const s of document.styleSheets){let n=0;try{n=s.cssRules.length}catch(e){n=-1}const h=s.href||\"(inline)\";out.push({sheet:h.split(\"/\").slice(-2).join(\"/\"),rules:n});}const root=[];let order=0;for(const s of document.styleSheets){order++;let r=null;try{r=s.cssRules}catch(e){continue}for(const rule of r){if(rule.selectorText===\":root\"){let c=0;for(let i=0;i<rule.style.length;i++){if(rule.style[i].indexOf(\"--color-\")===0)c++;}root.push({order:order,sheet:(s.href||\"(inline)\").split(\"/\").slice(-1)[0],colorVarsInRoot:c});}}}return{sheets:out,rootBlocks:root};})()",
+          "expression": "(()=>{\nconst sheets=[];for(const s of document.styleSheets)sheets.push(s);\nconst idxOf=(sub)=>{for(let i=0;i<sheets.length;i++){if((sheets[i].href||\"\").indexOf(sub)>-1)return i}return -1};\nfunction rootColorCount(s){let n=0;let r=null;try{r=s.cssRules}catch(e){return -1}\nfor(const rule of r){if(rule.selectorText===\":root\"){for(let i=0;i<rule.style.length;i++){if(rule.style[i].indexOf(\"--color-\")===0)n++}}}return n}\nconst osui=idxOf(\"outsystems-ui.css\");const theme=idxOf(\"dist/theme.css\");\nlet osuiRules=-1;if(osui>-1){try{osuiRules=sheets[osui].cssRules.length}catch(e){osuiRules=-1}}\nlet after=0;const offenders=[];\nif(theme>-1){for(let i=theme+1;i<sheets.length;i++){const c=rootColorCount(sheets[i]);if(c>0){after+=c;offenders.push((sheets[i].href||\"(inline)\").split(\"/\").slice(-1)[0]+\":\"+c)}}}\nreturn {osuiLoaded:osui>-1,osuiBaseNonEmpty:osuiRules>1000,osuiRootColorCount:osui>-1?rootColorCount(sheets[osui]):-1,\nthemeLoaded:theme>-1,themeOrderedAfterOsui:(osui>-1&&theme>osui),themeRootColorCount:theme>-1?rootColorCount(sheets[theme]):-1,\nrootColorRedefinitionsAfterTheme:after,offenders:offenders};})()",
           "value": {
-            "sheets": [
-              {
-                "sheet": "outsystems-ui/outsystems-ui.css",
-                "rules": 3654
-              },
-              {
-                "sheet": "dist/theme.css",
-                "rules": 1
-              }
-            ],
-            "rootBlocks": [
-              {
-                "order": 1,
-                "sheet": "outsystems-ui.css",
-                "colorVarsInRoot": 112
-              },
-              {
-                "order": 1,
-                "sheet": "outsystems-ui.css",
-                "colorVarsInRoot": 0
-              },
-              {
-                "order": 2,
-                "sheet": "theme.css",
-                "colorVarsInRoot": 52
-              }
-            ]
+            "osuiLoaded": true,
+            "osuiBaseNonEmpty": true,
+            "osuiRootColorCount": 112,
+            "themeLoaded": true,
+            "themeOrderedAfterOsui": true,
+            "themeRootColorCount": 52,
+            "rootColorRedefinitionsAfterTheme": 0,
+            "offenders": []
           }
         },
         {
@@ -497,38 +478,19 @@
           }
         },
         {
-          "name": "cascade provenance — sheets loaded, and which :root block declares --color-* in what order",
+          "name": "cascade invariant — the real OSUI base is loaded, theme.css follows it, declares 52 :root --color-*, and nothing after it redefines them",
           "status": "measured",
           "kind": "js",
-          "expression": "(()=>{const out=[];for(const s of document.styleSheets){let n=0;try{n=s.cssRules.length}catch(e){n=-1}const h=s.href||\"(inline)\";out.push({sheet:h.split(\"/\").slice(-2).join(\"/\"),rules:n});}const root=[];let order=0;for(const s of document.styleSheets){order++;let r=null;try{r=s.cssRules}catch(e){continue}for(const rule of r){if(rule.selectorText===\":root\"){let c=0;for(let i=0;i<rule.style.length;i++){if(rule.style[i].indexOf(\"--color-\")===0)c++;}root.push({order:order,sheet:(s.href||\"(inline)\").split(\"/\").slice(-1)[0],colorVarsInRoot:c});}}}return{sheets:out,rootBlocks:root};})()",
+          "expression": "(()=>{\nconst sheets=[];for(const s of document.styleSheets)sheets.push(s);\nconst idxOf=(sub)=>{for(let i=0;i<sheets.length;i++){if((sheets[i].href||\"\").indexOf(sub)>-1)return i}return -1};\nfunction rootColorCount(s){let n=0;let r=null;try{r=s.cssRules}catch(e){return -1}\nfor(const rule of r){if(rule.selectorText===\":root\"){for(let i=0;i<rule.style.length;i++){if(rule.style[i].indexOf(\"--color-\")===0)n++}}}return n}\nconst osui=idxOf(\"outsystems-ui.css\");const theme=idxOf(\"dist/theme.css\");\nlet osuiRules=-1;if(osui>-1){try{osuiRules=sheets[osui].cssRules.length}catch(e){osuiRules=-1}}\nlet after=0;const offenders=[];\nif(theme>-1){for(let i=theme+1;i<sheets.length;i++){const c=rootColorCount(sheets[i]);if(c>0){after+=c;offenders.push((sheets[i].href||\"(inline)\").split(\"/\").slice(-1)[0]+\":\"+c)}}}\nreturn {osuiLoaded:osui>-1,osuiBaseNonEmpty:osuiRules>1000,osuiRootColorCount:osui>-1?rootColorCount(sheets[osui]):-1,\nthemeLoaded:theme>-1,themeOrderedAfterOsui:(osui>-1&&theme>osui),themeRootColorCount:theme>-1?rootColorCount(sheets[theme]):-1,\nrootColorRedefinitionsAfterTheme:after,offenders:offenders};})()",
           "value": {
-            "sheets": [
-              {
-                "sheet": "outsystems-ui/outsystems-ui.css",
-                "rules": 3654
-              },
-              {
-                "sheet": "dist/theme.css",
-                "rules": 1
-              }
-            ],
-            "rootBlocks": [
-              {
-                "order": 1,
-                "sheet": "outsystems-ui.css",
-                "colorVarsInRoot": 112
-              },
-              {
-                "order": 1,
-                "sheet": "outsystems-ui.css",
-                "colorVarsInRoot": 0
-              },
-              {
-                "order": 2,
-                "sheet": "theme.css",
-                "colorVarsInRoot": 52
-              }
-            ]
+            "osuiLoaded": true,
+            "osuiBaseNonEmpty": true,
+            "osuiRootColorCount": 112,
+            "themeLoaded": true,
+            "themeOrderedAfterOsui": true,
+            "themeRootColorCount": 52,
+            "rootColorRedefinitionsAfterTheme": 0,
+            "offenders": []
           }
         },
         {
