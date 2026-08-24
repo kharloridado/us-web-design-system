@@ -24,5 +24,17 @@
     "",
     "Add an entry for every new handover. A handover with no entry gets no embedded code, and the",
     "embed silently goes stale when its source changes — so keep this in sync (the build warns)."
+  ],
+  "odc-palette-screen.md": [
+    [
+      "style-guide/odc-palette-screen.css",
+      "css",
+      "the ODC Screen's Style Sheet"
+    ],
+    [
+      "style-guide/odc-palette-screen.html",
+      "html",
+      "one Expression widget on the screen, Escape Content = No"
+    ]
   ]
 }
