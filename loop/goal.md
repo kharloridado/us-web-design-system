@@ -45,8 +45,13 @@ Ordered by dependency. The loop builds top to bottom and stops at each tier chec
 | 17 | Table | `composites` | [`1892-2502`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-2502&m=dev) |  |
 | 18 | Modal / Popup | `patterns` | [`1892-2033`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-2033&m=dev) |  |
 
-**18 deliverables.** Every row carries a Figma node id, so every item can have a ref frozen; none is blocked on a missing spec.
+**19 deliverables.** Items 1–18 each carry a Figma node id. Item 19 is specified in prose instead — a written spec of record, which `loop/refs/README.md` accepts as a legitimate ref. None is blocked on a missing spec.
 
+> **Scope change, 2026-08-20.** Item 19 was added after the original signing, at the request of
+> Kharlo Ridado, and is recorded here rather than landed silently — the hard rule is that nothing
+> enters the build queue without a row in this table. It is tooling, not a design deliverable.
+
+| 19 | Live Style Guide — colour specimen | `foundations` | _written spec_ ([`loop/refs/sg-palette-specimen/spec.md`](loop/refs/sg-palette-specimen/spec.md)) | **Added 2026-08-20**, after the checker flagged that three consecutive token items would produce no visual output. Preview-only chrome; ships nothing to ODC. Depends on item 1. |
 
 - When **`Inventory source = artifact`**, the row is a line in the signed table named above. A component that is in Figma but not in the inventory is `needs-human`, not `queued`.
 - When **`Inventory source = board`**, the row *is* the card, and the signature is a scope owner having moved it to **`Ready`**. A card that reached `Ready` any other way, or whose "in the agreed scope" box is unticked, is `Blocked` — not `queued`. The loop never moves a card into `Ready` itself.

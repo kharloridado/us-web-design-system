@@ -15,6 +15,7 @@
     "gen:color-utilities": "node build/gen-color-utilities.mjs",
     "gen:type-utilities": "node build/gen-type-utilities.mjs",
     "gen:spacing-utilities": "node build/gen-spacing-utilities.mjs",
+    "gen:palette-specimen": "node build/gen-palette-specimen.mjs",
     "build:osui": "node build/build-osui.mjs",
     "preview": "node build/preview-server.mjs",
     "gate:selftest": "node build/gate/measure-fidelity.mjs --probes build/gate/selftest.json",
