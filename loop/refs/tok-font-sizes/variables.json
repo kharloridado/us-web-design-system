@@ -1,0 +1,18 @@
+{
+  "_meta": {
+    "source": "Figma MCP get_variable_defs, verbatim",
+    "figma_file_key": "tJnXUZbEL3fRWG7h1z0ij7",
+    "figma_node_id": "1892-7566",
+    "node_name": "Font sizes",
+    "pulled": "2026-08-20",
+    "pulled_by": "orchestrator (subagents have no Figma MCP access)",
+    "variable_count": 2,
+    "IMPORTANT": "The FONT SIZES ARE NOT FIGMA VARIABLES. get_variable_defs on this node returns only the two colours below — the colours of the page's own label text. The nine sizes are literal text styles, so there is nothing to bind to and no variable path to preserve. The size values in spec.md were taken from the node's text-layer NAMES via get_metadata (which are the literal strings '13px', 'h6', '2', …) and independently confirmed against the rendered figma.png. Two sources, no shared failure mode.",
+    "mode_axis": "none observable from this node — one value per size, no device or breakpoint variants present. NOTE that tokens/typography.css warns a type ramp's device axis is often invisible on the type page and only surfaces in a component's example frames. Treat single-value as an ASSUMPTION to re-test at the first component ref that specifies type, not as a settled fact.",
+    "naming_inconsistency": "This node reports the ink colour as 'Base/ink' (#1B1B1B). The colour palette node 287-98 reports the same literal as 'Base/base-ink'. Two variable paths for one colour in the same library. Recorded, not acted on: it changes nothing for this item, which emits no colour."
+  },
+  "variables": {
+    "Base/ink": "#1B1B1B",
+    "Base/base-light": "#A9AEB1"
+  }
+}

@@ -25,7 +25,7 @@
     "after_primitives": "pause",
     "after_composites": "continue"
   },
-  "iteration": 1,
+  "iteration": 2,
   "tiers": [
     "foundations",
     "primitives",
@@ -52,8 +52,15 @@
       "id": "tok-font-sizes",
       "tier": "foundations",
       "node": "1892-7566",
-      "status": "queued",
-      "rounds": 0
+      "status": "built",
+      "rounds": 2,
+      "level": "L1",
+      "artifact": "tokens/typography.css",
+      "risk_tier": "core",
+      "det_gate": "pass",
+      "visual": "pass",
+      "confidence": "high",
+      "decision_log": "Nine-step size ramp, design step names preserved (3xs..3xl), sparse USWDS scale indices left uninterpolated, px kept as the design states with the rem trade-off declared not taken silently. Round 1 built 42px for 2xl because the REF said 42px; the checker measured glyph ink in the exported render, flagged it as a 5.4% outlier against a k=5.51 fit, and returned BLOCKED rather than FAIL because the defect was in the ref, not the build. get_design_context on the sample node confirmed 40px. Ref re-frozen from per-node text styles; the discredited layer-name sourcing is recorded in spec.md so it is not repeated."
     },
     {
       "id": "tok-typography",
@@ -193,6 +200,36 @@
       "issue": 1,
       "node": "287-98",
       "summary": ".alert-info 2.24:1 and .alert-success/.btn-success 3.14:1 — OSUI pairs a white foreground with the base colour token. WCAG 2.1 SC 1.4.3. Built faithfully; remedy belongs in the override/semantic layer or the Alert item."
+    },
+    {
+      "id": "FND-005",
+      "item": "tok-font-sizes",
+      "type": "consistency",
+      "severity": "medium",
+      "disposition": "open (register-only, medium)",
+      "issue": null,
+      "node": "1892-7566",
+      "summary": "Font sizes page labels the 2xl row 42px but styles its sample 40px. Built as 40px. Below the high+ gate, so register-only."
+    },
+    {
+      "id": "FND-006",
+      "item": "tok-font-sizes",
+      "type": "consistency",
+      "severity": "low",
+      "disposition": "open (register-only, low)",
+      "issue": null,
+      "node": "1892-7566",
+      "summary": "#1B1B1B exposed as Base/base-ink from node 287-98 and Base/ink from node 1892-7566."
+    },
+    {
+      "id": "FND-007",
+      "item": "tok-font-sizes",
+      "type": "consistency",
+      "severity": "low",
+      "disposition": "open (register-only, low)",
+      "issue": null,
+      "node": "1892-7566",
+      "summary": "--font-size-xs collides with OSUI 12px across 26 consumers; zero rendered defect measured. Mapping question for the semantic/overrides layer: OSUI xs is its smallest-text role and 3xs 13px is closer than the 15px that lands there by name."
     }
   ],
   "handover_epics": [],

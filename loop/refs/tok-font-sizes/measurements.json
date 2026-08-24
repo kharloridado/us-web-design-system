@@ -1,0 +1,596 @@
+{
+  "schema": "measure-fidelity/1",
+  "generatedBy": "build/gate/measure-fidelity.mjs",
+  "generatedAt": "2026-08-20T19:22:11.423Z",
+  "playwright": "1.62.1",
+  "browser": {
+    "channel": "chrome",
+    "version": "151.0.7922.169"
+  },
+  "url": "http://127.0.0.1:54574/preview/index.html",
+  "probesFile": "loop/refs/tok-font-sizes/probes.json",
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1280,
+      "height": 900,
+      "status": "measured",
+      "failedRequests": [],
+      "probes": [
+        {
+          "name": "ramp / 3xs used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-3xs)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "13px"
+        },
+        {
+          "name": "ramp / 2xs used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-2xs)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "14px"
+        },
+        {
+          "name": "ramp / xs used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-xs)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "15px"
+        },
+        {
+          "name": "ramp / sm used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-sm)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "16px"
+        },
+        {
+          "name": "ramp / md used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-md)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "17px"
+        },
+        {
+          "name": "ramp / lg used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-lg)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "22px"
+        },
+        {
+          "name": "ramp / xl used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-xl)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "32px"
+        },
+        {
+          "name": "ramp / 2xl used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-2xl)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "40px"
+        },
+        {
+          "name": "ramp / 3xl used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-3xl)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "48px"
+        },
+        {
+          "name": "cascade / who wins --font-size-xs",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{return getComputedStyle(document.documentElement).getPropertyValue('--font-size-xs').trim();})()",
+          "value": "15px"
+        },
+        {
+          "name": "cascade / ramp declared block",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const r=getComputedStyle(document.documentElement);return ['3xs','2xs','xs','sm','md','lg','xl','2xl','3xl'].map(s=>s+'='+r.getPropertyValue('--font-size-'+s).trim()).join(' ');})()",
+          "value": "3xs=13px 2xs=14px xs=15px sm=16px md=17px lg=22px xl=32px 2xl=40px 3xl=48px"
+        },
+        {
+          "name": "collateral / .btn.btn-small",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const b=document.createElement('button');b.className='btn btn-small';b.textContent='Small button';document.body.appendChild(b);const cs=getComputedStyle(b);const r=b.getBoundingClientRect();const o={fontSize:cs.fontSize,height:Math.round(r.height*100)/100,minHeight:cs.minHeight,paddingTop:cs.paddingTop,lineHeight:cs.lineHeight};b.remove();return o;})()",
+          "value": {
+            "fontSize": "15px",
+            "height": 32,
+            "minHeight": "0px",
+            "paddingTop": "0px",
+            "lineHeight": "15px"
+          }
+        },
+        {
+          "name": "collateral / .btn (base, must be unchanged)",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const b=document.createElement('button');b.className='btn';b.textContent='Base button';document.body.appendChild(b);const cs=getComputedStyle(b);const r=b.getBoundingClientRect();const o={fontSize:cs.fontSize,height:Math.round(r.height*100)/100};b.remove();return o;})()",
+          "value": {
+            "fontSize": "14px",
+            "height": 40
+          }
+        },
+        {
+          "name": "collateral / .badge.badge-small",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.className='badge badge-small';e.textContent='9';document.body.appendChild(e);const cs=getComputedStyle(e);const r=e.getBoundingClientRect();const o={fontSize:cs.fontSize,height:Math.round(r.height*100)/100,width:Math.round(r.width*100)/100};e.remove();return o;})()",
+          "value": {
+            "fontSize": "15px",
+            "height": 24,
+            "width": 24
+          }
+        },
+        {
+          "name": "collateral / .tag.tag-small",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.className='tag tag-small';e.textContent='Tag';document.body.appendChild(e);const cs=getComputedStyle(e);const r=e.getBoundingClientRect();const o={fontSize:cs.fontSize,height:Math.round(r.height*100)/100};e.remove();return o;})()",
+          "value": {
+            "fontSize": "15px",
+            "height": 24
+          }
+        },
+        {
+          "name": "collateral / .avatar-small",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('div');e.className='avatar avatar-small';e.textContent='AB';document.body.appendChild(e);const cs=getComputedStyle(e);const r=e.getBoundingClientRect();const o={fontSize:cs.fontSize,height:Math.round(r.height*100)/100,width:Math.round(r.width*100)/100};e.remove();return o;})()",
+          "value": {
+            "fontSize": "15px",
+            "height": 24,
+            "width": 24
+          }
+        },
+        {
+          "name": "collateral / span.validation-message",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.className='validation-message';e.textContent='This field is required';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "15px"
+        },
+        {
+          "name": "collateral / .breadcrumbs-item .icon (glyph size)",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const w=document.createElement('div');w.className='breadcrumbs-item';const i=document.createElement('span');i.className='icon';w.appendChild(i);document.body.appendChild(w);const v=getComputedStyle(i).fontSize;w.remove();return v;})()",
+          "value": "15px"
+        },
+        {
+          "name": "collateral / .form-control.input-small",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('input');e.className='form-control input-small';e.setAttribute('data-input','');document.body.appendChild(e);const cs=getComputedStyle(e);const r=e.getBoundingClientRect();const o={fontSize:cs.fontSize,height:Math.round(r.height*100)/100};e.remove();return o;})()",
+          "value": {
+            "fontSize": "15px",
+            "height": 32
+          }
+        },
+        {
+          "name": "collateral / .font-size-xs utility",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.className='font-size-xs';e.textContent='x';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "15px"
+        },
+        {
+          "name": "untouched / .font-size-s utility (expect 14px)",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.className='font-size-s';e.textContent='x';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "14px"
+        },
+        {
+          "name": "untouched / --font-size-base + label + h1..h6 + display",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const r=getComputedStyle(document.documentElement);return ['base','label','h1','h2','h3','h4','h5','h6','display'].map(s=>s+'='+r.getPropertyValue('--font-size-'+s).trim()).join(' ');})()",
+          "value": "base=16px label=11px h1=32px h2=28px h3=26px h4=22px h5=20px h6=18px display=36px"
+        },
+        {
+          "name": "removed / var(--font-size-s) resolves (OSUI 14px)",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-s)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "14px"
+        },
+        {
+          "name": "removed / var(--font-size-m, 16px) example fallback",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-m, 16px)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "16px"
+        },
+        {
+          "name": "removed / var(--font-size-l, 20px) example fallback",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-l, 20px)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "20px"
+        },
+        {
+          "name": "removed / bare var(--font-size-m) with NO fallback",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-m)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "14px"
+        },
+        {
+          "name": "zoom-proxy / px does not track root font-size",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const html=document.documentElement;const prev=html.style.fontSize;html.style.fontSize='32px';const e=document.createElement('span');e.style.fontSize='var(--font-size-sm)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();html.style.fontSize=prev;return v;})()",
+          "value": "16px"
+        },
+        {
+          "name": "overflow / .badge.badge-small 2 digits",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.className='badge badge-small';e.textContent='99';document.body.appendChild(e);const cs=getComputedStyle(e);const r={rendered:e.clientWidth>0&&e.clientHeight>0,clips_x:e.scrollWidth>e.clientWidth,clips_y:e.scrollHeight>e.clientHeight,fontSize:cs.fontSize,height:e.clientHeight};e.remove();return r;})()",
+          "value": {
+            "rendered": true,
+            "clips_x": false,
+            "clips_y": false,
+            "fontSize": "15px",
+            "height": 24
+          }
+        },
+        {
+          "name": "overflow / .avatar-small initials",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('div');e.className='avatar avatar-small';e.textContent='AB';document.body.appendChild(e);const cs=getComputedStyle(e);const r={rendered:e.clientWidth>0&&e.clientHeight>0,clips_x:e.scrollWidth>e.clientWidth,clips_y:e.scrollHeight>e.clientHeight,fontSize:cs.fontSize,height:e.clientHeight};e.remove();return r;})()",
+          "value": {
+            "rendered": true,
+            "clips_x": false,
+            "clips_y": false,
+            "fontSize": "15px",
+            "height": 24
+          }
+        },
+        {
+          "name": "overflow / .tag.tag-small",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.className='tag tag-small';e.textContent='Active';document.body.appendChild(e);const cs=getComputedStyle(e);const r={rendered:e.clientWidth>0&&e.clientHeight>0,clips_x:e.scrollWidth>e.clientWidth,clips_y:e.scrollHeight>e.clientHeight,fontSize:cs.fontSize,height:e.clientHeight};e.remove();return r;})()",
+          "value": {
+            "rendered": true,
+            "clips_x": false,
+            "clips_y": false,
+            "fontSize": "15px",
+            "height": 24
+          }
+        },
+        {
+          "name": "overflow / .btn.btn-small",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('button');e.className='btn btn-small';e.textContent='Save changes';document.body.appendChild(e);const cs=getComputedStyle(e);const r={rendered:e.clientWidth>0&&e.clientHeight>0,clips_x:e.scrollWidth>e.clientWidth,clips_y:e.scrollHeight>e.clientHeight,fontSize:cs.fontSize,height:e.clientHeight};e.remove();return r;})()",
+          "value": {
+            "rendered": true,
+            "clips_x": false,
+            "clips_y": false,
+            "fontSize": "15px",
+            "height": 30
+          }
+        },
+        {
+          "name": "overflow / .badge.badge-small at OSUI default 12px (control)",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.className='badge badge-small';e.style.setProperty('--font-size-xs','12px');e.textContent='99';document.body.appendChild(e);const cs=getComputedStyle(e);const r={rendered:e.clientWidth>0&&e.clientHeight>0,clips_x:e.scrollWidth>e.clientWidth,clips_y:e.scrollHeight>e.clientHeight,fontSize:cs.fontSize,height:e.clientHeight};e.remove();return r;})()",
+          "value": {
+            "rendered": true,
+            "clips_x": false,
+            "clips_y": false,
+            "fontSize": "12px",
+            "height": 24
+          }
+        }
+      ],
+      "screenshot": "loop/refs/tok-font-sizes/rendered.desktop.png"
+    },
+    {
+      "name": "mobile",
+      "width": 375,
+      "height": 812,
+      "status": "measured",
+      "failedRequests": [],
+      "probes": [
+        {
+          "name": "ramp / 3xs used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-3xs)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "13px"
+        },
+        {
+          "name": "ramp / 2xs used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-2xs)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "14px"
+        },
+        {
+          "name": "ramp / xs used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-xs)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "15px"
+        },
+        {
+          "name": "ramp / sm used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-sm)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "16px"
+        },
+        {
+          "name": "ramp / md used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-md)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "17px"
+        },
+        {
+          "name": "ramp / lg used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-lg)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "22px"
+        },
+        {
+          "name": "ramp / xl used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-xl)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "32px"
+        },
+        {
+          "name": "ramp / 2xl used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-2xl)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "40px"
+        },
+        {
+          "name": "ramp / 3xl used",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-3xl)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "48px"
+        },
+        {
+          "name": "cascade / who wins --font-size-xs",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{return getComputedStyle(document.documentElement).getPropertyValue('--font-size-xs').trim();})()",
+          "value": "15px"
+        },
+        {
+          "name": "cascade / ramp declared block",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const r=getComputedStyle(document.documentElement);return ['3xs','2xs','xs','sm','md','lg','xl','2xl','3xl'].map(s=>s+'='+r.getPropertyValue('--font-size-'+s).trim()).join(' ');})()",
+          "value": "3xs=13px 2xs=14px xs=15px sm=16px md=17px lg=22px xl=32px 2xl=40px 3xl=48px"
+        },
+        {
+          "name": "collateral / .btn.btn-small",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const b=document.createElement('button');b.className='btn btn-small';b.textContent='Small button';document.body.appendChild(b);const cs=getComputedStyle(b);const r=b.getBoundingClientRect();const o={fontSize:cs.fontSize,height:Math.round(r.height*100)/100,minHeight:cs.minHeight,paddingTop:cs.paddingTop,lineHeight:cs.lineHeight};b.remove();return o;})()",
+          "value": {
+            "fontSize": "15px",
+            "height": 32,
+            "minHeight": "0px",
+            "paddingTop": "0px",
+            "lineHeight": "15px"
+          }
+        },
+        {
+          "name": "collateral / .btn (base, must be unchanged)",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const b=document.createElement('button');b.className='btn';b.textContent='Base button';document.body.appendChild(b);const cs=getComputedStyle(b);const r=b.getBoundingClientRect();const o={fontSize:cs.fontSize,height:Math.round(r.height*100)/100};b.remove();return o;})()",
+          "value": {
+            "fontSize": "14px",
+            "height": 40
+          }
+        },
+        {
+          "name": "collateral / .badge.badge-small",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.className='badge badge-small';e.textContent='9';document.body.appendChild(e);const cs=getComputedStyle(e);const r=e.getBoundingClientRect();const o={fontSize:cs.fontSize,height:Math.round(r.height*100)/100,width:Math.round(r.width*100)/100};e.remove();return o;})()",
+          "value": {
+            "fontSize": "15px",
+            "height": 24,
+            "width": 24
+          }
+        },
+        {
+          "name": "collateral / .tag.tag-small",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.className='tag tag-small';e.textContent='Tag';document.body.appendChild(e);const cs=getComputedStyle(e);const r=e.getBoundingClientRect();const o={fontSize:cs.fontSize,height:Math.round(r.height*100)/100};e.remove();return o;})()",
+          "value": {
+            "fontSize": "15px",
+            "height": 24
+          }
+        },
+        {
+          "name": "collateral / .avatar-small",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('div');e.className='avatar avatar-small';e.textContent='AB';document.body.appendChild(e);const cs=getComputedStyle(e);const r=e.getBoundingClientRect();const o={fontSize:cs.fontSize,height:Math.round(r.height*100)/100,width:Math.round(r.width*100)/100};e.remove();return o;})()",
+          "value": {
+            "fontSize": "15px",
+            "height": 24,
+            "width": 24
+          }
+        },
+        {
+          "name": "collateral / span.validation-message",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.className='validation-message';e.textContent='This field is required';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "15px"
+        },
+        {
+          "name": "collateral / .breadcrumbs-item .icon (glyph size)",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const w=document.createElement('div');w.className='breadcrumbs-item';const i=document.createElement('span');i.className='icon';w.appendChild(i);document.body.appendChild(w);const v=getComputedStyle(i).fontSize;w.remove();return v;})()",
+          "value": "15px"
+        },
+        {
+          "name": "collateral / .form-control.input-small",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('input');e.className='form-control input-small';e.setAttribute('data-input','');document.body.appendChild(e);const cs=getComputedStyle(e);const r=e.getBoundingClientRect();const o={fontSize:cs.fontSize,height:Math.round(r.height*100)/100};e.remove();return o;})()",
+          "value": {
+            "fontSize": "15px",
+            "height": 32
+          }
+        },
+        {
+          "name": "collateral / .font-size-xs utility",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.className='font-size-xs';e.textContent='x';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "15px"
+        },
+        {
+          "name": "untouched / .font-size-s utility (expect 14px)",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.className='font-size-s';e.textContent='x';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "14px"
+        },
+        {
+          "name": "untouched / --font-size-base + label + h1..h6 + display",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const r=getComputedStyle(document.documentElement);return ['base','label','h1','h2','h3','h4','h5','h6','display'].map(s=>s+'='+r.getPropertyValue('--font-size-'+s).trim()).join(' ');})()",
+          "value": "base=16px label=11px h1=32px h2=28px h3=26px h4=22px h5=20px h6=18px display=36px"
+        },
+        {
+          "name": "removed / var(--font-size-s) resolves (OSUI 14px)",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-s)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "14px"
+        },
+        {
+          "name": "removed / var(--font-size-m, 16px) example fallback",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-m, 16px)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "16px"
+        },
+        {
+          "name": "removed / var(--font-size-l, 20px) example fallback",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-l, 20px)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "20px"
+        },
+        {
+          "name": "removed / bare var(--font-size-m) with NO fallback",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.style.fontSize='var(--font-size-m)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();return v;})()",
+          "value": "14px"
+        },
+        {
+          "name": "zoom-proxy / px does not track root font-size",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const html=document.documentElement;const prev=html.style.fontSize;html.style.fontSize='32px';const e=document.createElement('span');e.style.fontSize='var(--font-size-sm)';document.body.appendChild(e);const v=getComputedStyle(e).fontSize;e.remove();html.style.fontSize=prev;return v;})()",
+          "value": "16px"
+        },
+        {
+          "name": "overflow / .badge.badge-small 2 digits",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.className='badge badge-small';e.textContent='99';document.body.appendChild(e);const cs=getComputedStyle(e);const r={rendered:e.clientWidth>0&&e.clientHeight>0,clips_x:e.scrollWidth>e.clientWidth,clips_y:e.scrollHeight>e.clientHeight,fontSize:cs.fontSize,height:e.clientHeight};e.remove();return r;})()",
+          "value": {
+            "rendered": true,
+            "clips_x": false,
+            "clips_y": false,
+            "fontSize": "15px",
+            "height": 24
+          }
+        },
+        {
+          "name": "overflow / .avatar-small initials",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('div');e.className='avatar avatar-small';e.textContent='AB';document.body.appendChild(e);const cs=getComputedStyle(e);const r={rendered:e.clientWidth>0&&e.clientHeight>0,clips_x:e.scrollWidth>e.clientWidth,clips_y:e.scrollHeight>e.clientHeight,fontSize:cs.fontSize,height:e.clientHeight};e.remove();return r;})()",
+          "value": {
+            "rendered": true,
+            "clips_x": false,
+            "clips_y": false,
+            "fontSize": "15px",
+            "height": 24
+          }
+        },
+        {
+          "name": "overflow / .tag.tag-small",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.className='tag tag-small';e.textContent='Active';document.body.appendChild(e);const cs=getComputedStyle(e);const r={rendered:e.clientWidth>0&&e.clientHeight>0,clips_x:e.scrollWidth>e.clientWidth,clips_y:e.scrollHeight>e.clientHeight,fontSize:cs.fontSize,height:e.clientHeight};e.remove();return r;})()",
+          "value": {
+            "rendered": true,
+            "clips_x": false,
+            "clips_y": false,
+            "fontSize": "15px",
+            "height": 24
+          }
+        },
+        {
+          "name": "overflow / .btn.btn-small",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('button');e.className='btn btn-small';e.textContent='Save changes';document.body.appendChild(e);const cs=getComputedStyle(e);const r={rendered:e.clientWidth>0&&e.clientHeight>0,clips_x:e.scrollWidth>e.clientWidth,clips_y:e.scrollHeight>e.clientHeight,fontSize:cs.fontSize,height:e.clientHeight};e.remove();return r;})()",
+          "value": {
+            "rendered": true,
+            "clips_x": false,
+            "clips_y": false,
+            "fontSize": "15px",
+            "height": 30
+          }
+        },
+        {
+          "name": "overflow / .badge.badge-small at OSUI default 12px (control)",
+          "status": "measured",
+          "kind": "js",
+          "expression": "(()=>{const e=document.createElement('span');e.className='badge badge-small';e.style.setProperty('--font-size-xs','12px');e.textContent='99';document.body.appendChild(e);const cs=getComputedStyle(e);const r={rendered:e.clientWidth>0&&e.clientHeight>0,clips_x:e.scrollWidth>e.clientWidth,clips_y:e.scrollHeight>e.clientHeight,fontSize:cs.fontSize,height:e.clientHeight};e.remove();return r;})()",
+          "value": {
+            "rendered": true,
+            "clips_x": false,
+            "clips_y": false,
+            "fontSize": "12px",
+            "height": 24
+          }
+        }
+      ],
+      "screenshot": "loop/refs/tok-font-sizes/rendered.mobile.png"
+    }
+  ],
+  "summary": {
+    "viewports": 2,
+    "probes": 64,
+    "measured": 64,
+    "unmeasured": 0,
+    "criticalFailedRequests": 0
+  },
+  "exitCode": 0
+}
