@@ -66,8 +66,15 @@
       "id": "tok-typography",
       "tier": "foundations",
       "node": "63-49",
-      "status": "queued",
-      "rounds": 0
+      "status": "built",
+      "rounds": 1,
+      "level": "L1",
+      "artifact": "tokens/typography.css",
+      "risk_tier": "core",
+      "det_gate": "pass",
+      "visual": "n/a — token-only item, no rendered surface of its own",
+      "confidence": "high",
+      "decision_log": "Family/weight/line-height only; sizes left to tok-font-sizes, which already owns them in the same file. Six of eight Prose steps are bound Figma variables; h3 and h6 are bound to nothing and were read from the sample nodes' own text styles via get_design_context (12:115, 12:119) rather than from layer names — the sourcing error tok-font-sizes made in round 1. Emitted Public Sans (the ref names a face, so the TODO the font-sizes ref could not close is closed here), weights 400/700 only, and three line-heights 1.62/1.2/1.15. Dropped the template's --font-weight-medium: 500: nothing on the node uses 500, and its only in-repo consumer carries an explicit fallback. Measured the framework rather than assuming: OSUI names weights --font-light/regular/semi-bold/bold (300/400/600/700), NOT --font-weight-*, so these names re-brand nothing on their own; and OSUI hard-codes its font stack in the html rule instead of reading a variable, so --font-family-base has no framework consumer either. Re-pointing --font-semi-bold (33 consumers, no 600 in this design) is the change that would actually re-brand widgets — deliberately left to the override layer, since this ref says nothing about OutSystems widgets. Kept --line-height-base as the name for the body value to avoid breaking its no-fallback consumer in the palette specimen. Two findings raised, none normalised: FND-008 (h3/h6 Regular where every other heading is Bold — and they are exactly the two unbound steps), FND-009 (Link/link-visited #562B97 has no palette entry). Independent corroboration of FND-005: this node states h1 = 40px, confirming the round-2 correction of the 2xl step from the mislabelled 42px."
     },
     {
       "id": "cmp-buttons",
