@@ -70,7 +70,15 @@ when; an exception with no owner and no date is indistinguishable from an oversi
 
 | Exception | Applies to | Rationale | Signed off by | Date | Finding / issue |
 | --- | --- | --- | --- | --- | --- |
-| _none yet_ | | | | | |
+| **`--font-weight-medium: 500` exists although no ref states it.** Node `63-49` (Typography) contains only weights 400 and 700. The token was removed as unsourced during `tok-typography`, then restored on this decision. It is a brand-owner value, not a design-derived one. | `tokens/typography.css` | It is the value `--font-semi-bold` is mapped to (row below). Without it the override has nothing to point at. | Kharlo Ridado | 2026-08-25 | [#9](https://github.com/kharloridado/us-web-design-system/pull/9) |
+| **OutSystems UI's `--font-semi-bold` is re-pointed from 600 to the medium weight (500).** | `tokens/outsystems-ui-overrides.css` | `--font-semi-bold` has **33** consumers — OSUI's emphasis weight across buttons, labels, headings, tabs, list items — and this design system has no 600 step, so the framework default is off-brand by construction. It had to land somewhere. 500 rather than 700 keeps a step between "emphasised" and "heading"; 700 would flatten all 33 roles to full bold. Node `63-49` is a prose type page and states nothing about widget roles, so this is a mapping decision, not a translation. Expect app-wide visual change on publish. | Kharlo Ridado | 2026-08-25 | [#9](https://github.com/kharloridado/us-web-design-system/pull/9) |
+
+> **Both rows are open to evidence, not closed.** Neither is derived from a ref, so the first
+> component ref that states a real weight against a real widget is the first real test of
+> them. `cmp-buttons` (node `1868-83`) is next in the queue and will state a button label
+> weight directly. If it disagrees with 500, that is a **finding against these rows** — raise
+> it and bring it back here, rather than quietly re-pointing the token or deleting the
+> exception.
 
 The machine-readable sibling of this table is `knownFalsePositiveClasses` in
 `project.config.json` — a class of finding that has been adversarially refuted and must

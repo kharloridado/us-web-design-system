@@ -24,3 +24,6 @@
 @import "./colors.css";
 @import "./spacing.css";
 @import "./typography.css";
+
+/* LAST, always — see layer 5 above. Anything added later goes ABOVE this line. */
+@import "./outsystems-ui-overrides.css";

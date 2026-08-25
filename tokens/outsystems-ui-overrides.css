@@ -1,0 +1,56 @@
+/* @section Widget Overrides / OutSystems UI */
+/* outsystems-ui-overrides.css — redefinitions of OutSystems UI's OWN :root custom
+ * properties, so native widgets re-brand with no framework edit and no hard-coded value.
+ *
+ * THIS FILE MUST LOAD LAST. Its whole mechanism is winning at equal `:root` specificity by
+ * being later in source order, so it is the final @import in tokens/index.css. Moving it
+ * earlier silently disables it — the framework's own declarations would win and nothing
+ * here would apply. There is no specificity trick holding this up, only order.
+ *
+ * WHAT BELONGS HERE, AND WHAT DOES NOT. A primitive token file answers "what does the design
+ * say?" — it is sourced from a frozen Figma ref and nothing else. This file answers a
+ * different question: "which OutSystems UI role should that value land on?" That is a
+ * MAPPING decision with app-wide blast radius, and it is never derivable from a token page.
+ * Keep the two apart: primitives stay honest to the ref, mappings live here with their
+ * reasoning attached. */
+
+:root {
+  /* ---- Font weight: --font-semi-bold → medium ------------------------------------
+   * DECISION, NOT A TRANSLATION. Brand owner Kharlo Ridado, 2026-08-25, on PR #9.
+   * Recorded in project-context.md under "Known signed-off exceptions".
+   *
+   * MEASURED, from the compiled framework (preview/vendor/outsystems-ui/outsystems-ui.css):
+   *
+   *   --font-light:     300   1 consumer
+   *   --font-regular:   400   9 consumers    == USWDS regular, already identical
+   *   --font-semi-bold: 600  33 consumers    <- the only one worth overriding
+   *   --font-bold:      700   2 consumers    == USWDS bold, already identical
+   *
+   * WHY ONLY THIS ONE. `--font-regular` and `--font-bold` already hold exactly the values
+   * this design system uses (400 / 700), so redefining them would change literally nothing —
+   * a no-op that only adds a second place to maintain the same number. `--font-light` (300)
+   * has no counterpart in this design at all and one consumer; it is left alone rather than
+   * mapped to a guess.
+   *
+   * `--font-semi-bold` is the one that matters: 33 rules resolve through it — the framework's
+   * emphasis weight across buttons, labels, headings, tabs and list items — and this design
+   * system has NO 600 step, so OSUI's default is off-brand by construction. It had to land on
+   * something.
+   *
+   * WHY MEDIUM (500) AND NOT BOLD (700). This is the brand owner's call, and it is the
+   * lighter of the two plausible answers: 700 would make every one of those 33 emphasis roles
+   * read as full bold, flattening the distinction between "emphasised" and "heading". 500
+   * keeps a step between them. Node 63-49 states neither — it is a prose type page and says
+   * nothing about widget roles — which is exactly why this is a decision and not something a
+   * token extractor could have derived.
+   *
+   * EXPECT VISIBLE CHANGE ON PUBLISH, app-wide, wherever OSUI applies its emphasis weight —
+   * not only where a class of ours is applied. That is the mechanism working, not a defect.
+   *
+   * TO RE-TEST, NOT TO ASSUME SETTLED. The first component ref that states a real weight
+   * against a real widget is the evidence this decision never had. `cmp-buttons` (node
+   * 1868-83) is next in the queue and will state a button label weight directly. If it
+   * disagrees with 500, that is a finding against THIS line — raise it, do not quietly
+   * re-point the token. */
+  --font-semi-bold: var(--font-weight-medium);
+}

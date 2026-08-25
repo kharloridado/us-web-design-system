@@ -36,11 +36,17 @@
    *   Loading it is a separate deliverable (it needs the licensed/self-hosted asset path and
    *   an @font-face rule, neither of which belongs in a :root token file).
    *
-   * WEIGHTS: 400 and 700 are the ONLY weights anywhere on this node. The template's
-   * `--font-weight-medium: 500` is therefore REMOVED — nothing in the design uses a 500, and
-   * per CLAUDE.md a credible-looking default is worse than a blank. Its only in-repo consumer,
-   * style-guide/odc-palette-screen.css, already carries `var(--font-weight-medium, 500)` with
-   * an explicit fallback and renders identically without it.
+   * WEIGHTS: 400 and 700 are the ONLY weights anywhere on THIS NODE.
+   *
+   *   `--font-weight-medium: 500` IS NOT FROM THE REF. It is a BRAND-OWNER DECISION, taken by
+   *   Kharlo Ridado on 2026-08-25 on PR #9, and recorded in project-context.md under "Known
+   *   signed-off exceptions". It was removed from this file first, precisely because node
+   *   63-49 does not contain a 500 — and then restored on that decision, not on the design's
+   *   authority. The distinction is the point: a value with a named human behind it is a
+   *   different thing from a plausible default nobody verified, even when the number matches.
+   *   Its purpose is the override in tokens/outsystems-ui-overrides.css, which re-points
+   *   OutSystems UI's `--font-semi-bold` at it. Do not delete it as "unsourced" on a later
+   *   pass; read the exception first.
    *
    * FRAMEWORK COLLISION — THERE ISN'T ONE, AND THAT IS THE POINT. Measured in the compiled
    * framework (preview/vendor/outsystems-ui/outsystems-ui.css): OutSystems UI names its
@@ -67,6 +73,7 @@
   --font-family-base: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                       Helvetica, Arial, sans-serif;
   --font-weight-regular: 400;
+  --font-weight-medium:  500; /* NOT from node 63-49 — brand-owner decision, see above */
   --font-weight-bold:    700;
 
   /* ---- Font size — the nine-step ramp -------------------------------------------
