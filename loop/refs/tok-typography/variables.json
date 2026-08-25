@@ -1,0 +1,65 @@
+{
+  "_source": {
+    "file_key": "tJnXUZbEL3fRWG7h1z0ij7",
+    "node": "63-49",
+    "node_name": "Typography",
+    "pulled": "2026-08-25",
+    "tool": "get_variable_defs (bound variables) + get_design_context (per-node text styles for the two steps that expose no variable)"
+  },
+
+  "_bound_variables": {
+    "_note": "Verbatim from get_variable_defs on node 63-49. Six Prose steps are bound; h3 and h6 are NOT and were measured separately below.",
+    "Prose/body":  "Font(family: \"Public Sans\", style: Regular, size: 16, weight: 400, lineHeight: 1.6200000047683716, letterSpacing: 0)",
+    "Prose/intro": "Font(family: \"Public Sans\", style: Regular, size: 22, weight: 400, lineHeight: 1.6200000047683716, letterSpacing: 0)",
+    "Prose/h1":    "Font(family: \"Public Sans\", style: Bold, size: 40, weight: 700, lineHeight: 1.2000000476837158, letterSpacing: 0)",
+    "Prose/h2":    "Font(family: \"Public Sans\", style: Bold, size: 32, weight: 700, lineHeight: 1.2000000476837158, letterSpacing: 0)",
+    "Prose/h4":    "Font(family: \"Public Sans\", style: Bold, size: 16, weight: 700, lineHeight: 1.2000000476837158, letterSpacing: 0)",
+    "Prose/h5":    "Font(family: \"Public Sans\", style: Bold, size: 15, weight: 700, lineHeight: 1.2000000476837158, letterSpacing: 0)",
+    "Primary/primary-light": "#73B3E7",
+    "Link/link-visited": "#562B97"
+  },
+
+  "_measured_text_styles": {
+    "_note": "h3 and h6 expose no bound variable. Read from the sample nodes' own text styles via get_design_context — NOT from layer names or printed labels, per the tok-font-sizes lesson.",
+    "Prose/h3": {
+      "node": "12:115",
+      "family": "Public Sans",
+      "style": "Regular",
+      "weight": 400,
+      "size_px": 22,
+      "line_height": 1.2,
+      "letter_spacing": 0,
+      "color": "#171717"
+    },
+    "Prose/h6": {
+      "node": "12:119",
+      "family": "Public Sans",
+      "style": "Regular",
+      "weight": 400,
+      "size_px": 13,
+      "line_height": 1.15,
+      "letter_spacing_px": 0.325,
+      "text_transform": "uppercase",
+      "color": "#171717"
+    }
+  },
+
+  "_design_annotations": {
+    "_note": "USWDS utility names printed on the node's own callout lines, matched to the sample they annotate by y-position. Provenance, not measurements.",
+    "h1":    "font-heading-2xl",
+    "intro": "font-alt-xl line-height-alt-5 margin-top-1em measure-6",
+    "h2":    "font-sans-xl margin-top-105em",
+    "body":  "font-body-sm line-height-body-5 measure-6",
+    "h4":    "font-heading-sm line-height-heading-2 margin-top-105em measure-6",
+    "h5":    "font-heading-xs line-height-heading-2 margin-top-105em measure-6",
+    "h6":    "font-sans-3xs line-height-heading-2 margin-top-105em measure-6 text-uppercase letter-spacing-1",
+    "_margins_only": ["h2 + h3 margin-top-1em", "ul: margin-top-1em", "ol: margin-top-1em", "li: margin-top-05em", "margin-top-1em"]
+  },
+
+  "_distinct_values_this_item_owns": {
+    "_note": "tok-typography owns family, weight and line-height. SIZES are owned by tok-font-sizes (built) and are NOT re-emitted from this ref.",
+    "families": ["Public Sans"],
+    "weights": [400, 700],
+    "line_heights": [1.62, 1.2, 1.15]
+  }
+}

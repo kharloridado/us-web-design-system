@@ -6,18 +6,67 @@
  * on the design system's type page and only shows up in a component's example frames.
  * If a size is mode-bound, emit per-device tokens — do not freeze one device's value here.
  *
- * THIS FILE IS SHARED BY TWO ITEMS. The nine-step SIZE RAMP below is item `tok-font-sizes`
- * (node 1892-7566) and is final. The family / weight / line-height declarations are still
- * template placeholders owned by item `tok-typography` (node 63-49) — leave them for that
- * item to replace. */
+ * THIS FILE IS SHARED BY TWO ITEMS, both now built. The nine-step SIZE RAMP below is item
+ * `tok-font-sizes` (node 1892-7566). The family / weight / line-height declarations are item
+ * `tok-typography` (node 63-49). Two refs, one file — keep the provenance blocks separate so
+ * a later change to one ramp cannot be mistaken for authority over the other. */
 :root {
-  /* ---- Font family / weight / line-height — PLACEHOLDERS, owned by tok-typography ----
-   * Not from any ref. Item 3 (node 63-49) replaces these. The Font sizes page renders its
-   * samples in a face it never names, so emitting a family from that ref would be
-   * inventing a value the design did not state. */
-  --font-family-base: system-ui, sans-serif; /* TODO: brand font */
+  /* ---- Font family / weight / line-height ----------------------------------------
+   * SOURCE OF RECORD: loop/refs/tok-typography/ (Figma file tJnXUZbEL3fRWG7h1z0ij7,
+   * node 63-49, pulled 2026-08-25).
+   *
+   * MIXED SOURCING, DELIBERATELY RECORDED. Six of the node's eight Prose steps are bound
+   * Figma variables (get_variable_defs). Two — h3 and h6 — are bound to nothing, and were
+   * read from the sample nodes' own text styles via get_design_context (12:115, 12:119).
+   * The USWDS utility names printed on the node's callout lines (`font-heading-2xl`,
+   * `font-sans-3xs`, `measure-6`…) are PROVENANCE, NOT MEASUREMENTS — see spec.md. That
+   * distinction is why tok-font-sizes shipped a wrong value in round 1.
+   *
+   * SIZES ARE NOT EMITTED HERE. This node states sizes too; the ramp below owns them. One
+   * value, one source — a second source for the same number is how two files drift.
+   *
+   * FAMILY. The design names its face: Public Sans, on every step. tok-font-sizes could not
+   * emit a family because its ref never named one; this ref does, so the TODO is closed.
+   * The fallbacks after it are OutSystems UI's own `html` stack, so an unstyled element
+   * degrades to what the framework would have used rather than to a different sans.
+   *   NOT SELF-HOSTED YET, AND THAT IS A REAL GAP. Declaring the name does not ship the
+   *   face. Until Public Sans is loaded — @font-face against the ODC theme module, or the
+   *   font is installed client-side — every one of these declarations silently resolves to
+   *   the first available fallback and the page renders in the framework's default sans.
+   *   Loading it is a separate deliverable (it needs the licensed/self-hosted asset path and
+   *   an @font-face rule, neither of which belongs in a :root token file).
+   *
+   * WEIGHTS: 400 and 700 are the ONLY weights anywhere on this node. The template's
+   * `--font-weight-medium: 500` is therefore REMOVED — nothing in the design uses a 500, and
+   * per CLAUDE.md a credible-looking default is worse than a blank. Its only in-repo consumer,
+   * style-guide/odc-palette-screen.css, already carries `var(--font-weight-medium, 500)` with
+   * an explicit fallback and renders identically without it.
+   *
+   * FRAMEWORK COLLISION — THERE ISN'T ONE, AND THAT IS THE POINT. Measured in the compiled
+   * framework (preview/vendor/outsystems-ui/outsystems-ui.css): OutSystems UI names its
+   * weights `--font-light: 300`, `--font-regular: 400`, `--font-semi-bold: 600`,
+   * `--font-bold: 700` (lines 275-278) — NOT `--font-weight-*`. The three names below have
+   * ZERO declarations and ZERO consumers in the framework, so unlike the colour palette
+   * these re-brand nothing on their own; they are this design system's own vocabulary,
+   * consumed by our CSS.
+   *   The framework's own weights have real reach — `var(--font-semi-bold)` alone has 33
+   *   consumers — and this design system has no 600 step at all, so OSUI's semi-bold is
+   *   off-brand by construction. Re-pointing `--font-semi-bold` (to 700) is the change that
+   *   would actually re-brand the widgets, and it is NOT made here: it is an override-layer
+   *   decision with app-wide blast radius, and this ref says nothing about OutSystems
+   *   widgets. Left for tokens/outsystems-ui-overrides.css, on purpose.
+   *   Likewise `--font-family-base` has no framework consumer: OSUI hard-codes its stack in
+   *   the `html` rule (line 949) rather than reading a variable, so the face changes only
+   *   when a rule sets `font-family` — again, override-layer work, not a token rename.
+   *
+   * h3 AND h6 ARE REGULAR, NOT BOLD — BUILT AS DESIGNED, FLAGGED SEPARATELY. Every other
+   * heading step is Bold 700; h3 (22px) and h6 (13px) measure Regular 400. Fidelity first,
+   * so that is what the weights above allow and what the semantic layer must map. Filed as a
+   * `consistency` finding rather than normalised, because the correlation is suggestive: the
+   * two steps that break the weight pattern are exactly the two bound to no variable. */
+  --font-family-base: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                      Helvetica, Arial, sans-serif;
   --font-weight-regular: 400;
-  --font-weight-medium:  500;
   --font-weight-bold:    700;
 
   /* ---- Font size — the nine-step ramp -------------------------------------------
@@ -103,7 +152,33 @@
   --font-size-2xl: 40px; /* 14   h1            */
   --font-size-3xl: 48px; /* 15   Display       */
 
-  /* ---- Line height — PLACEHOLDER, owned by tok-typography ----
-   * The Font sizes ref states no line-heights. Item 3 (node 63-49) replaces this. */
-  --line-height-base: 1.5;
+  /* ---- Line height ---------------------------------------------------------------
+   * SOURCE OF RECORD: loop/refs/tok-typography/ (node 63-49). Three distinct values, and
+   * only three, across all eight Prose steps:
+   *
+   *   1.62  body, intro                    (bound variables)
+   *   1.2   h1, h2, h3, h4, h5             (h1/h2/h4/h5 bound; h3 measured at 12:115)
+   *   1.15  h6 ONLY                        (measured at 12:119)
+   *
+   * UNITLESS, AS THE DESIGN STATES. Figma reports these as ratios, not lengths, and unitless
+   * is also the correct CSS: a unitless line-height inherits as a ratio and re-computes per
+   * element, so a child at a different font-size stays proportional. Freezing them to px
+   * would break that and would be a conversion the ref did not ask for.
+   *
+   * `--line-height-base` KEEPS ITS NAME and takes the body value. It is the design's base
+   * step (body = 16px, the same step tok-font-sizes marks "h4 + body"), and renaming it
+   * would silently break its existing consumer in style-guide/odc-palette-screen.css, which
+   * references it with no fallback. Value moves 1.5 → 1.62; that placeholder was never
+   * sourced from anything.
+   *
+   * 1.15 IS EMITTED EVEN THOUGH ONE STEP USES IT. It is a real, measured value in the ref,
+   * and h6 also carries uppercase + 0.325px letter-spacing — a genuinely distinct treatment
+   * rather than a rounding of 1.2. Those two other properties are NOT tokens: they belong to
+   * whichever item maps roles onto steps, since they describe h6's usage, not the ramp.
+   *
+   * NO FRAMEWORK COLLISION: OutSystems UI declares no `--line-height-*` custom property at
+   * all and references none, so these three names are ours alone. */
+  --line-height-base:          1.62;
+  --line-height-heading:       1.2;
+  --line-height-heading-tight: 1.15;
 }
