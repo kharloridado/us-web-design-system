@@ -85,41 +85,100 @@ including its comment header and section banners. Preserve the leading /*! block
 
 Then the full contents of `dist/theme.css`.
 
+## ⚠ Build the UI from native widgets — never from an HTML literal
+
+**Project rule, learned the hard way on this exact screen (2026-08-25).** The UI is built
+from **Container widgets carrying Style Classes**. It is *not* built by handing Mentor a
+block of HTML to drop into an Expression, and not by reaching for `IAdvancedHtml` either.
+
+Two independent reasons, either of which is sufficient:
+
+1. **An Expression renders as a `<span>`.** Wrap a layout in one and nothing inside it is a
+   widget the platform models — it cannot be inspected, restyled, reordered or reused in
+   Studio or by a later Mentor turn. The whole `ExtendedClass` / BEM-on-native-widgets
+   discipline this repo runs on requires that the elements actually *be* widgets.
+2. **`Escape Content = No` does not exist on the ODC reactive Expression.** It is a
+   Traditional Web property. Mentor will accept the instruction, set an `EscapeContent`
+   extended property, report success with `change_applied: true` and zero validation
+   errors — and the published page will render `<div class="…">` as visible text. The
+   model is not lying about what it stored; the property simply has no effect on that
+   widget. Nothing in the build gate catches it. Only a real browser does.
+
+The first version of this handover instructed the Expression route and shipped exactly that
+failure. What follows is the corrected route.
+
 ## Mentor prompt — turn B (screen)
+
+Split the build across turns — one section per turn — and publish between them. A single
+turn carrying all 52 swatches is the largest edit in this repo; the Theme-palette half alone
+is 129 Containers. Publishing between turns means a failure costs one turn, not the screen.
 
 ```
 Goal: In the SandboxKharlo module, create a screen named "PaletteSpecimen" that renders
-the US Web Design System colour palette as a reference grid.
+the US Web Design System colour palette as a reference grid, built from NATIVE OutSystems
+widgets. Do NOT use an Expression widget and do NOT use IAdvancedHtml. No raw HTML anywhere.
 
 Context (already done — do NOT re-create or edit):
 - The theme CSS is already published and declares every --color-* token this screen uses.
 - Do not author or modify the theme. Do not write JavaScript. There is no logic, no
   data model, no aggregate, no input parameter and no event on this screen.
 
-Task, referencing every element by the exact name given:
+Task:
 
-1. Create a screen named "PaletteSpecimen".
+1. Create a screen named "PaletteSpecimen" in the MainFlow UI flow.
    - Anonymous access is fine; this is an internal reference page.
    - No input parameters, no local variables, no data fetch.
 
 2. Set the screen's Style Sheet to exactly the CSS given below under "Screen stylesheet",
    byte for byte. Do not reformat or minify it. It consumes --color-* tokens from the
-   theme and declares no colour literals of its own.
+   theme and declares no colour literals of its own. It is class-only, so native
+   Containers carrying these classes render identically to the reference markup — there
+   are no element selectors to satisfy.
 
-3. Place ONE Expression widget as the only content of the screen's main placeholder.
-   - Name it "PaletteMarkup".
-   - Set Escape Content = No. This is required: the value is HTML and must render as
-     markup, not as visible text.
-   - Set its value to the HTML given below under "Screen markup", as a single literal
-     text string, byte for byte.
+3. Build this widget tree in the screen's main content placeholder, using Container
+   widgets only. Each Container's Style Class is in [brackets]; literal static text
+   content is in "quotes"; a Container marked (empty) has no content and no children.
 
-Do not substitute an HTML widget container, do not split the markup across multiple
-Expressions, and do not move any of the CSS inline — the specimen is deliberately
-class-only, and inline styles would defeat what it exists to test.
+   Container [uswds-specimen]
+     Container [uswds-specimen__section]
+       Container [uswds-specimen__section-title] "<section label>"
+       ...for EACH ramp, in order:
+         Container [uswds-specimen__ramp-title] "<ramp label>"
+         Container [uswds-specimen__ramp]
+           ...for EACH swatch in that ramp, in order:
+             Container [uswds-specimen__item]
+               Container [uswds-specimen__chip <swatch class>]   (empty)
+               Container [uswds-specimen__name] "<token name>"
+               Container [uswds-specimen__hex]  "<hex>"
+
+   The chip Container carries TWO classes separated by a space: the literal
+   "uswds-specimen__chip" plus the swatch class from the ramp table.
+
+4. The token names begin with two literal hyphens, e.g. --color-base-lightest, and must
+   render as two hyphens. Do NOT substitute HTML entities such as &#45; — this is static
+   widget text, not an HTML string, so no entity encoding is needed or wanted. If two
+   hyphens cause trouble in some code path, say so rather than silently encoding them.
+
+Do not move any of the CSS inline — the specimen is deliberately class-only, and inline
+styles would defeat what it exists to test.
+
+When done, report how many Container widgets you created.
 ```
 
-Then the contents of `style-guide/odc-palette-screen.css` (screen stylesheet) and
-`style-guide/odc-palette-screen.html` (screen markup) — both embedded below.
+Feed the ramp tables from `tokens/colors.css` (swatch class · token name · hex), one
+section per turn: **Theme palette** (base 7, primary 6, secondary 6, accent cool 5, accent
+warm 5) then **State palette** (info 5, error 5, warning 5, success 5, disabled 3).
+
+The screen stylesheet, `style-guide/odc-palette-screen.css`, is embedded below and is
+unchanged by this rewrite — it was always class-only, which is why the Container tree drops
+straight into it.
+
+`style-guide/odc-palette-screen.html` is **no longer a paste target** and is deliberately
+not embedded in this ticket any more. It stays generated, and stays useful, as two things:
+the rendered reference for what the screen must look like, and the source of the ramp tables
+that feed the prompt above. Pasting it into an Expression is the defect this rewrite exists
+to prevent, so `handover/handover-map.json` no longer lists it — only CSS and JS are paste
+targets.
 
 ## Why the specimen is built this way
 
@@ -148,8 +207,16 @@ Measured, not eyeballed — the same check that was run locally before handover:
 - No horizontal page scroll at desktop width.
 - The two `#00BDE3` chips (`--color-accent-cool` and `--color-info`) are *meant* to be
   identical — that is deliberate in the source design system, not a duplication bug.
+- **No HTML tag text is visible anywhere on the page.** If you can read `<div class="…">`
+  or `&#45;` as words, the UI was built as an HTML literal rather than as Containers and
+  the build is wrong regardless of how it looks otherwise.
+- Spot-check the widget tree in Studio: the chips must be **Container widgets**, not one
+  Expression. `change_applied: true` from Mentor does not establish this.
 
-Validate in a **real browser**, never Service Studio Preview.
+Validate in a **real browser**, never Service Studio Preview. The one defect that made this
+handover need rewriting — an Expression silently escaping its content — is invisible to the
+deterministic gate, to Mentor's own validation, and to Studio Preview. It is visible in a
+browser in one second.
 
 ## Code to paste into ODC
 
@@ -301,315 +368,7 @@ Validate in a **real browser**, never Service Studio Preview.
 ```
 
 </details>
-<details>
-<summary><code>odc-palette-screen.html</code> → one Expression widget on the screen, Escape Content = No</summary>
 
-```html
-<!-- GENERATED by build/gen-palette-specimen.mjs — do not hand-edit.
-     PASTE INTO: one Expression widget on the ODC screen, with Escape Content = No.
-     Pair it with style-guide/odc-palette-screen.css in the Screen's Style Sheet.
-     52 swatches, painted through the live cascade. -->
-<div class="uswds-specimen">
-  <section class="uswds-specimen__section">
-    <h2 class="uswds-specimen__section-title">Theme palette</h2>
-      <h3 class="uswds-specimen__ramp-title">base</h3>
-      <div class="uswds-specimen__ramp">
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--base-lightest"></div>
-          <code class="uswds-specimen__name">--color-base-lightest</code>
-          <code class="uswds-specimen__hex">#F0F0F0</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--base-lighter"></div>
-          <code class="uswds-specimen__name">--color-base-lighter</code>
-          <code class="uswds-specimen__hex">#DCDEE0</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--base-light"></div>
-          <code class="uswds-specimen__name">--color-base-light</code>
-          <code class="uswds-specimen__hex">#A9AEB1</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--base"></div>
-          <code class="uswds-specimen__name">--color-base</code>
-          <code class="uswds-specimen__hex">#71767A</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--base-dark"></div>
-          <code class="uswds-specimen__name">--color-base-dark</code>
-          <code class="uswds-specimen__hex">#565C65</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--base-darker"></div>
-          <code class="uswds-specimen__name">--color-base-darker</code>
-          <code class="uswds-specimen__hex">#3D4551</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--base-ink"></div>
-          <code class="uswds-specimen__name">--color-base-ink</code>
-          <code class="uswds-specimen__hex">#1B1B1B</code>
-        </div>
-      </div>
-      <h3 class="uswds-specimen__ramp-title">primary</h3>
-      <div class="uswds-specimen__ramp">
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--primary-lighter"></div>
-          <code class="uswds-specimen__name">--color-primary-lighter</code>
-          <code class="uswds-specimen__hex">#D9E8F6</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--primary-light"></div>
-          <code class="uswds-specimen__name">--color-primary-light</code>
-          <code class="uswds-specimen__hex">#73B3E7</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--primary"></div>
-          <code class="uswds-specimen__name">--color-primary</code>
-          <code class="uswds-specimen__hex">#005EA2</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--primary-vivid"></div>
-          <code class="uswds-specimen__name">--color-primary-vivid</code>
-          <code class="uswds-specimen__hex">#0050D8</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--primary-dark"></div>
-          <code class="uswds-specimen__name">--color-primary-dark</code>
-          <code class="uswds-specimen__hex">#1A4480</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--primary-darker"></div>
-          <code class="uswds-specimen__name">--color-primary-darker</code>
-          <code class="uswds-specimen__hex">#162E51</code>
-        </div>
-      </div>
-      <h3 class="uswds-specimen__ramp-title">secondary</h3>
-      <div class="uswds-specimen__ramp">
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--secondary-lighter"></div>
-          <code class="uswds-specimen__name">--color-secondary-lighter</code>
-          <code class="uswds-specimen__hex">#F8DFE2</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--secondary-light"></div>
-          <code class="uswds-specimen__name">--color-secondary-light</code>
-          <code class="uswds-specimen__hex">#F2938C</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--secondary"></div>
-          <code class="uswds-specimen__name">--color-secondary</code>
-          <code class="uswds-specimen__hex">#D83933</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--secondary-vivid"></div>
-          <code class="uswds-specimen__name">--color-secondary-vivid</code>
-          <code class="uswds-specimen__hex">#E41D3D</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--secondary-dark"></div>
-          <code class="uswds-specimen__name">--color-secondary-dark</code>
-          <code class="uswds-specimen__hex">#B51D09</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--secondary-darker"></div>
-          <code class="uswds-specimen__name">--color-secondary-darker</code>
-          <code class="uswds-specimen__hex">#8B1303</code>
-        </div>
-      </div>
-      <h3 class="uswds-specimen__ramp-title">accent cool</h3>
-      <div class="uswds-specimen__ramp">
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--accent-cool-lighter"></div>
-          <code class="uswds-specimen__name">--color-accent-cool-lighter</code>
-          <code class="uswds-specimen__hex">#E1F3F8</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--accent-cool-light"></div>
-          <code class="uswds-specimen__name">--color-accent-cool-light</code>
-          <code class="uswds-specimen__hex">#97D4EA</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--accent-cool"></div>
-          <code class="uswds-specimen__name">--color-accent-cool</code>
-          <code class="uswds-specimen__hex">#00BDE3</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--accent-cool-dark"></div>
-          <code class="uswds-specimen__name">--color-accent-cool-dark</code>
-          <code class="uswds-specimen__hex">#28A0CB</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--accent-cool-darker"></div>
-          <code class="uswds-specimen__name">--color-accent-cool-darker</code>
-          <code class="uswds-specimen__hex">#07648D</code>
-        </div>
-      </div>
-      <h3 class="uswds-specimen__ramp-title">accent warm</h3>
-      <div class="uswds-specimen__ramp">
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--accent-warm-lighter"></div>
-          <code class="uswds-specimen__name">--color-accent-warm-lighter</code>
-          <code class="uswds-specimen__hex">#F2E4D4</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--accent-warm-light"></div>
-          <code class="uswds-specimen__name">--color-accent-warm-light</code>
-          <code class="uswds-specimen__hex">#FFBC78</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--accent-warm"></div>
-          <code class="uswds-specimen__name">--color-accent-warm</code>
-          <code class="uswds-specimen__hex">#FA9441</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--accent-warm-dark"></div>
-          <code class="uswds-specimen__name">--color-accent-warm-dark</code>
-          <code class="uswds-specimen__hex">#C05600</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--accent-warm-darker"></div>
-          <code class="uswds-specimen__name">--color-accent-warm-darker</code>
-          <code class="uswds-specimen__hex">#775540</code>
-        </div>
-      </div>
-  </section>
-  <section class="uswds-specimen__section">
-    <h2 class="uswds-specimen__section-title">State palette</h2>
-      <h3 class="uswds-specimen__ramp-title">info</h3>
-      <div class="uswds-specimen__ramp">
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--info-lighter"></div>
-          <code class="uswds-specimen__name">--color-info-lighter</code>
-          <code class="uswds-specimen__hex">#E7F6F8</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--info-light"></div>
-          <code class="uswds-specimen__name">--color-info-light</code>
-          <code class="uswds-specimen__hex">#99DEEA</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--info"></div>
-          <code class="uswds-specimen__name">--color-info</code>
-          <code class="uswds-specimen__hex">#00BDE3</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--info-dark"></div>
-          <code class="uswds-specimen__name">--color-info-dark</code>
-          <code class="uswds-specimen__hex">#009EC1</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--info-darker"></div>
-          <code class="uswds-specimen__name">--color-info-darker</code>
-          <code class="uswds-specimen__hex">#2E6276</code>
-        </div>
-      </div>
-      <h3 class="uswds-specimen__ramp-title">error</h3>
-      <div class="uswds-specimen__ramp">
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--error-lighter"></div>
-          <code class="uswds-specimen__name">--color-error-lighter</code>
-          <code class="uswds-specimen__hex">#F4E3DB</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--error-light"></div>
-          <code class="uswds-specimen__name">--color-error-light</code>
-          <code class="uswds-specimen__hex">#F39268</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--error"></div>
-          <code class="uswds-specimen__name">--color-error</code>
-          <code class="uswds-specimen__hex">#D54309</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--error-dark"></div>
-          <code class="uswds-specimen__name">--color-error-dark</code>
-          <code class="uswds-specimen__hex">#B50909</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--error-darker"></div>
-          <code class="uswds-specimen__name">--color-error-darker</code>
-          <code class="uswds-specimen__hex">#6F3331</code>
-        </div>
-      </div>
-      <h3 class="uswds-specimen__ramp-title">warning</h3>
-      <div class="uswds-specimen__ramp">
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--warning-lighter"></div>
-          <code class="uswds-specimen__name">--color-warning-lighter</code>
-          <code class="uswds-specimen__hex">#FAF3D1</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--warning-light"></div>
-          <code class="uswds-specimen__name">--color-warning-light</code>
-          <code class="uswds-specimen__hex">#FEE685</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--warning"></div>
-          <code class="uswds-specimen__name">--color-warning</code>
-          <code class="uswds-specimen__hex">#FFBE2E</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--warning-dark"></div>
-          <code class="uswds-specimen__name">--color-warning-dark</code>
-          <code class="uswds-specimen__hex">#E5A000</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--warning-darker"></div>
-          <code class="uswds-specimen__name">--color-warning-darker</code>
-          <code class="uswds-specimen__hex">#936F38</code>
-        </div>
-      </div>
-      <h3 class="uswds-specimen__ramp-title">success</h3>
-      <div class="uswds-specimen__ramp">
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--success-lighter"></div>
-          <code class="uswds-specimen__name">--color-success-lighter</code>
-          <code class="uswds-specimen__hex">#ECF3EC</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--success-light"></div>
-          <code class="uswds-specimen__name">--color-success-light</code>
-          <code class="uswds-specimen__hex">#70E17B</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--success"></div>
-          <code class="uswds-specimen__name">--color-success</code>
-          <code class="uswds-specimen__hex">#00A91C</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--success-dark"></div>
-          <code class="uswds-specimen__name">--color-success-dark</code>
-          <code class="uswds-specimen__hex">#4D8055</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--success-darker"></div>
-          <code class="uswds-specimen__name">--color-success-darker</code>
-          <code class="uswds-specimen__hex">#446443</code>
-        </div>
-      </div>
-      <h3 class="uswds-specimen__ramp-title">disabled</h3>
-      <div class="uswds-specimen__ramp">
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--disabled-light"></div>
-          <code class="uswds-specimen__name">--color-disabled-light</code>
-          <code class="uswds-specimen__hex">#E6E6E6</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--disabled"></div>
-          <code class="uswds-specimen__name">--color-disabled</code>
-          <code class="uswds-specimen__hex">#C9C9C9</code>
-        </div>
-        <div class="uswds-specimen__item">
-          <div class="uswds-specimen__chip uswds-swatch--disabled-dark"></div>
-          <code class="uswds-specimen__name">--color-disabled-dark</code>
-          <code class="uswds-specimen__hex">#ADADAD</code>
-        </div>
-      </div>
-  </section>
-</div>
-```
-
-</details>
 ## Build in ODC with Mentor Studio
 
 > Paste this into **ODC Mentor Studio** to scaffold the OutSystems side of this handover

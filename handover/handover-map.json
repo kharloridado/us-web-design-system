@@ -22,6 +22,13 @@
     "",
     "Tokens are NOT listed here — they travel once via dist/theme.css, which is its own paste.",
     "",
+    "MARKUP IS NOT LISTED HERE EITHER. Only CSS and JS are paste targets. UI is built from native",
+    "OutSystems widgets — Containers carrying Style Classes — never from an HTML string dropped",
+    "into an Expression. Embedding a .html file here invites exactly that: it presents markup as",
+    "something to paste. See the warning section in handover/odc-palette-screen.md for what that",
+    "cost on sg-palette-specimen (a screen shipped rendering its own tags as visible text, with a",
+    "clean build gate and a Mentor turn reporting success).",
+    "",
     "Add an entry for every new handover. A handover with no entry gets no embedded code, and the",
     "embed silently goes stale when its source changes — so keep this in sync (the build warns)."
   ],
@@ -30,11 +37,6 @@
       "style-guide/odc-palette-screen.css",
       "css",
       "the ODC Screen's Style Sheet"
-    ],
-    [
-      "style-guide/odc-palette-screen.html",
-      "html",
-      "one Expression widget on the screen, Escape Content = No"
     ]
   ]
 }
