@@ -38,5 +38,12 @@
       "css",
       "the ODC Screen's Style Sheet"
     ]
+  ],
+  "odc-type-screen.md": [
+    [
+      "style-guide/odc-type-screen.css",
+      "css",
+      "the ODC Screen's Style Sheet"
+    ]
   ]
 }
