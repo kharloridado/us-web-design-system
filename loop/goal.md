@@ -45,13 +45,40 @@ Ordered by dependency. The loop builds top to bottom and stops at each tier chec
 | 17 | Table | `composites` | [`1892-2502`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-2502&m=dev) |  |
 | 18 | Modal / Popup | `patterns` | [`1892-2033`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=1892-2033&m=dev) |  |
 
-**19 deliverables.** Items 1–18 each carry a Figma node id. Item 19 is specified in prose instead — a written spec of record, which `loop/refs/README.md` accepts as a legitimate ref. None is blocked on a missing spec.
+**20 deliverables.** Items 1–18 each carry a Figma node id. Items 19 and 20 were added after the original signing and are recorded below rather than landed silently. Item 19 is specified in prose — a written spec of record, which `loop/refs/README.md` accepts as a legitimate ref. None is blocked on a missing spec.
 
 > **Scope change, 2026-08-20.** Item 19 was added after the original signing, at the request of
 > Kharlo Ridado, and is recorded here rather than landed silently — the hard rule is that nothing
 > enters the build queue without a row in this table. It is tooling, not a design deliverable.
 
 | 19 | Live Style Guide — colour specimen | `foundations` | _written spec_ ([`loop/refs/sg-palette-specimen/spec.md`](loop/refs/sg-palette-specimen/spec.md)) | **Added 2026-08-20**, after the checker flagged that three consecutive token items would produce no visual output. Preview-only chrome; ships nothing to ODC. Depends on item 1. |
+
+> **Scope change, 2026-08-25.** Item 20 was added at the request of Kharlo Ridado, during review of
+> item 3, on evidence rather than opinion: `tok-typography` emits family, weight and line-height as
+> `:root` tokens, and **most of that reaches no OutSystems UI rule at all**. Measured in the compiled
+> framework (`preview/vendor/outsystems-ui/outsystems-ui.css`):
+>
+> - `h1`–`h6` / `.heading1`–`.heading6` size themselves from `var(--font-size-h1…h6)`, which
+>   OutSystems UI declares (32/28/26/22/20/18px) and item 3 never redefined — so native headings
+>   still render at framework sizes, not USWDS ones. **67 consumers** across the six roles.
+> - Heading `line-height` is the literal `1.25` (`:1170`), and **48** `line-height:` declarations in
+>   the file read no custom property at all. `--line-height-heading` currently reaches nothing.
+> - `font-family` is hard-coded in the `html` rule (`:949`). `--font-family-base` reaches nothing.
+>
+> Colour re-brands through variables alone; **typography does not**. This item is the difference,
+> and it is a mapping-and-override deliverable, not a second source of type values — the ramp stays
+> owned by item 2 and the family/weight/line-height by item 3.
+>
+> It carries a real ref: node `63-49`, already frozen at `loop/refs/tok-typography/`, states the
+> role→size mapping directly (h1 40 · h2 32 · h3 22 · h4 16 · h5 15 · h6 13), which is the "role"
+> column item 2 deliberately declined to emit. Nothing here is invented.
+>
+> **Font loading is NOT in this row.** Declaring `Public Sans` does not ship the face, so until an
+> `@font-face` exists every declaration resolves to a fallback — but that needs a self-hosted asset
+> path and a licensing decision, so it belongs in its own row once someone has made that call. This
+> item is written to be correct-but-invisible until then, and that is stated rather than hidden.
+
+| 20 | Typography roles — OutSystems UI inheritance | `foundations` | [`63-49`](https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-?node-id=63-49&m=dev) (ref already frozen at [`loop/refs/tok-typography/`](loop/refs/tok-typography/)) | **Added 2026-08-25.** Maps the built ramp onto OutSystems UI's own role variables (`--font-size-h1…h6`, `--font-size-label`) in `tokens/outsystems-ui-overrides.css`, and writes the few real rules variables cannot reach — `html`/`body` `font-family`, heading `line-height`. Depends on items 2 and 3. Expect app-wide visual change on publish. |
 
 - When **`Inventory source = artifact`**, the row is a line in the signed table named above. A component that is in Figma but not in the inventory is `needs-human`, not `queued`.
 - When **`Inventory source = board`**, the row *is* the card, and the signature is a scope owner having moved it to **`Ready`**. A card that reached `Ready` any other way, or whose "in the agreed scope" box is unticked, is `Blocked` — not `queued`. The loop never moves a card into `Ready` itself.
