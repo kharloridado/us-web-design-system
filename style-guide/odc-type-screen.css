@@ -6,7 +6,23 @@
  * --font-* and --line-height-* tokens, it does not define them.
  *
  * Token-only and class-only: no hard-coded design value, no inline style, and nothing
- * attached by mutating OutSystems UI internals. */
+ * attached by mutating OutSystems UI internals.
+ *
+ * WHICH WIDGET CARRIES WHICH CLASS. Class-only cuts both ways: it lets the ODC screen
+ * use the RIGHT widget for each piece of content while these rules stay identical. The
+ * screen is not a tree of styled Containers — that shape shipped once and had to be
+ * rebuilt, because a page of divs has no document outline at all (measured: zero h1-h6).
+ *
+ *   .uswds-type__section        -> ExtendedClass on an OutSystems UI Section block
+ *   .uswds-type__section-title  -> AdvancedHtml Tag="h2" in that Section Title placeholder
+ *   .uswds-type__section-note   -> AdvancedHtml Tag="p"
+ *   .uswds-type__para           -> AdvancedHtml Tag="p"
+ *   .uswds-type__name/__value   -> AdvancedHtml Tag="code"
+ *   .uswds-type__row/__meta/__sample/__face  -> Container (genuinely last resort: a
+ *                                  token-label + rendered-sample grid has no OS UI block)
+ *
+ * The screen title is NOT here: it is AdvancedHtml Tag="h1" in the Layout's Title
+ * placeholder, one per screen, and it carries no class of ours. */
 
 .uswds-type {
   font-family: var(--font-family-base);
@@ -20,6 +36,9 @@
 }
 
 .uswds-type__section-title {
+  /* This is a real <h2> inside a Section's Title placeholder, so it arrives with both a
+   * UA margin and whatever the Section pattern styles its title as. Reset both here
+   * rather than relying on either. */
   margin: 0 0 var(--space-xs, 0.25rem);
   padding-block-end: var(--space-s, 0.5rem);
   border-block-end: 2px solid var(--color-base-ink);

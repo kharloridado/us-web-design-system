@@ -85,6 +85,40 @@ including its comment header and section banners. Preserve the leading /*! block
 
 Then the full contents of `dist/theme.css`.
 
+## The widget hierarchy — walk it, don't default to `Container`
+
+**This screen was rebuilt on 2026-08-25 because the first version ignored this.** Every
+piece of content was a generic `Container` with a class on it. The page rendered
+pixel-perfect, Mentor reported `change_applied: true` with zero validation errors, and a
+screenshot review passed — and the published page contained **zero `h1`-`h6` elements**, so
+a screen-reader user got no document outline at all.
+
+Upstream's order is a **search order you must actually walk**, not a preference:
+
+> **OutSystems UI block → `AdvancedHtml` with a semantic HTML5 tag → platform interactive
+> widget → `Container` (last resort)**
+
+| Content | Correct widget | The downgrade that shipped |
+| --- | --- | --- |
+| Screen title | `AdvancedHtml Tag="h1"` in the Layout's `Title` placeholder — **one per screen** | plain static text, which emits no heading at all |
+| A titled group of content | the **`Section`** block (`Title` + `Content` placeholders, `ExtendedClass`, `UsePadding`) | `Container` + a styled title `Container` |
+| Section heading | `AdvancedHtml Tag="h2"` in `Section.Title` | styled `Container` |
+| Sub-heading under it | `AdvancedHtml Tag="h3"` — never skip a level | styled `Container` |
+| Body copy | `AdvancedHtml Tag="p"` | `Container` |
+| A token name / hex / literal value | `AdvancedHtml Tag="code"` | `Container` |
+| A row/grid with no matching block | `Container` — **genuinely correct here** | — |
+
+`AdvancedHtml` used as a **single semantic tag wrapping real text is correct and
+upstream-mandated**. It is not what the "never build UI as an HTML literal" rule below
+bans — that rule bans pasting a *layout* as markup. Reading it as "Containers only" is what
+produced the defect.
+
+**Confirm a block's real placeholders before naming them in a prompt.** They vary by OS UI
+version: `Section` in `OutSystemsUI_2_16` exposes `Title` and `Content` **only**, while the
+pattern reference also documents an `Actions` placeholder. And instruct Mentor to **say so
+if it cannot find a block, never to substitute a `Container`** — that silent substitution is
+exactly how this defect enters.
+
 ## ⚠ Build the UI from native widgets — never from an HTML literal
 
 **Project rule, learned the hard way on this exact screen (2026-08-25).** The UI is built
@@ -171,16 +205,19 @@ Task:
    content is in "quotes"; a Container marked (empty) has no content and no children.
 
    Container [uswds-specimen]
-     Container [uswds-specimen__section]
-       Container [uswds-specimen__section-title] "<section label>"
-       ...for EACH ramp, in order:
-         Container [uswds-specimen__ramp-title] "<ramp label>"
-         Container [uswds-specimen__ramp]
-           ...for EACH swatch in that ramp, in order:
-             Container [uswds-specimen__item]
-               Container [uswds-specimen__chip <swatch class>]   (empty)
-               Container [uswds-specimen__name] "<token name>"
-               Container [uswds-specimen__hex]  "<hex>"
+     Section block instance
+       ExtendedClass = uswds-specimen__section
+       UsePadding    = False
+       Title placeholder -> AdvancedHtml Tag="h2" "<section label>"   (no class)
+       Content placeholder ->
+         ...for EACH ramp, in order:
+           AdvancedHtml Tag="h3" [uswds-specimen__ramp-title] "<ramp label>"
+           Gallery block instance [uswds-specimen__ramp]
+             ...for EACH swatch in that ramp, in order:
+               Container [uswds-specimen__item]
+                 Container [uswds-specimen__chip <swatch class>]   (empty)
+                 AdvancedHtml Tag="code" [uswds-specimen__name] "<token name>"
+                 AdvancedHtml Tag="code" [uswds-specimen__hex]  "<hex>"
 
    The chip Container carries TWO classes separated by a space: the literal
    "uswds-specimen__chip" plus the swatch class from the ramp table.
@@ -231,6 +268,26 @@ for, made visible, rather than a bug in the screen.
 
 Measured, not eyeballed — the same check that was run locally before handover:
 
+- **The document outline is real.** Run this in the browser console:
+  ```js
+  [...document.querySelectorAll('h1,h2,h3,h4,h5,h6')].map(h => h.tagName + ': ' + h.textContent.trim())
+  ```
+  **Zero headings is a FAIL**, always — it means the `Title` placeholder got plain text and
+  every heading is a `div`. This is the one check that catches a page built from styled
+  `Container`s, because such a page renders pixel-perfect and passes everything else.
+  Expected here:
+  ```
+  H1: Palette Specimen
+  H2: Theme palette
+  H3: base / primary / secondary / accent cool / accent warm
+  H2: State palette
+  H3: info / error / warning / success / disabled
+  ```
+  Exactly one `h1`, and no skipped levels. Also expect 2 `.section` elements, 10
+  `[data-block="Adaptive.Gallery"]` ramps, and `.uswds-specimen__name` /
+  `.uswds-specimen__hex` to be `CODE`.
+  **Measured after the 2026-08-25 fix: all of the above, and 132 divs in the specimen
+  (down from 246).**
 - **52 chips**, ramp counts Base 7 · Primary 6 · Secondary 6 · Accent cool 5 · Accent warm 5 ·
   Info 5 · Error 5 · Warning 5 · Success 5 · Disabled 3.
 - For every chip, computed `background-color` must equal the hex printed beside it. Locally

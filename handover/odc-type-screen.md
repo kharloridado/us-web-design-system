@@ -53,6 +53,40 @@ If the screen is published but the theme is not, the samples all render at the b
 default size next to labels confidently naming a step. That is the failure being tested for,
 made visible.
 
+## The widget hierarchy — walk it, don't default to `Container`
+
+**This screen was rebuilt on 2026-08-25 because the first version ignored this.** Every
+piece of content was a generic `Container` with a class on it. The page rendered
+pixel-perfect, Mentor reported `change_applied: true` with zero validation errors, and a
+screenshot review passed — and the published page contained **zero `h1`-`h6` elements**, so
+a screen-reader user got no document outline at all.
+
+Upstream's order is a **search order you must actually walk**, not a preference:
+
+> **OutSystems UI block → `AdvancedHtml` with a semantic HTML5 tag → platform interactive
+> widget → `Container` (last resort)**
+
+| Content | Correct widget | The downgrade that shipped |
+| --- | --- | --- |
+| Screen title | `AdvancedHtml Tag="h1"` in the Layout's `Title` placeholder — **one per screen** | plain static text, which emits no heading at all |
+| A titled group of content | the **`Section`** block (`Title` + `Content` placeholders, `ExtendedClass`, `UsePadding`) | `Container` + a styled title `Container` |
+| Section heading | `AdvancedHtml Tag="h2"` in `Section.Title` | styled `Container` |
+| Sub-heading under it | `AdvancedHtml Tag="h3"` — never skip a level | styled `Container` |
+| Body copy | `AdvancedHtml Tag="p"` | `Container` |
+| A token name / hex / literal value | `AdvancedHtml Tag="code"` | `Container` |
+| A row/grid with no matching block | `Container` — **genuinely correct here** | — |
+
+`AdvancedHtml` used as a **single semantic tag wrapping real text is correct and
+upstream-mandated**. It is not what the "never build UI as an HTML literal" rule below
+bans — that rule bans pasting a *layout* as markup. Reading it as "Containers only" is what
+produced the defect.
+
+**Confirm a block's real placeholders before naming them in a prompt.** They vary by OS UI
+version: `Section` in `OutSystemsUI_2_16` exposes `Title` and `Content` **only**, while the
+pattern reference also documents an `Actions` placeholder. And instruct Mentor to **say so
+if it cannot find a block, never to substitute a `Container`** — that silent substitution is
+exactly how this defect enters.
+
 ## ⚠ The two rules this repo learned the hard way
 
 Both were learned on the palette screen on 2026-08-25 and both apply here in full:
@@ -116,36 +150,41 @@ Task:
    only. Each Container's Style Class is in [brackets]; literal static text content is in
    "quotes"; a Container marked (empty) has no content and no children.
 
-   Container [uswds-type]
+   Container [uswds-type]          <- a Container ONLY because it just carries page
+                                      font-family/colour/padding. Everything titled
+                                      inside it uses the Section block.
 
      -- Section 1: Typeface --
-     Container [uswds-type__section]
-       Container [uswds-type__section-title] "Typeface"
-       Container [uswds-type__section-note] "<the note text from the table below>"
+     Section block instance
+       ExtendedClass = uswds-type__section
+       UsePadding    = False
+       Title placeholder ->
+         AdvancedHtml Tag="h2" [uswds-type__section-title] "Typeface"
+       AdvancedHtml Tag="p" [uswds-type__section-note] "<the note text from the table below>"
        Container [uswds-type__row]
          Container [uswds-type__meta]
-           Container [uswds-type__name] "--font-family-base"
+           AdvancedHtml Tag="code" [uswds-type__name] "--font-family-base"
            Container [uswds-type__role] "declared"
          Container [uswds-type__face uswds-type__face--declared]
            Container "The quick brown fox jumps over the lazy dog"
-           Container [uswds-type__stack] "<the full stack string>"
+           AdvancedHtml Tag="code" [uswds-type__stack] "<the full stack string>"
        Container [uswds-type__row]
          Container [uswds-type__meta]
-           Container [uswds-type__name] "(fallback only)"
+           AdvancedHtml Tag="code" [uswds-type__name] "(fallback only)"
            Container [uswds-type__role] "control"
          Container [uswds-type__face uswds-type__face--fallback]
            Container "The quick brown fox jumps over the lazy dog"
-           Container [uswds-type__stack] "<the fallback stack string>"
+           AdvancedHtml Tag="code" [uswds-type__stack] "<the fallback stack string>"
 
      -- Sections 2-4: one Container [uswds-type__section] each, same shape --
-     Container [uswds-type__section]
-       Container [uswds-type__section-title] "<section title>"
-       Container [uswds-type__section-note]  "<section note>"
+     Section block instance (ExtendedClass = uswds-type__section, UsePadding = False)
+       Title placeholder   -> AdvancedHtml Tag="h2" [uswds-type__section-title] "<section title>"
+       Content placeholder -> AdvancedHtml Tag="p"  [uswds-type__section-note]  "<section note>"
        ...for EACH row in that section's table, in order:
          Container [uswds-type__row]
            Container [uswds-type__meta]
-             Container [uswds-type__name]  "<token name>"
-             Container [uswds-type__value] "<value>"
+             AdvancedHtml Tag="code" [uswds-type__name]  "<token name>"
+             AdvancedHtml Tag="code" [uswds-type__value] "<value>"
              Container [uswds-type__role]  "<role>"        (omit this Container if role is —)
            Container [<sample classes from the table>] "<sample text>"
 
@@ -226,6 +265,26 @@ Measured, not eyeballed. Validate in a **real browser**, never Service Studio Pr
 defect that made the palette handover need rewriting is invisible to the deterministic gate,
 to Mentor's own validation and to Studio Preview, and visible in a browser in one second.
 
+- **The document outline is real.** Run this in the browser console:
+  ```js
+  [...document.querySelectorAll('h1,h2,h3,h4,h5,h6')].map(h => h.tagName + ': ' + h.textContent.trim())
+  ```
+  **Zero headings is a FAIL**, always — it means the `Title` placeholder got plain text and
+  every heading is a `div`. This is the one check that catches a page built from styled
+  `Container`s, because such a page renders pixel-perfect and passes everything else.
+  Expected here:
+  ```
+  H1: Type Specimen
+  H2: Typeface
+  H2: Font size — the nine-step ramp
+  H2: Font weight
+  H2: Line height
+  ```
+  Exactly one `h1`. Also expect 4 `.section` elements (the real `Section` blocks),
+  `.uswds-type__section-note` and `.uswds-type__para` to be `P`, and
+  `.uswds-type__name` / `.uswds-type__value` to be `CODE`.
+  **Measured after the 2026-08-25 rebuild: all of the above, and 75 divs in the specimen
+  (down from 108).**
 - **17 specimen rows**: 2 typeface · 9 size · 3 weight · 3 line-height.
 - For every size row, computed `font-size` must equal the px value printed beside it —
   9/9, no mismatches. Anything less means the theme did not land cleanly.
@@ -282,7 +341,23 @@ to Mentor's own validation and to Studio Preview, and visible in a browser in on
  * --font-* and --line-height-* tokens, it does not define them.
  *
  * Token-only and class-only: no hard-coded design value, no inline style, and nothing
- * attached by mutating OutSystems UI internals. */
+ * attached by mutating OutSystems UI internals.
+ *
+ * WHICH WIDGET CARRIES WHICH CLASS. Class-only cuts both ways: it lets the ODC screen
+ * use the RIGHT widget for each piece of content while these rules stay identical. The
+ * screen is not a tree of styled Containers — that shape shipped once and had to be
+ * rebuilt, because a page of divs has no document outline at all (measured: zero h1-h6).
+ *
+ *   .uswds-type__section        -> ExtendedClass on an OutSystems UI Section block
+ *   .uswds-type__section-title  -> AdvancedHtml Tag="h2" in that Section Title placeholder
+ *   .uswds-type__section-note   -> AdvancedHtml Tag="p"
+ *   .uswds-type__para           -> AdvancedHtml Tag="p"
+ *   .uswds-type__name/__value   -> AdvancedHtml Tag="code"
+ *   .uswds-type__row/__meta/__sample/__face  -> Container (genuinely last resort: a
+ *                                  token-label + rendered-sample grid has no OS UI block)
+ *
+ * The screen title is NOT here: it is AdvancedHtml Tag="h1" in the Layout's Title
+ * placeholder, one per screen, and it carries no class of ours. */
 
 .uswds-type {
   font-family: var(--font-family-base);
@@ -296,6 +371,9 @@ to Mentor's own validation and to Studio Preview, and visible in a browser in on
 }
 
 .uswds-type__section-title {
+  /* This is a real <h2> inside a Section's Title placeholder, so it arrives with both a
+   * UA margin and whatever the Section pattern styles its title as. Reset both here
+   * rather than relying on either. */
   margin: 0 0 var(--space-xs, 0.25rem);
   padding-block-end: var(--space-s, 0.5rem);
   border-block-end: 2px solid var(--color-base-ink);
