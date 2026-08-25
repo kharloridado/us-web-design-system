@@ -235,6 +235,27 @@ to Mentor's own validation and to Studio Preview, and visible in a browser in on
 - **The two Typeface rows are expected to render identically at v0.2.0** — Public Sans is
   not self-hosted. Identical rows here are the honest result, and the page says so. If they
   ever differ, the face started loading and that is worth knowing.
+  **Measured on the published screen, 2026-08-25:** both sentences render at exactly
+  436.13px. Identical, as designed.
+
+  ⚠ **Two ways to check this wrongly, both of which say the face IS loading when it is
+  not.** Both were hit while verifying this screen:
+
+  1. **`document.fonts.check('16px "Public Sans"')` returns `true`.** It is not evidence.
+     That API answers "would this be used without waiting for a load?", and a family the
+     browser cannot resolve at all still answers yes. Enumerating `document.fonts` on the
+     published page returns only OutSystems UI's own faces — `FeedbackMessage`, `Phosphor`,
+     `FontAwesome` — and there is no `@font-face` for Public Sans anywhere.
+  2. **Comparing the width of the two `uswds-type__face` Containers.** They differ (754px
+     vs 639px) for a reason that has nothing to do with the face: each Container is a
+     shrink-to-fit flex item whose width is driven by the monospace stack label inside it,
+     and the declared row's label is longer by the leading `"Public Sans", `.
+
+  The reliable checks are a canvas measurement against a deliberately bogus family
+  (`'48px "Public Sans", monospace'` vs `'48px "NoSuchFace12345", monospace'` — equal
+  widths mean it does not resolve), or measuring the **sentence text runs** with
+  `Range.getBoundingClientRect()`, which is what produced the 436.13px figure above.
+  Compare the sentences, never their containers.
 - **No HTML tag text is visible anywhere on the page.** If you can read `<div class="…">` or
   `&#45;` as words, the UI was built as an HTML literal and the build is wrong regardless of
   how it looks otherwise.
@@ -401,6 +422,7 @@ to Mentor's own validation and to Studio Preview, and visible in a browser in on
 ```
 
 </details>
+
 ## Build in ODC with Mentor Studio
 
 > Paste this into **ODC Mentor Studio** to scaffold the OutSystems side of this handover
