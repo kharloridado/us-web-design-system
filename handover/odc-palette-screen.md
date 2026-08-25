@@ -35,7 +35,7 @@ useless to a human doing it manually.
 |---|---|---|---|
 | 1 | Environments | enumerate environments → `env_key` | never guess the key |
 | 2 | Apps | resolve `SandboxKharlo` → `app_key` (UUID) | prefer the key over the name from here on |
-| 3 | Context (themes) | read the current theme | establishes the pre-change baseline |
+| 3 | Context (themes) | read the current theme | baseline **and** the default `layout` the screen must use |
 | 4 | Mentor | turn A — theme CSS | **see the warning below** |
 | 5 | Publish | publish the session, poll to terminal | tenant mutation — confirm first |
 | 6 | Mentor | turn B — the screen, resuming the same session | echo `mentor_session_token` verbatim |
@@ -107,6 +107,25 @@ Two independent reasons, either of which is sufficient:
 The first version of this handover instructed the Expression route and shipped exactly that
 failure. What follows is the corrected route.
 
+## ⚠ Every screen uses the module's default Layout block
+
+**Project rule, also learned on this screen (2026-08-25).** A new screen is not a blank
+page. It uses the module's **default Layout block**, and its content goes **only into that
+layout's placeholders** — the page title in the **Title** placeholder, everything else in
+the **Content** placeholder. Never author a page structure at the root of the screen.
+
+Read the default layout from the **module's default Theme** rather than guessing it: the
+same theme lookup that returns the stylesheet also returns `layout` (name + key), alongside
+`menu` and `grid`. For `SandboxKharlo` it is **`LayoutTopMenu`**
+(`2cc2a24c-0ee3-4a4e-b7ef-32c7feff1982`). Use a different layout only if explicitly asked.
+
+**Why it matters, and why it is easy to miss:** the layout block supplies the app's menu,
+header, responsive grid and chrome. A screen without it renders as a detached page with no
+navigation, inconsistent with every other screen in the module — and it *looks fine in a
+screenshot of the content area*, which is exactly how it got shipped here. Correct
+Containers inside a missing layout is still the wrong screen. This rule is the outer one;
+the native-widget rule above governs what goes inside the Content placeholder.
+
 ## Mentor prompt — turn B (screen)
 
 Split the build across turns — one section per turn — and publish between them. A single
@@ -129,13 +148,25 @@ Task:
    - Anonymous access is fine; this is an internal reference page.
    - No input parameters, no local variables, no data fetch.
 
-2. Set the screen's Style Sheet to exactly the CSS given below under "Screen stylesheet",
+2. Use the module's DEFAULT LAYOUT BLOCK as the screen's root content — for SandboxKharlo
+   that is "LayoutTopMenu" (key 2cc2a24c-0ee3-4a4e-b7ef-32c7feff1982), as set in the
+   SandboxKharlo theme. Every other screen in this module uses it; this one must too.
+   Then fill exactly two placeholders and nothing else:
+   - TITLE placeholder → the single text: Palette Specimen
+   - CONTENT placeholder (named "MainContent" in LayoutTopMenu) → the widget tree from
+     step 4, with the [uswds-specimen] Container as a direct child of that placeholder.
+   When you are done the screen must have exactly ONE direct widget — the layout block —
+   and zero orphan containers at the screen root.
+   Do not author a page structure of your own and do not leave any content outside the
+   layout.
+
+3. Set the screen's Style Sheet to exactly the CSS given below under "Screen stylesheet",
    byte for byte. Do not reformat or minify it. It consumes --color-* tokens from the
    theme and declares no colour literals of its own. It is class-only, so native
    Containers carrying these classes render identically to the reference markup — there
    are no element selectors to satisfy.
 
-3. Build this widget tree in the screen's main content placeholder, using Container
+4. Build this widget tree inside the layout's CONTENT placeholder, using Container
    widgets only. Each Container's Style Class is in [brackets]; literal static text
    content is in "quotes"; a Container marked (empty) has no content and no children.
 
@@ -154,7 +185,7 @@ Task:
    The chip Container carries TWO classes separated by a space: the literal
    "uswds-specimen__chip" plus the swatch class from the ramp table.
 
-4. The token names begin with two literal hyphens, e.g. --color-base-lightest, and must
+5. The token names begin with two literal hyphens, e.g. --color-base-lightest, and must
    render as two hyphens. Do NOT substitute HTML entities such as &#45; — this is static
    widget text, not an HTML string, so no entity encoding is needed or wanted. If two
    hyphens cause trouble in some code path, say so rather than silently encoding them.
@@ -212,6 +243,10 @@ Measured, not eyeballed — the same check that was run locally before handover:
   the build is wrong regardless of how it looks otherwise.
 - Spot-check the widget tree in Studio: the chips must be **Container widgets**, not one
   Expression. `change_applied: true` from Mentor does not establish this.
+- **The app's menu and header are present, and the page title reads "Palette Specimen".**
+  Their absence means the screen skipped the default Layout block. Check this deliberately:
+  a screenshot cropped to the swatch grid looks identical either way, which is how a
+  layout-less version shipped the first time.
 
 Validate in a **real browser**, never Service Studio Preview. The one defect that made this
 handover need rewriting — an Expression silently escaping its content — is invisible to the
