@@ -22,6 +22,56 @@ and what they have to re-paste.
 
 ## [Unreleased]
 
+### Added
+
+- **USWDS buttons** (item `cmp-buttons`, Figma node `1868-83`) — the first `primitives`-tier
+  deliverable, and the first block CSS in the project. `src/blocks/button.css` restyles the
+  **native** OutSystems UI button; there is no new Block and no Web Component.
+
+  **What you have to re-paste:** `dist/theme.css` (it now carries the button section), and
+  nothing else. Full instructions in `handover/uswds-buttons.md`.
+
+  **What changes in a screen you already built, without you touching it:** every Button widget
+  re-skins. `Style = Primary` becomes `#005EA2` with a 4px radius and a Bold 16px label; hover
+  and active become distinct USWDS colours instead of OutSystems UI's brightness filter; a
+  Button with **no Style** now renders as the USWDS blue *outline* button; `Style = Success`
+  gets a **dark** label instead of white; `Style = Large` becomes the 22px big button. Buttons
+  are no longer a fixed 40px tall — height comes from padding, and no longer changes on tablet
+  or phone.
+
+  **What needs an `ExtendedClass`:** the six variants OutSystems UI has no class for —
+  `uswds-btn--secondary`, `uswds-btn--accent-cool`, `uswds-btn--accent-warm`,
+  `uswds-btn--base`, `uswds-btn--inverse`, `uswds-btn--outline-inverse`.
+
+  **Two judgment calls worth knowing about:** `.btn-cancel` is mapped onto the USWDS neutral
+  `base` type (the design draws no "cancel"), and disabled buttons all share one appearance,
+  including the six colour variants the design never drew a disabled cell for.
+
+- `--color-white` (`#FFFFFF`) in `tokens/colors.css`. The palette node contained no white and
+  correctly invented none; the buttons node binds `Base/white` as the label of 19 of its 38
+  states, so the blank is now filled from a ref rather than from a default.
+
+- A keyboard focus ring on buttons — 2px in the design's own ink, white on the two inverse
+  variants. The design draws no focus state; this is implementation-level accessibility
+  (WCAG 2.2 SC 2.4.7 / 2.4.11) applied without changing the visual design.
+
+### Fixed
+
+- `.btn-success` no longer fails WCAG AA. It was white on `#00A91C` (3.14:1); the design
+  specifies ink, which measures 5.49:1. This closes the `.btn` half of
+  [#1](https://github.com/kharloridado/us-web-design-system/issues/1) — by fidelity to the
+  design, not by a contrast repair. The `.alert-info` / `.alert-success` half of that issue is
+  untouched and belongs to `cmp-alert`.
+
+### Known issues
+
+- `accent-warm` buttons ship failing contrast **on purpose** — white on `#FA9441` is 2.24:1,
+  which is what the design specifies. Filed as
+  [#15](https://github.com/kharloridado/us-web-design-system/issues/15) and awaiting a designer.
+  Do not fix this in the ODC theme editor; the next paste would overwrite it.
+- Button **width** is unverified until Public Sans is hosted. Nothing in the repo loads the
+  face, so the preview measures the fallback's advance width. Height and colour are unaffected.
+
 ## [0.2.0] — 2026-08-25
 
 First tagged release. Everything below is already merged to `main`; this cut is what gets

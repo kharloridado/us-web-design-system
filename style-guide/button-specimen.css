@@ -1,0 +1,73 @@
+/* button-specimen.css — Live Style Guide chrome for the button specimen.
+ *
+ * Hand-written (unlike palette-specimen.css, which is generated) because the layout it
+ * needs is a variant/state matrix, not a ramp.
+ *
+ * PREVIEW CHROME ONLY — this file is NOT shipped to ODC and is NOT in src/blocks/. It
+ * styles the page around the buttons; every button in the specimen is the real native
+ * widget wearing the real overrides from src/blocks/button.css, so what you see is what the
+ * theme actually emits.
+ *
+ * Token-only and class-only per the preview harness rule: no inline styles, no ad-hoc hex.
+ * A preview that cheats cannot tell you whether the tokens are right. */
+
+.uswds-btnspec__row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s, 0.75rem);
+  margin-block-end: var(--space-s, 0.75rem);
+}
+
+.uswds-btnspec__label {
+  /* Fixed column so the variant names line up and the buttons form real state columns —
+   * the same reading order as the ref's own grid. */
+  flex: 0 0 10rem;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-3xs);
+  color: var(--color-base-dark);
+}
+
+.uswds-btnspec__head {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-3xs);
+  color: var(--color-base-dark);
+  margin-block-end: var(--space-xs, 0.5rem);
+}
+
+/* The dark band. The ref paints #1B1B1B (`Base/ink`, a bound variable) behind both inverse
+ * rows, and inverse contrast is judged against ink rather than against the page. A specimen
+ * that showed these on white would be measuring the wrong thing. */
+.uswds-btnspec__inverse {
+  background-color: var(--color-base-ink);
+  border-radius: var(--border-radius-soft, 4px);
+  padding: var(--space-base, 1rem);
+}
+
+.uswds-btnspec__inverse .uswds-btnspec__label {
+  color: var(--color-base-light);
+}
+
+/* Forces the hover and active columns to render in their state without a pointer, so the
+ * whole matrix is visible and measurable in one screenshot. Specimen-only: it exists to
+ * make the ref's grid reproducible side by side, and ships nowhere.
+ *
+ * These read the SAME custom properties the real `:hover` and `:active` rules read, rather
+ * than restating any colour. If a variant's hover value is wrong in src/blocks/button.css,
+ * this column is wrong in exactly the same way — which is the only way a simulated state is
+ * worth screenshotting. A specimen that hard-coded the hover hex would agree with itself
+ * and prove nothing.
+ *
+ * Qualified with `.btn` and loaded after the block overrides, because
+ * `.btn:not([class*=background-])` in button.css is 0,2,0 and would otherwise win. */
+.btn.uswds-btnspec__state--hover {
+  background-color: var(--uswds-button-bg-hover);
+  border-color: var(--uswds-button-border-hover);
+  color: var(--uswds-button-fg-hover);
+}
+
+.btn.uswds-btnspec__state--active {
+  background-color: var(--uswds-button-bg-active);
+  border-color: var(--uswds-button-border-active);
+  color: var(--uswds-button-fg-active);
+}

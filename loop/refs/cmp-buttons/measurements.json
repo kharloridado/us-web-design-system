@@ -1,0 +1,1508 @@
+{
+  "schema": "measure-fidelity/1",
+  "generatedBy": "build/gate/measure-fidelity.mjs",
+  "generatedAt": "2026-08-26T16:18:34.926Z",
+  "playwright": "1.62.1",
+  "browser": {
+    "channel": "chrome",
+    "version": "151.0.7922.174"
+  },
+  "url": "http://127.0.0.1:63967/preview/index.html",
+  "probesFile": "loop/refs/cmp-buttons/probes.json",
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1280,
+      "height": 900,
+      "status": "measured",
+      "failedRequests": [],
+      "probes": [
+        {
+          "name": "geometry / regular button box — ref says 93 x 38",
+          "status": "measured",
+          "selector": ".btn-primary:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "rect",
+          "rect": {
+            "x": 184,
+            "y": 476.5,
+            "width": 91.8,
+            "height": 38.39
+          }
+        },
+        {
+          "name": "geometry / big button box — ref says 120 x 52",
+          "status": "measured",
+          "selector": ".btn-large:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "rect",
+          "rect": {
+            "x": 184,
+            "y": 1134.41,
+            "width": 119.22,
+            "height": 51.8
+          }
+        },
+        {
+          "name": "geometry / outline button box — must equal the regular box (inside-aligned stroke)",
+          "status": "measured",
+          "selector": ".btn:not([class*=btn-]):not([class*=uswds-btn--]):not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "rect",
+          "rect": {
+            "x": 184,
+            "y": 944.63,
+            "width": 91.8,
+            "height": 38.39
+          }
+        },
+        {
+          "name": "type + box / regular button — ref: Public Sans Bold 16px, line-height 0.9, radius 4px, 2px border, padding 10/18",
+          "status": "measured",
+          "selector": ".btn-primary:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "font-family": "\"Public Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+            "font-size": "16px",
+            "font-weight": "700",
+            "line-height": "14.4px",
+            "border-radius": "4px",
+            "border-top-width": "2px",
+            "padding-top": "10px",
+            "padding-bottom": "10px",
+            "padding-left": "18px",
+            "padding-right": "18px",
+            "height": "38.3906px",
+            "white-space": "nowrap",
+            "text-align": "center"
+          }
+        },
+        {
+          "name": "type + box / big button — ref: 22px, padding 14/22",
+          "status": "measured",
+          "selector": ".btn-large:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "font-size": "22px",
+            "font-weight": "700",
+            "line-height": "19.8px",
+            "padding-top": "14px",
+            "padding-bottom": "14px",
+            "padding-left": "22px",
+            "padding-right": "22px",
+            "height": "51.7969px"
+          }
+        },
+        {
+          "name": "framework baseline / .btn resting filter (OSUI sets brightness(1); the hover/active override to none cannot be read from a static probe — verified by hover, see spec)",
+          "status": "measured",
+          "selector": ".btn-primary:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "filter": "brightness(1)",
+            "transition-duration": "0s",
+            "pointer-events": "auto"
+          }
+        },
+        {
+          "name": "colour / primary default",
+          "status": "measured",
+          "selector": ".btn-primary:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(0, 94, 162)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / primary hover",
+          "status": "measured",
+          "selector": ".btn-primary.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(26, 68, 128)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / primary active",
+          "status": "measured",
+          "selector": ".btn-primary.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(22, 46, 81)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / primary disabled",
+          "status": "measured",
+          "selector": ".btn-primary[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(201, 201, 201)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / secondary default",
+          "status": "measured",
+          "selector": ".uswds-btn--secondary:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(216, 57, 51)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / secondary hover",
+          "status": "measured",
+          "selector": ".uswds-btn--secondary.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(181, 29, 9)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / secondary active",
+          "status": "measured",
+          "selector": ".uswds-btn--secondary.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(139, 19, 3)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / secondary disabled",
+          "status": "measured",
+          "selector": ".uswds-btn--secondary[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(201, 201, 201)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / accent-cool default",
+          "status": "measured",
+          "selector": ".uswds-btn--accent-cool:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(0, 189, 227)",
+            "color": "rgb(27, 27, 27)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / accent-cool hover",
+          "status": "measured",
+          "selector": ".uswds-btn--accent-cool.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(40, 160, 203)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / accent-cool active",
+          "status": "measured",
+          "selector": ".uswds-btn--accent-cool.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(7, 100, 141)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / accent-cool disabled",
+          "status": "measured",
+          "selector": ".uswds-btn--accent-cool[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(201, 201, 201)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / base default",
+          "status": "measured",
+          "selector": ".uswds-btn--base:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(113, 118, 122)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / base hover",
+          "status": "measured",
+          "selector": ".uswds-btn--base.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(86, 92, 101)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / base active",
+          "status": "measured",
+          "selector": ".uswds-btn--base.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(61, 69, 81)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / base disabled",
+          "status": "measured",
+          "selector": ".uswds-btn--base[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(201, 201, 201)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / accent-warm default",
+          "status": "measured",
+          "selector": ".uswds-btn--accent-warm:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(250, 148, 65)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / accent-warm hover",
+          "status": "measured",
+          "selector": ".uswds-btn--accent-warm.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(192, 86, 0)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / accent-warm active",
+          "status": "measured",
+          "selector": ".uswds-btn--accent-warm.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(119, 85, 64)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / accent-warm disabled",
+          "status": "measured",
+          "selector": ".uswds-btn--accent-warm[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(201, 201, 201)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / error default",
+          "status": "measured",
+          "selector": ".btn-error:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(213, 67, 9)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / error hover",
+          "status": "measured",
+          "selector": ".btn-error.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(181, 9, 9)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / error active",
+          "status": "measured",
+          "selector": ".btn-error.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(111, 51, 49)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / error disabled",
+          "status": "measured",
+          "selector": ".btn-error[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(201, 201, 201)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / success default",
+          "status": "measured",
+          "selector": ".btn-success:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(0, 169, 28)",
+            "color": "rgb(27, 27, 27)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / success hover",
+          "status": "measured",
+          "selector": ".btn-success.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(77, 128, 85)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / success active",
+          "status": "measured",
+          "selector": ".btn-success.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(68, 100, 67)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / success disabled",
+          "status": "measured",
+          "selector": ".btn-success[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(201, 201, 201)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / inverse default",
+          "status": "measured",
+          "selector": ".uswds-btn--inverse:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(220, 222, 224)",
+            "color": "rgb(27, 27, 27)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / inverse hover",
+          "status": "measured",
+          "selector": ".uswds-btn--inverse.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(240, 240, 240)",
+            "color": "rgb(27, 27, 27)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / inverse active",
+          "status": "measured",
+          "selector": ".uswds-btn--inverse.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(255, 255, 255)",
+            "color": "rgb(27, 27, 27)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / inverse disabled",
+          "status": "measured",
+          "selector": ".uswds-btn--inverse[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(113, 118, 122)",
+            "color": "rgb(27, 27, 27)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / outline-inverse default",
+          "status": "measured",
+          "selector": ".uswds-btn--outline-inverse:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(169, 174, 177)",
+            "border-top-color": "rgb(169, 174, 177)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / outline-inverse hover",
+          "status": "measured",
+          "selector": ".uswds-btn--outline-inverse.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(240, 240, 240)",
+            "border-top-color": "rgb(240, 240, 240)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / outline-inverse active",
+          "status": "measured",
+          "selector": ".uswds-btn--outline-inverse.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgb(255, 255, 255)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / outline-inverse disabled",
+          "status": "measured",
+          "selector": ".uswds-btn--outline-inverse[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(113, 118, 122)",
+            "border-top-color": "rgb(113, 118, 122)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / big default",
+          "status": "measured",
+          "selector": ".btn-large:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(0, 94, 162)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / big hover",
+          "status": "measured",
+          "selector": ".btn-large.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(26, 68, 128)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / big active",
+          "status": "measured",
+          "selector": ".btn-large.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(22, 46, 81)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / big disabled",
+          "status": "measured",
+          "selector": ".btn-large[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(201, 201, 201)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / outline default",
+          "status": "measured",
+          "selector": ".btn:not([class*=btn-]):not([class*=uswds-btn--]):not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(0, 94, 162)",
+            "border-top-color": "rgb(0, 94, 162)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / outline hover",
+          "status": "measured",
+          "selector": ".btn:not([class*=btn-]):not([class*=uswds-btn--]).uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(26, 68, 128)",
+            "border-top-color": "rgb(26, 68, 128)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / outline active",
+          "status": "measured",
+          "selector": ".btn:not([class*=btn-]):not([class*=uswds-btn--]).uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(22, 46, 81)",
+            "border-top-color": "rgb(22, 46, 81)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / outline disabled",
+          "status": "measured",
+          "selector": ".btn:not([class*=btn-]):not([class*=uswds-btn--])[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(201, 201, 201)",
+            "border-top-color": "rgb(201, 201, 201)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / btn-cancel (MAPPED to the ref base type)",
+          "status": "measured",
+          "selector": ".btn-cancel:not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(113, 118, 122)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "geometry / btn-small keeps the framework box (32px)",
+          "status": "measured",
+          "selector": ".btn-small",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "height": "32px",
+            "padding-left": "8px",
+            "padding-right": "8px",
+            "font-size": "15px"
+          }
+        }
+      ],
+      "screenshot": "loop/refs/cmp-buttons/rendered.desktop.png"
+    },
+    {
+      "name": "mobile",
+      "width": 375,
+      "height": 812,
+      "status": "measured",
+      "failedRequests": [],
+      "probes": [
+        {
+          "name": "geometry / regular button box — ref says 93 x 38",
+          "status": "measured",
+          "selector": ".btn-primary:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "rect",
+          "rect": {
+            "x": 184,
+            "y": 687.5,
+            "width": 91.8,
+            "height": 38.39
+          }
+        },
+        {
+          "name": "geometry / big button box — ref says 120 x 52",
+          "status": "measured",
+          "selector": ".btn-large:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "rect",
+          "rect": {
+            "x": 184,
+            "y": 1941.09,
+            "width": 119.22,
+            "height": 51.8
+          }
+        },
+        {
+          "name": "geometry / outline button box — must equal the regular box (inside-aligned stroke)",
+          "status": "measured",
+          "selector": ".btn:not([class*=btn-]):not([class*=uswds-btn--]):not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "rect",
+          "rect": {
+            "x": 184,
+            "y": 1592.64,
+            "width": 91.8,
+            "height": 38.39
+          }
+        },
+        {
+          "name": "type + box / regular button — ref: Public Sans Bold 16px, line-height 0.9, radius 4px, 2px border, padding 10/18",
+          "status": "measured",
+          "selector": ".btn-primary:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "font-family": "\"Public Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+            "font-size": "16px",
+            "font-weight": "700",
+            "line-height": "14.4px",
+            "border-radius": "4px",
+            "border-top-width": "2px",
+            "padding-top": "10px",
+            "padding-bottom": "10px",
+            "padding-left": "18px",
+            "padding-right": "18px",
+            "height": "38.3906px",
+            "white-space": "nowrap",
+            "text-align": "center"
+          }
+        },
+        {
+          "name": "type + box / big button — ref: 22px, padding 14/22",
+          "status": "measured",
+          "selector": ".btn-large:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "font-size": "22px",
+            "font-weight": "700",
+            "line-height": "19.8px",
+            "padding-top": "14px",
+            "padding-bottom": "14px",
+            "padding-left": "22px",
+            "padding-right": "22px",
+            "height": "51.7969px"
+          }
+        },
+        {
+          "name": "framework baseline / .btn resting filter (OSUI sets brightness(1); the hover/active override to none cannot be read from a static probe — verified by hover, see spec)",
+          "status": "measured",
+          "selector": ".btn-primary:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "filter": "brightness(1)",
+            "transition-duration": "0s",
+            "pointer-events": "auto"
+          }
+        },
+        {
+          "name": "colour / primary default",
+          "status": "measured",
+          "selector": ".btn-primary:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(0, 94, 162)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / primary hover",
+          "status": "measured",
+          "selector": ".btn-primary.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(26, 68, 128)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / primary active",
+          "status": "measured",
+          "selector": ".btn-primary.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(22, 46, 81)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / primary disabled",
+          "status": "measured",
+          "selector": ".btn-primary[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(201, 201, 201)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / secondary default",
+          "status": "measured",
+          "selector": ".uswds-btn--secondary:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(216, 57, 51)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / secondary hover",
+          "status": "measured",
+          "selector": ".uswds-btn--secondary.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(181, 29, 9)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / secondary active",
+          "status": "measured",
+          "selector": ".uswds-btn--secondary.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(139, 19, 3)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / secondary disabled",
+          "status": "measured",
+          "selector": ".uswds-btn--secondary[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(201, 201, 201)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / accent-cool default",
+          "status": "measured",
+          "selector": ".uswds-btn--accent-cool:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(0, 189, 227)",
+            "color": "rgb(27, 27, 27)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / accent-cool hover",
+          "status": "measured",
+          "selector": ".uswds-btn--accent-cool.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(40, 160, 203)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / accent-cool active",
+          "status": "measured",
+          "selector": ".uswds-btn--accent-cool.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(7, 100, 141)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / accent-cool disabled",
+          "status": "measured",
+          "selector": ".uswds-btn--accent-cool[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(201, 201, 201)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / base default",
+          "status": "measured",
+          "selector": ".uswds-btn--base:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(113, 118, 122)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / base hover",
+          "status": "measured",
+          "selector": ".uswds-btn--base.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(86, 92, 101)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / base active",
+          "status": "measured",
+          "selector": ".uswds-btn--base.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(61, 69, 81)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / base disabled",
+          "status": "measured",
+          "selector": ".uswds-btn--base[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(201, 201, 201)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / accent-warm default",
+          "status": "measured",
+          "selector": ".uswds-btn--accent-warm:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(250, 148, 65)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / accent-warm hover",
+          "status": "measured",
+          "selector": ".uswds-btn--accent-warm.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(192, 86, 0)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / accent-warm active",
+          "status": "measured",
+          "selector": ".uswds-btn--accent-warm.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(119, 85, 64)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / accent-warm disabled",
+          "status": "measured",
+          "selector": ".uswds-btn--accent-warm[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(201, 201, 201)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / error default",
+          "status": "measured",
+          "selector": ".btn-error:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(213, 67, 9)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / error hover",
+          "status": "measured",
+          "selector": ".btn-error.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(181, 9, 9)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / error active",
+          "status": "measured",
+          "selector": ".btn-error.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(111, 51, 49)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / error disabled",
+          "status": "measured",
+          "selector": ".btn-error[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(201, 201, 201)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / success default",
+          "status": "measured",
+          "selector": ".btn-success:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(0, 169, 28)",
+            "color": "rgb(27, 27, 27)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / success hover",
+          "status": "measured",
+          "selector": ".btn-success.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(77, 128, 85)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / success active",
+          "status": "measured",
+          "selector": ".btn-success.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(68, 100, 67)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / success disabled",
+          "status": "measured",
+          "selector": ".btn-success[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(201, 201, 201)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / inverse default",
+          "status": "measured",
+          "selector": ".uswds-btn--inverse:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(220, 222, 224)",
+            "color": "rgb(27, 27, 27)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / inverse hover",
+          "status": "measured",
+          "selector": ".uswds-btn--inverse.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(240, 240, 240)",
+            "color": "rgb(27, 27, 27)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / inverse active",
+          "status": "measured",
+          "selector": ".uswds-btn--inverse.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(255, 255, 255)",
+            "color": "rgb(27, 27, 27)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / inverse disabled",
+          "status": "measured",
+          "selector": ".uswds-btn--inverse[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(113, 118, 122)",
+            "color": "rgb(27, 27, 27)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / outline-inverse default",
+          "status": "measured",
+          "selector": ".uswds-btn--outline-inverse:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(169, 174, 177)",
+            "border-top-color": "rgb(169, 174, 177)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / outline-inverse hover",
+          "status": "measured",
+          "selector": ".uswds-btn--outline-inverse.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(240, 240, 240)",
+            "border-top-color": "rgb(240, 240, 240)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / outline-inverse active",
+          "status": "measured",
+          "selector": ".uswds-btn--outline-inverse.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgb(255, 255, 255)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / outline-inverse disabled",
+          "status": "measured",
+          "selector": ".uswds-btn--outline-inverse[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(113, 118, 122)",
+            "border-top-color": "rgb(113, 118, 122)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / big default",
+          "status": "measured",
+          "selector": ".btn-large:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(0, 94, 162)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / big hover",
+          "status": "measured",
+          "selector": ".btn-large.uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(26, 68, 128)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / big active",
+          "status": "measured",
+          "selector": ".btn-large.uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(22, 46, 81)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / big disabled",
+          "status": "measured",
+          "selector": ".btn-large[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(201, 201, 201)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / outline default",
+          "status": "measured",
+          "selector": ".btn:not([class*=btn-]):not([class*=uswds-btn--]):not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(0, 94, 162)",
+            "border-top-color": "rgb(0, 94, 162)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / outline hover",
+          "status": "measured",
+          "selector": ".btn:not([class*=btn-]):not([class*=uswds-btn--]).uswds-btnspec__state--hover",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(26, 68, 128)",
+            "border-top-color": "rgb(26, 68, 128)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / outline active",
+          "status": "measured",
+          "selector": ".btn:not([class*=btn-]):not([class*=uswds-btn--]).uswds-btnspec__state--active",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(22, 46, 81)",
+            "border-top-color": "rgb(22, 46, 81)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / outline disabled",
+          "status": "measured",
+          "selector": ".btn:not([class*=btn-]):not([class*=uswds-btn--])[disabled]",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(201, 201, 201)",
+            "border-top-color": "rgb(201, 201, 201)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "colour / btn-cancel (MAPPED to the ref base type)",
+          "status": "measured",
+          "selector": ".btn-cancel:not([disabled])",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "background-color": "rgb(113, 118, 122)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "2px",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "name": "geometry / btn-small keeps the framework box (32px)",
+          "status": "measured",
+          "selector": ".btn-small",
+          "matchCount": 1,
+          "kind": "props",
+          "values": {
+            "height": "32px",
+            "padding-left": "8px",
+            "padding-right": "8px",
+            "font-size": "15px"
+          }
+        }
+      ],
+      "screenshot": "loop/refs/cmp-buttons/rendered.mobile.png"
+    }
+  ],
+  "summary": {
+    "viewports": 2,
+    "probes": 104,
+    "measured": 104,
+    "unmeasured": 0,
+    "criticalFailedRequests": 0
+  },
+  "exitCode": 0
+}

@@ -55,8 +55,14 @@
      styles the preview page itself, so it stays token-only per the rule above. -->
 <link rel="stylesheet" href="../style-guide/palette-specimen.css">
 
-<!-- 4) Block overrides — one <link> per file in src/blocks/index.css.
-     <link rel="stylesheet" href="../src/blocks/BLOCK.css"> -->
+<!-- 4) Block overrides — one <link> per file in src/blocks/index.css. -->
+<link rel="stylesheet" href="../src/blocks/button.css">
+
+<!-- 4b) Specimen chrome that must out-order a block override. button-specimen.css
+     simulates :hover / :active for the state columns, and button.css's own
+     `.btn:not([class*=background-])` is 0,2,0 — so this has to load after it, not up at
+     3b with the rest of the Style Guide chrome. Ships nowhere. -->
+<link rel="stylesheet" href="../style-guide/button-specimen.css">
 
 </head>
 <body>
@@ -89,6 +95,147 @@
       <!-- One section per component. Use the REAL rendered widget markup captured in
            outsystems-widgets-reference/ — not an idealised approximation of it. The
            vendored SCSS can be stale; the rendered DOM is the truth. -->
+      <!-- ── Buttons — item cmp-buttons, ref loop/refs/cmp-buttons ──────────────────────
+           REAL native widgets. Every element below is a `<button class="btn …">`, which is
+           what the OutSystems UI Button widget renders; the USWDS look comes entirely from
+           src/blocks/button.css overriding the framework, not from specimen markup.
+
+           The variants with no native OutSystems UI class are applied the way a developer
+           applies them in ODC — ExtendedClass, never by mutating framework internals:
+
+               ExtendedClass = "uswds-btn--accent-cool"
+
+           `hover` and `active` columns are SIMULATED with a specimen class so the whole
+           matrix is visible at once; they read the same custom properties the real
+           pseudo-class rules read. Hover a button to confirm the real state agrees. -->
+      <div class="uswds-specimen__section">
+        <h3>Buttons</h3>
+
+        <h4>Standard buttons</h4>
+        <p class="uswds-btnspec__head">default · hover · active · disabled</p>
+
+        <div class="uswds-btnspec__row">
+          <span class="uswds-btnspec__label">primary</span>
+          <button type="button" class="btn btn-primary">Button</button>
+          <button type="button" class="btn btn-primary uswds-btnspec__state--hover">Button</button>
+          <button type="button" class="btn btn-primary uswds-btnspec__state--active">Button</button>
+          <button type="button" class="btn btn-primary" disabled>Button</button>
+        </div>
+
+        <div class="uswds-btnspec__row">
+          <span class="uswds-btnspec__label">secondary</span>
+          <button type="button" class="btn uswds-btn--secondary">Button</button>
+          <button type="button" class="btn uswds-btn--secondary uswds-btnspec__state--hover">Button</button>
+          <button type="button" class="btn uswds-btn--secondary uswds-btnspec__state--active">Button</button>
+          <button type="button" class="btn uswds-btn--secondary" disabled>Button</button>
+        </div>
+
+        <div class="uswds-btnspec__row">
+          <span class="uswds-btnspec__label">accent cool</span>
+          <button type="button" class="btn uswds-btn--accent-cool">Button</button>
+          <button type="button" class="btn uswds-btn--accent-cool uswds-btnspec__state--hover">Button</button>
+          <button type="button" class="btn uswds-btn--accent-cool uswds-btnspec__state--active">Button</button>
+          <button type="button" class="btn uswds-btn--accent-cool" disabled>Button</button>
+        </div>
+
+        <div class="uswds-btnspec__row">
+          <span class="uswds-btnspec__label">base</span>
+          <button type="button" class="btn uswds-btn--base">Button</button>
+          <button type="button" class="btn uswds-btn--base uswds-btnspec__state--hover">Button</button>
+          <button type="button" class="btn uswds-btn--base uswds-btnspec__state--active">Button</button>
+          <button type="button" class="btn uswds-btn--base" disabled>Button</button>
+        </div>
+
+        <div class="uswds-btnspec__row">
+          <span class="uswds-btnspec__label">accent warm</span>
+          <button type="button" class="btn uswds-btn--accent-warm">Button</button>
+          <button type="button" class="btn uswds-btn--accent-warm uswds-btnspec__state--hover">Button</button>
+          <button type="button" class="btn uswds-btn--accent-warm uswds-btnspec__state--active">Button</button>
+          <button type="button" class="btn uswds-btn--accent-warm" disabled>Button</button>
+        </div>
+
+        <div class="uswds-btnspec__row">
+          <span class="uswds-btnspec__label">error</span>
+          <button type="button" class="btn btn-error">Button</button>
+          <button type="button" class="btn btn-error uswds-btnspec__state--hover">Button</button>
+          <button type="button" class="btn btn-error uswds-btnspec__state--active">Button</button>
+          <button type="button" class="btn btn-error" disabled>Button</button>
+        </div>
+
+        <div class="uswds-btnspec__row">
+          <span class="uswds-btnspec__label">success</span>
+          <button type="button" class="btn btn-success">Button</button>
+          <button type="button" class="btn btn-success uswds-btnspec__state--hover">Button</button>
+          <button type="button" class="btn btn-success uswds-btnspec__state--active">Button</button>
+          <button type="button" class="btn btn-success" disabled>Button</button>
+        </div>
+
+        <!-- Ink band: the ref paints Base/ink behind the inverse rows, and their contrast is
+             judged against it. -->
+        <div class="uswds-btnspec__inverse">
+          <div class="uswds-btnspec__row">
+            <span class="uswds-btnspec__label">inverse</span>
+            <button type="button" class="btn uswds-btn--inverse">Button</button>
+            <button type="button" class="btn uswds-btn--inverse uswds-btnspec__state--hover">Button</button>
+            <button type="button" class="btn uswds-btn--inverse uswds-btnspec__state--active">Button</button>
+            <button type="button" class="btn uswds-btn--inverse" disabled>Button</button>
+          </div>
+        </div>
+
+        <h4>Outline buttons</h4>
+        <p class="uswds-btnspec__head">
+          A bare <code>.btn</code> — an OutSystems UI Button with no Style — already IS the
+          outline button, so it needs no ExtendedClass.
+        </p>
+
+        <div class="uswds-btnspec__row">
+          <span class="uswds-btnspec__label">primary</span>
+          <button type="button" class="btn">Button</button>
+          <button type="button" class="btn uswds-btnspec__state--hover">Button</button>
+          <button type="button" class="btn uswds-btnspec__state--active">Button</button>
+          <button type="button" class="btn" disabled>Button</button>
+        </div>
+
+        <div class="uswds-btnspec__inverse">
+          <div class="uswds-btnspec__row">
+            <span class="uswds-btnspec__label">inverse</span>
+            <button type="button" class="btn uswds-btn--outline-inverse">Button</button>
+            <button type="button" class="btn uswds-btn--outline-inverse uswds-btnspec__state--hover">Button</button>
+            <button type="button" class="btn uswds-btn--outline-inverse uswds-btnspec__state--active">Button</button>
+            <button type="button" class="btn uswds-btn--outline-inverse" disabled>Button</button>
+          </div>
+        </div>
+
+        <h4>Big button</h4>
+        <p class="uswds-btnspec__head">
+          Primary only — the ref draws no other big variant, so none is generated.
+          Native class <code>.btn-large</code>.
+        </p>
+
+        <div class="uswds-btnspec__row">
+          <span class="uswds-btnspec__label">primary</span>
+          <button type="button" class="btn btn-large">Button</button>
+          <button type="button" class="btn btn-large uswds-btnspec__state--hover">Button</button>
+          <button type="button" class="btn btn-large uswds-btnspec__state--active">Button</button>
+          <button type="button" class="btn btn-large" disabled>Button</button>
+        </div>
+
+        <h4>Framework variants the ref does not draw</h4>
+        <p class="uswds-btnspec__head">
+          Shown because the base override would otherwise have silently destroyed them.
+          <code>.btn-small</code> keeps OutSystems UI's own geometry; <code>.btn-cancel</code>
+          is MAPPED onto the ref's neutral <code>base</code> type — a role judgment, recorded
+          in the handover for a designer to overrule.
+        </p>
+
+        <div class="uswds-btnspec__row">
+          <span class="uswds-btnspec__label">small · cancel</span>
+          <button type="button" class="btn btn-small">Button</button>
+          <button type="button" class="btn btn-cancel">Button</button>
+          <button type="button" class="btn btn-cancel" disabled>Button</button>
+        </div>
+      </div>
+
       <!-- BEGIN generated palette specimen -->
       <!-- GENERATED by build/gen-palette-specimen.mjs — do not hand-edit. -->
       <div class="uswds-specimen__section">
