@@ -64,6 +64,15 @@ native OutSystems UI class, Style is plain `btn` and the modifier goes in Extend
 | inverse | `btn` | `uswds-btn--inverse` |
 | outline-inverse | `btn` | `uswds-btn--outline-inverse` |
 
+**Either property works — Style is a verbatim class string, so it can carry both classes.**
+`Style = "btn uswds-btn--secondary"` with ExtendedClass empty renders the identical DOM to
+`Style = "btn"` + `ExtendedClass = "uswds-btn--secondary"`. In ODC Studio, ExtendedClass is the
+idiomatic split and the table above is what to use. If you are driving the edit through Mentor,
+put both classes in **Style** instead: on this tenant Mentor edits Style reliably and failed to
+set ExtendedClass three times in a row while reporting success each time.
+
+The only thing that actually matters is that **`btn` is present in the rendered class list.**
+
 **Why a missing `btn` is fatal rather than cosmetic here.** This CSS puts every visual property
 on `.btn` and only custom-property *assignments* on the variant classes. A button carrying
 `btn-primary` without `btn` therefore sets nine custom properties that **nothing reads**, and
