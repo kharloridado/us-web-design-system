@@ -39,9 +39,23 @@ In ODC Studio, on the **`SandboxKharlo`** app, add each of these files as a **Re
 uploaded as `publicsans-regular.woff2` or `PublicSans-Regular (1).woff2` will not be found, and
 the symptom is not an error — it is text quietly rendering in a system sans.
 
-Do this **before** pasting the theme. Pasting first is not harmful, it just means the app
-renders in the fallback face until the Resources land, which is easy to misread as "the CSS
-didn't work".
+### This is a HARD PREREQUISITE, not a tidy ordering — measured 2026-08-26
+
+The original draft of this ticket said pasting the theme first was harmless. **It is not.** ODC
+resolves `url(...)` against the app's Resources at **design time**, not only at compile time.
+With the theme pasted and the Resources absent, the theme validates with **five `Unknown Object`
+errors — exactly one per `@font-face`**, and the app cannot be published cleanly until they
+clear.
+
+That was observed directly: the theme paste landed byte-exact and reported
+`error_count: 5, first_messages: ["Unknown Object" × 5]`. So the order is not a preference:
+
+> **Upload the five Resources, then paste the theme, then publish.**
+
+If you have already pasted the theme and are staring at five `Unknown Object` errors, nothing is
+broken — upload the Resources and they resolve. Do **not** delete the `@font-face` rules to make
+the errors go away; that ships the theme without the face and reintroduces exactly the silent
+fallback this deliverable exists to fix.
 
 ### Why exactly five, and not the nine weights Public Sans ships
 

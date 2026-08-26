@@ -107,6 +107,17 @@ touch a URL.
 **Why this is here:** a serif fallback was diagnosed as a broken font path, and the "fix" — rewriting the
 `src` — made it worse. The real cause was an undeclared 500-weight face.
 
+**The other half, and it bites earlier: the platform also resolves that `url()` at DESIGN time.** A
+`@font-face` whose Resource does not exist yet is not a runtime 404 you discover after publishing — it is a
+validation **error** on the theme, one per rule, and the app will not publish cleanly until the files are
+there. Measured on ODC 2026-08-26: pasting a theme with five `@font-face` rules ahead of the uploads
+produced exactly five `Unknown Object` errors.
+
+So **upload the font Resources BEFORE pasting the theme**, always. And when you meet those errors, do not
+make them go away by deleting the `@font-face` rules — that ships a theme that names a face it never
+loads, which is the silent-fallback failure at the top of this section, arrived at from the other
+direction.
+
 ---
 
 ## 2. Build the framework's widget, not a parallel universe
