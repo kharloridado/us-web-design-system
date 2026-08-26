@@ -226,7 +226,7 @@ Exempt (disabled), recorded for completeness: `disabled`/`outline` disabled 1.66
 `accent-warm` at 2.24:1 is the more serious of the two — it is the resting state of a
 component, and it is the identical arithmetic to the `.alert-info` half of FND-001. Note the
 shape of the fix the design already knows: `accent-cool` and `success` solved exactly this
-problem with an ink foreground, and `#1B1B1B` on `#FA9441` measures **8.99:1**. That
+problem with an ink foreground, and `#1B1B1B` on `#FA9441` measures **7.69:1**. That
 observation belongs in the finding as a recommendation to design — **not** in the CSS. Rule 4:
 build it as designed, flag the conflict.
 
@@ -253,6 +253,56 @@ the way `loop/refs/README.md` warns about.
 This is now the **third** ref in a row to record "no mode axis". It remains an assumption to
 re-test at the first ref that actually specifies responsive behaviour, not a settled property
 of the library.
+
+## Verification of the build against this ref — 2026-08-26
+
+Recorded here because the ref is where the next person looks to find out what was actually
+checked, and with what.
+
+**Deterministic gate:** `npm run build:theme` exits 0 (`check:config` ok, `validate:theme` ok
+— 94 tokens defined, every `var()` resolves).
+
+**Rendered measurement:** `build/gate/measure-fidelity.mjs` against the preview harness (real
+OutSystems UI base + `dist/theme.css` + `src/blocks/button.css`) in headless Chrome 151.
+`probes.json` → `measurements.json`. **104/104 probes measured, exit 0**, across desktop
+1280x900 and mobile 375x812.
+
+Comparing every measured colour to the variant tables above: **44 states x 2 viewports = 88
+comparisons, 88 match, 0 drift** — background, foreground, border colour and 2px border width.
+
+**States a static probe cannot see** were measured separately, driving the real pseudo-classes
+with the 100ms transition allowed to settle:
+
+| Checked | Result |
+|---|---|
+| Real `:hover` on primary / accent-cool / success / inverse / outline / outline-inverse | Matches the ref exactly, including the ink→white flip on accent-cool and success |
+| Real `:active` on the same six | Matches the ref exactly |
+| `filter` neutralisation under `.desktop` | `filter: none` — OutSystems UI's `brightness(0.9)` is beaten, so hover lands on the ref's colour undimmed |
+| Keyboard `:focus-visible` | `outline: 2px solid #1B1B1B, offset 2px` — the added ring, in the ref's own ink |
+
+> **Read the transition before you read the number.** `.btn` carries OutSystems UI's
+> `transition: all 100ms linear`, and `outline-color`, `outline-offset` and
+> `background-color` are all animatable. Reading a computed style immediately after a hover
+> or focus returns a value **part-way between** the two states — an arbitrary colour that
+> looks like a real drift and is not. Three separate "failures" during this build were that
+> and nothing else. Settle for >100ms before reading, or measure nothing.
+
+### Two things that are NOT verified, stated plainly
+
+1. **Button WIDTH cannot be confirmed until Public Sans is loaded.** Measured 91.8px against
+   the ref's 93px, and 119.22px against 120px. Nothing in this repo loads the typeface — no
+   `@font-face`, no font import — so the preview renders the fallback stack and the label's
+   advance width is a different font's. Height is unaffected and matches exactly (38.39 vs
+   38.4, 51.8 vs 51.8), because height derives from font-size x line-height + padding, none of
+   which depends on the face. **The width numbers are unverified, not passing.** Re-measure
+   when the face is hosted; the gap is `tok-typography`'s open item, not a defect introduced
+   here.
+2. **The preview harness does not emulate the device class.** ODC puts `.desktop` / `.tablet`
+   / `.phone` on the body and OutSystems UI hangs real rules off them —
+   `.desktop .btn:hover`, `.tablet .btn { height: 48px }`. `preview/index.html` sets none, so
+   those branches are dead in the preview by default and the harness quietly under-tests every
+   override that has to beat one. The `.desktop` case above was verified by injecting the class
+   at measurement time. Worth fixing in the harness rather than remembering per item.
 
 ## The white gap
 

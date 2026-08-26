@@ -68,14 +68,31 @@
  *   5.49:1 on #00A91C), or keeping white text and re-pointing the fill at the `-darker`
  *   step (#2E6276 = 6.72:1, #446443 = 6.67:1). Neither is implemented here.
  *
- * NOT HERE, ON PURPOSE: the ref contains no white, black or neutral ramp, so none is
- * invented — OSUI keeps its own --color-neutral-0..10 until an override item re-points
+ * NOT HERE, ON PURPOSE: this ref (node 287-98) contains no black or neutral ramp, so none
+ * is invented — OSUI keeps its own --color-neutral-0..10 until an override item re-points
  * them. No semantic role layer, no utility classes, no component tokens: separate files,
- * separate work items. */
+ * separate work items.
+ *
+ * AMENDED 2026-08-26 by cmp-buttons — white, and only white. The paragraph above originally
+ * excluded white on the same grounds, and that was correct FOR THIS REF. It stopped being
+ * correct when a second ref supplied the evidence: node 1868-83 binds `Base/white` =
+ * #FFFFFF as a real Figma variable, and it is the foreground of 19 of that node's 38 button
+ * states. The rule this file is built on is "a credible-looking default is worse than a
+ * blank" — not "never add a value". A blank held until evidence arrived; the evidence
+ * arrived; the blank is filled and its source is named.
+ *
+ * The alternative was to have the button CSS consume OSUI's --color-neutral-0 (also
+ * #FFFFFF). Rejected: that couples the design system's white to a framework role a later
+ * override item is free to re-point, and would leave `Base/white` as the only bound
+ * variable in the engagement with no token of its own. Black is still NOT added — no ref
+ * has stated one. */
 :root {
   /* ============================== Theme palette ============================== */
 
   /* ---- Base ---- */
+  /* Source: node 1868-83 (cmp-buttons), variable `Base/white`. Not from node 287-98. */
+  --color-white:         #FFFFFF;
+
   --color-base-lightest: #F0F0F0;
   --color-base-lighter:  #DCDEE0;
   --color-base-light:    #A9AEB1;

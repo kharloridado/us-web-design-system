@@ -1,0 +1,580 @@
+{
+  "_comment": "Probes for item cmp-buttons. The harness measures; it never reads loop/refs/cmp-buttons/spec.md. Expected values live in the ref and the comparison is the checker judgment, not this file.",
+  "waitFor": ".btn-primary",
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1280,
+      "height": 900
+    },
+    {
+      "name": "mobile",
+      "width": 375,
+      "height": 812
+    }
+  ],
+  "probes": [
+    {
+      "name": "geometry / regular button box — ref says 93 x 38",
+      "selector": ".btn-primary:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "rect": true
+    },
+    {
+      "name": "geometry / big button box — ref says 120 x 52",
+      "selector": ".btn-large:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "rect": true
+    },
+    {
+      "name": "geometry / outline button box — must equal the regular box (inside-aligned stroke)",
+      "selector": ".btn:not([class*=btn-]):not([class*=uswds-btn--]):not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "rect": true
+    },
+    {
+      "name": "type + box / regular button — ref: Public Sans Bold 16px, line-height 0.9, radius 4px, 2px border, padding 10/18",
+      "selector": ".btn-primary:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "props": [
+        "font-family",
+        "font-size",
+        "font-weight",
+        "line-height",
+        "border-radius",
+        "border-top-width",
+        "padding-top",
+        "padding-bottom",
+        "padding-left",
+        "padding-right",
+        "height",
+        "white-space",
+        "text-align"
+      ]
+    },
+    {
+      "name": "type + box / big button — ref: 22px, padding 14/22",
+      "selector": ".btn-large:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "props": [
+        "font-size",
+        "font-weight",
+        "line-height",
+        "padding-top",
+        "padding-bottom",
+        "padding-left",
+        "padding-right",
+        "height"
+      ]
+    },
+    {
+      "name": "framework baseline / .btn resting filter (OSUI sets brightness(1); the hover/active override to none cannot be read from a static probe — verified by hover, see spec)",
+      "selector": ".btn-primary:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "props": [
+        "filter",
+        "transition-duration",
+        "pointer-events"
+      ]
+    },
+    {
+      "name": "colour / primary default",
+      "selector": ".btn-primary:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / primary hover",
+      "selector": ".btn-primary.uswds-btnspec__state--hover",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / primary active",
+      "selector": ".btn-primary.uswds-btnspec__state--active",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / primary disabled",
+      "selector": ".btn-primary[disabled]",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / secondary default",
+      "selector": ".uswds-btn--secondary:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / secondary hover",
+      "selector": ".uswds-btn--secondary.uswds-btnspec__state--hover",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / secondary active",
+      "selector": ".uswds-btn--secondary.uswds-btnspec__state--active",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / secondary disabled",
+      "selector": ".uswds-btn--secondary[disabled]",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / accent-cool default",
+      "selector": ".uswds-btn--accent-cool:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / accent-cool hover",
+      "selector": ".uswds-btn--accent-cool.uswds-btnspec__state--hover",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / accent-cool active",
+      "selector": ".uswds-btn--accent-cool.uswds-btnspec__state--active",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / accent-cool disabled",
+      "selector": ".uswds-btn--accent-cool[disabled]",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / base default",
+      "selector": ".uswds-btn--base:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / base hover",
+      "selector": ".uswds-btn--base.uswds-btnspec__state--hover",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / base active",
+      "selector": ".uswds-btn--base.uswds-btnspec__state--active",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / base disabled",
+      "selector": ".uswds-btn--base[disabled]",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / accent-warm default",
+      "selector": ".uswds-btn--accent-warm:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / accent-warm hover",
+      "selector": ".uswds-btn--accent-warm.uswds-btnspec__state--hover",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / accent-warm active",
+      "selector": ".uswds-btn--accent-warm.uswds-btnspec__state--active",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / accent-warm disabled",
+      "selector": ".uswds-btn--accent-warm[disabled]",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / error default",
+      "selector": ".btn-error:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / error hover",
+      "selector": ".btn-error.uswds-btnspec__state--hover",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / error active",
+      "selector": ".btn-error.uswds-btnspec__state--active",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / error disabled",
+      "selector": ".btn-error[disabled]",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / success default",
+      "selector": ".btn-success:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / success hover",
+      "selector": ".btn-success.uswds-btnspec__state--hover",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / success active",
+      "selector": ".btn-success.uswds-btnspec__state--active",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / success disabled",
+      "selector": ".btn-success[disabled]",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / inverse default",
+      "selector": ".uswds-btn--inverse:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / inverse hover",
+      "selector": ".uswds-btn--inverse.uswds-btnspec__state--hover",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / inverse active",
+      "selector": ".uswds-btn--inverse.uswds-btnspec__state--active",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / inverse disabled",
+      "selector": ".uswds-btn--inverse[disabled]",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / outline-inverse default",
+      "selector": ".uswds-btn--outline-inverse:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / outline-inverse hover",
+      "selector": ".uswds-btn--outline-inverse.uswds-btnspec__state--hover",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / outline-inverse active",
+      "selector": ".uswds-btn--outline-inverse.uswds-btnspec__state--active",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / outline-inverse disabled",
+      "selector": ".uswds-btn--outline-inverse[disabled]",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / big default",
+      "selector": ".btn-large:not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / big hover",
+      "selector": ".btn-large.uswds-btnspec__state--hover",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / big active",
+      "selector": ".btn-large.uswds-btnspec__state--active",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / big disabled",
+      "selector": ".btn-large[disabled]",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / outline default",
+      "selector": ".btn:not([class*=btn-]):not([class*=uswds-btn--]):not(.uswds-btnspec__state--hover):not(.uswds-btnspec__state--active):not([disabled])",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / outline hover",
+      "selector": ".btn:not([class*=btn-]):not([class*=uswds-btn--]).uswds-btnspec__state--hover",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / outline active",
+      "selector": ".btn:not([class*=btn-]):not([class*=uswds-btn--]).uswds-btnspec__state--active",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / outline disabled",
+      "selector": ".btn:not([class*=btn-]):not([class*=uswds-btn--])[disabled]",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "colour / btn-cancel (MAPPED to the ref base type)",
+      "selector": ".btn-cancel:not([disabled])",
+      "props": [
+        "background-color",
+        "color",
+        "border-top-color",
+        "border-top-width",
+        "border-top-style"
+      ]
+    },
+    {
+      "name": "geometry / btn-small keeps the framework box (32px)",
+      "selector": ".btn-small",
+      "props": [
+        "height",
+        "padding-left",
+        "padding-right",
+        "font-size"
+      ]
+    }
+  ]
+}

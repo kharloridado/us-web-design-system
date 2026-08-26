@@ -32,6 +32,19 @@
     "Add an entry for every new handover. A handover with no entry gets no embedded code, and the",
     "embed silently goes stale when its source changes — so keep this in sync (the build warns)."
   ],
+  "uswds-buttons.md": {
+    "files": [
+      [
+        "src/blocks/button.css",
+        "css",
+        "Theme CSS — paste BELOW OutSystems UI, after dist/theme.css"
+      ]
+    ],
+    "mentor": {
+      "kind": "restyle",
+      "block": "Button"
+    }
+  },
   "odc-palette-screen.md": [
     [
       "style-guide/odc-palette-screen.css",

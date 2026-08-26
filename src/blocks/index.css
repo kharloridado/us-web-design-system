@@ -16,3 +16,5 @@
  *      CSS never loads in the preview will pass review and break in production.
  *
  * Add imports below as you build. */
+
+@import "./button.css";
