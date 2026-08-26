@@ -8,13 +8,13 @@
 <div class="uswds-type">
     <div class="uswds-type__section">
       <h2 class="uswds-type__section-title">Typeface</h2>
-      <p class="uswds-type__section-note">The same sentence twice: first in var(--font-family-base), then in that stack with Public Sans removed. If the two rows look identical, Public Sans is NOT loading and this page — and the app — is rendering in the fallback. The face is not self-hosted yet; declaring the name does not ship it.</p>
+      <p class="uswds-type__section-note">The same sentence twice: first in var(--font-family-base), then in that stack with Public Sans Web removed. If the two rows look identical, Public Sans Web is NOT loading and this page — and the app — is rendering in the fallback. The face IS self-hosted, so identical rows now mean a Resource is missing or misnamed on the app — not that nobody shipped it.</p>
       <div class="uswds-type__row">
         <div class="uswds-type__meta">
           <code class="uswds-type__name">--font-family-base</code>
           <span class="uswds-type__role">declared</span>
         </div>
-        <div class="uswds-type__face uswds-type__face--declared">The quick brown fox jumps over the lazy dog<code class="uswds-type__stack">"Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif</code></div>
+        <div class="uswds-type__face uswds-type__face--declared">The quick brown fox jumps over the lazy dog<code class="uswds-type__stack">"Public Sans Web", "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif</code></div>
       </div>
       <div class="uswds-type__row">
         <div class="uswds-type__meta">
@@ -100,7 +100,7 @@
     </div>
     <div class="uswds-type__section">
       <h2 class="uswds-type__section-title">Font weight</h2>
-      <p class="uswds-type__section-note">400 and 700 are the design's own weights. 500 is a brand-owner decision (Kharlo Ridado, 2026-08-25, PR #9), not a value from the ref — it exists so OutSystems UI's --font-semi-bold has a step to land on. A weight only renders if the loaded face actually ships it; with the face falling back, expect the browser to synthesise or snap these.</p>
+      <p class="uswds-type__section-note">400 and 700 are the design's own weights. 500 is a brand-owner decision (Kharlo Ridado, 2026-08-25, PR #9), not a value from the ref — it exists so OutSystems UI's --font-semi-bold has a step to land on. A weight only renders as drawn if a real face is loaded for it — all three below are shipped as separate Resources. Three visibly distinct rows mean all three landed; two rows that look alike mean one face is missing and the browser is synthesising or snapping to its neighbour.</p>
       <div class="uswds-type__row">
         <div class="uswds-type__meta">
           <code class="uswds-type__name">--font-weight-regular</code>

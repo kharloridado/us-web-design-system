@@ -24,15 +24,16 @@
  * default size next to labels confidently naming a step. That is the failure mode being
  * tested for, made visible.
  *
- * THE TYPEFACE ROW IS A LOAD-BEARING SPECIAL CASE. `--font-family-base` names Public Sans,
- * but the face IS NOT SELF-HOSTED YET (see the long note in tokens/typography.css): with no
- * @font-face and no client-side install, the declaration silently resolves to the first
- * available fallback and the page renders in the framework's default sans, looking perfectly
- * fine. Nothing in the build gate catches that. So the specimen renders the SAME sentence
- * twice — once in var(--font-family-base), once in the fallback tail of that stack with
- * Public Sans removed — and states the test in words: if the two rows are identical, the
- * face is not loading. That is the only way this page can tell the truth about a font it
- * cannot itself install.
+ * THE TYPEFACE ROW IS A LOAD-BEARING SPECIAL CASE, AND IT DID NOT STOP MATTERING WHEN THE
+ * FACE WAS SELF-HOSTED. A declared family that fails to load does not error: it silently
+ * resolves to the next entry in the stack and the page renders in the framework's default
+ * sans, looking perfectly fine. Nothing in the build gate catches that. Since 2026-08-26 the
+ * face IS shipped (tokens/font-faces.css → five ODC Resources), which MOVES the failure mode
+ * rather than removing it — a missing Resource, a renamed upload, or a weight declared
+ * nowhere all land in exactly the same place. So the specimen still renders the SAME sentence
+ * twice — once in var(--font-family-base), once in that stack with the brand face removed —
+ * and states the test in words: if the two rows are identical, the face is not loading. That
+ * is the only way this page can tell the truth about a font it cannot itself install.
  *
  *   node build/gen-type-specimen.mjs
  */
@@ -78,10 +79,26 @@ if (!family) {
   process.exit(1);
 }
 
-/* The fallback tail: the declared stack with the named face removed. Rendering this beside
- * the real stack is what makes "Public Sans is not actually loading" visible. */
-const fallbackStack = family.split(',').slice(1).map((s) => s.trim()).join(', ');
-const namedFace = family.split(',')[0].trim().replace(/^"|"$/g, '');
+/* The fallback tail: the declared stack with the brand face removed. Rendering this beside
+ * the real stack is what makes "the face is not actually loading" visible.
+ *
+ * IT DROPS EVERY LEADING ENTRY THAT NAMES THE BRAND FACE, NOT JUST THE FIRST. The stack
+ * follows USWDS's own convention of a self-hosted "<Face> Web" ahead of a plain "<Face>"
+ * that catches a local install, so slicing off one entry would leave the control row still
+ * asking for the very face it exists to prove absent - a test that can no longer fail.
+ * Comparison is against the face name with USWDS's " Web" suffix stripped, so both
+ * spellings go. */
+const stackEntries = family.split(',').map((s) => s.trim());
+const namedFace = stackEntries[0].replace(/^"|"$/g, '');
+const coreFace = namedFace.replace(/\s+web$/i, '').toLowerCase();
+const isBrandFace = (entry) => entry.replace(/^"|"$/g, '').toLowerCase().includes(coreFace);
+const firstFallback = stackEntries.findIndex((e) => !isBrandFace(e));
+if (firstFallback === -1) {
+  console.error('gen:type-specimen - --font-family-base names only the brand face, so the ' +
+                'typeface test has no control row to render against.');
+  process.exit(1);
+}
+const fallbackStack = stackEntries.slice(firstFallback).join(', ');
 
 /* The role column tokens/typography.css records against each size step, as a trailing
  * comment. Provenance for the reader — NOT emitted as CSS, because the role mapping belongs
@@ -300,8 +317,8 @@ const faceSection =
   `      <p class="uswds-type__section-note">The same sentence twice: first in ` +
   `var(--font-family-base), then in that stack with ${esc(namedFace)} removed. If the two ` +
   `rows look identical, ${esc(namedFace)} is NOT loading and this page — and the app — is ` +
-  `rendering in the fallback. The face is not self-hosted yet; declaring the name does not ` +
-  `ship it.</p>\n` +
+  `rendering in the fallback. The face IS self-hosted, so identical rows now mean a Resource ` +
+  `is missing or misnamed on the app \u2014 not that nobody shipped it.</p>\n` +
   `      <div class="uswds-type__row">\n` +
   `        <div class="uswds-type__meta">\n` +
   `          <code class="uswds-type__name">--font-family-base</code>\n` +
@@ -340,8 +357,10 @@ const weightSection =
   `      <p class="uswds-type__section-note">400 and 700 are the design's own weights. 500 ` +
   `is a brand-owner decision (Kharlo Ridado, 2026-08-25, PR #9), not a value from the ref — ` +
   `it exists so OutSystems UI's --font-semi-bold has a step to land on. A weight only ` +
-  `renders if the loaded face actually ships it; with the face falling back, expect the ` +
-  `browser to synthesise or snap these.</p>\n` +
+  `renders as drawn if a real face is loaded for it \u2014 all three below are shipped as ` +
+  `separate Resources. Three visibly distinct rows mean all three landed; two rows that ` +
+  `look alike mean one face is missing and the browser is synthesising or snapping to its ` +
+  `neighbour.</p>\n` +
   weights
     .map((t) =>
       row('uswds-type__sample uswds-type__face', t.varName, t.value, '', `uswds-type__sample--${t.leaf}`, SAMPLE)

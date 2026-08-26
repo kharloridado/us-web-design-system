@@ -48,6 +48,15 @@
 <!-- 2) Brand theme tokens. Regenerate with `npm run build:theme`. -->
 <link rel="stylesheet" href="../dist/theme.css">
 
+<!-- 2b) The brand face, with URLs that resolve OFF-PLATFORM. theme.css declares the same
+     five @font-face rules against ODC Resource paths, which ODC rewrites at compile time
+     and which therefore 404 here (docs/LESSONS.md §1.7 — expected, not a bug). Two
+     @font-face rules for one family+weight+style do not cascade on failure; the LAST one
+     wins outright, so this MUST stay after theme.css. Without it the harness renders in a
+     system sans and every type measurement it produces is a lie about the published app.
+     GENERATED alongside tokens/font-faces.css by `npm run gen:font-faces`. -->
+<link rel="stylesheet" href="fonts.css">
+
 <!-- 3) Provider stylesheets (runtime-injected in ODC). Vendor them here as you adopt them.
      <link rel="stylesheet" href="vendor/.../provider.css"> -->
 

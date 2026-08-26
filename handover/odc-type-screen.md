@@ -21,23 +21,25 @@ here unchanged and is not repeated. Read it first if you have not.
 The type tokens have a failure mode the palette does not, and it is the reason this screen
 exists rather than a static screenshot.
 
-**`--font-family-base` names Public Sans, but the face is not self-hosted yet.** There is no
-`@font-face` rule anywhere in this repo and the ODC theme module ships no font asset. With
-no face to load, the declaration silently resolves to the first available fallback and every
-page in the app renders in the framework's default sans — *looking completely fine*. Nothing
-in the build gate catches this. `npm run validate:theme` reports "all references resolve",
-which is true and irrelevant: the token resolves to a stack, and the stack resolves to
-whatever the client already had.
+**A named family that fails to load does not error — it silently resolves to the next entry
+in the stack**, and every page in the app renders in the framework's default sans *looking
+completely fine*. Nothing in the build gate catches this. `npm run validate:theme` reports
+"all references resolve", which is true and irrelevant: the token resolves to a stack, and
+the stack resolves to whatever the client already had.
 
 So the Typeface section renders **the same sentence twice** — once in
-`var(--font-family-base)`, once in that stack with `Public Sans` removed — and states the
+`var(--font-family-base)`, once in that stack with the brand face removed — and states the
 test in words on the page. **If the two rows are visually identical, the face is not
 loading.** That is the only way a page can tell the truth about a font it cannot install.
 
-Expect them to be identical today. That is the correct, honest result for v0.2.0, not a
-defect in the screen. Self-hosting the face is a separate deliverable — it needs the
-licensed asset path and an `@font-face` rule against the theme module, neither of which
-belongs in a `:root` token file.
+**UPDATED 2026-08-26 — THE EXPECTED RESULT HAS FLIPPED.** When this screen shipped at v0.2.0
+the face was not self-hosted at all: there was no `@font-face` rule in the repo and the theme
+module shipped no font asset, so identical rows were the honest result and the page said so.
+Public Sans is now self-hosted (`tokens/font-faces.css` → five ODC Resources on the app; see
+`handover/public-sans-font-face.md`). **The two rows should now differ.** That does not retire
+this test — it MOVES its failure mode: a missing Resource, a renamed upload, or a weight used
+but never declared all land in exactly the same place, and this screen is still the only thing
+that will show you.
 
 The other two properties are inherited from the palette specimen and are equally
 load-bearing:
@@ -291,11 +293,13 @@ to Mentor's own validation and to Studio Preview, and visible in a browser in on
 - For every weight row, computed `font-weight` must equal the value printed beside it.
 - For every line-height row, computed `line-height` ÷ computed `font-size` must equal the
   ratio printed beside it.
-- **The two Typeface rows are expected to render identically at v0.2.0** — Public Sans is
-  not self-hosted. Identical rows here are the honest result, and the page says so. If they
-  ever differ, the face started loading and that is worth knowing.
-  **Measured on the published screen, 2026-08-25:** both sentences render at exactly
-  436.13px. Identical, as designed.
+- **The two Typeface rows are expected to DIFFER since 2026-08-26.** They were expected to
+  render identically at v0.2.0, when the face was not self-hosted, and that expectation is
+  now inverted: Public Sans ships as five ODC Resources, so identical rows mean the face is
+  **not** reaching the browser — a missing or misnamed Resource, or a weight declared
+  nowhere. **Measured on the published screen, 2026-08-25 (pre-change):** both sentences
+  rendered at exactly 436.13px — identical, as designed at the time. Re-measure after the
+  Resources land; the widths must separate.
 
   ⚠ **Two ways to check this wrongly, both of which say the face IS loading when it is
   not.** Both were hit while verifying this screen:
@@ -441,7 +445,7 @@ to Mentor's own validation and to Studio Preview, and visible in a browser in on
 
 /* ---- The typeface test ----
  * Two rows, same sentence, same size. The first asks for the declared stack; the second
- * asks for that stack with Public Sans removed. IDENTICAL RENDERING MEANS THE FACE IS NOT
+ * asks for that stack with Public Sans Web removed. IDENTICAL RENDERING MEANS THE FACE IS NOT
  * LOADING and everything on this page is really being drawn in the fallback. */
 .uswds-type__face {
   font-size: var(--font-size-lg, 1.375rem);

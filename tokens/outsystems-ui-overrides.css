@@ -53,4 +53,207 @@
    * disagrees with 500, that is a finding against THIS line — raise it, do not quietly
    * re-point the token. */
   --font-semi-bold: var(--font-weight-medium);
+
+  /* ---- Type ROLES: the USWDS ramp onto OutSystems UI's heading + display slots ----
+   * SOURCE OF RECORD FOR THIS BLOCK IS UPSTREAM USWDS, NOT A FIGMA REF, and that is a
+   * deliberate change of authority requested by the brand owner on 2026-08-26: "check the
+   * main documents of fonts in US Web Design System from the web and follow the rules
+   * there for headings and body". Recorded in project-context.md under "Known signed-off
+   * exceptions".
+   *
+   * WHY IT NEEDED AN AUTHORITY AT ALL. tokens/typography.css owns the nine-step SIZE ramp
+   * and says, twice and on purpose, that it emits "SIZES ONLY — NO ROLES": which step is
+   * h1 is a mapping, and mappings live here. The design ref (node 1892-7566) prints a role
+   * column, but a column on a specimen page is a claim about the design system, not about
+   * OutSystems UI's slots — nothing in Figma knows what `--font-size-h4` is. So the roles
+   * were read from the system that defines them.
+   *
+   * READ FROM, verbatim, 2026-08-26:
+   *   uswds/uswds@develop packages/uswds-core/src/styles/settings/_settings-typography.scss
+   *   uswds/uswds@develop packages/uswds-core/src/styles/mixins/typography/headings.scss
+   *   uswds/uswds@develop packages/uswds-core/src/styles/tokens/font/line-height.scss
+   *   designsystem.digital.gov/design-tokens/typesetting/font-size/  (+ /font-family/)
+   *
+   *   $theme-h1-font-size: "2xl"      $theme-body-font-size: "sm"
+   *   $theme-h2-font-size: "xl"       $theme-display-font-size: "3xl"
+   *   $theme-h3-font-size: "lg"       $theme-body-line-height: 5    -> 1.62
+   *   $theme-h4-font-size: "sm"       $theme-heading-line-height: 2 -> 1.2
+   *   $theme-h5-font-size: "xs"       @mixin h1..h5 { font-weight: fw("bold") }   -> 700
+   *   $theme-h6-font-size: "3xs"      @mixin h6     { font-weight: fw("normal") } -> 400
+   *                                                   + uppercase + letter-spacing ls-1
+   *
+   * THE RAMP AND THE ROLES CORROBORATE EACH OTHER EXACTLY. All nine of USWDS's published
+   * $theme-type-scale-* px values (13/14/15/16/17/22/32/40/48) are identical to the nine
+   * steps tok-font-sizes measured out of Figma, and every role above lands on the same
+   * step the design's own role column states. Two independent sources, one answer — which
+   * is also the strongest evidence yet that FND-005's 42px label really was a mislabel and
+   * that 40px was the right build.
+   *
+   * ONLY SIZES ARE MAPPED IN :root. Weight, line-height, tracking and case are not
+   * expressible as OSUI custom properties — OSUI hard-codes them in its own heading rule
+   * (`font-weight: var(--font-semi-bold); line-height: 1.25`, compiled framework line
+   * ~1155). Those need real rules, and they are BELOW this block, outside :root.
+   *
+   * NOT MAPPED, ON PURPOSE:
+   *   --font-size-base   OSUI already declares 16px and USWDS's body step is 16px. Pointing
+   *                      one at the other changes literally nothing and creates a second
+   *                      place to maintain the same number — the same reason --font-regular
+   *                      and --font-bold are left alone above.
+   *   --font-size-s      OSUI's 14px, 25 consumers. USWDS's 2xs step is also 14px, so again
+   *                      a no-op. Left alone.
+   *   --font-size-label  OSUI's 11px, 3 consumers. USWDS has no counterpart role; mapping it
+   *                      would be a guess, and a guess is what this project does not ship.
+   *   lead / intro       USWDS's $theme-lead-font-size ("lg", 22px) has NO OutSystems UI
+   *                      slot to land on. It needs a class, which needs an item and a ref.
+   *
+   *   value each slot HELD before this file        the step it lands on now */
+  --font-size-h1:      var(--font-size-2xl);  /* 32px -> 40px */
+  --font-size-h2:      var(--font-size-xl);   /* 28px -> 32px */
+  --font-size-h3:      var(--font-size-lg);   /* 26px -> 22px */
+  --font-size-h4:      var(--font-size-sm);   /* 22px -> 16px */
+  --font-size-h5:      var(--font-size-xs);   /* 20px -> 15px */
+  --font-size-h6:      var(--font-size-3xs);  /* 18px -> 13px */
+  --font-size-display: var(--font-size-3xl);  /* 36px -> 48px */
+
+  /* ---- Letter-spacing: one step, and only because h6 uses it ---------------------
+   * USWDS's own `ls-1` token, 0.025em (uswds-core/_properties.scss, letter-spacing map).
+   * It is minted here rather than in tokens/typography.css because that file states the
+   * reason itself: h6's tracking and case "describe h6's usage, not the ramp", so they
+   * belong to whichever item maps roles onto steps. This is that item.
+   *
+   * IT IS ALSO THE INDEPENDENT CONFIRMATION THAT THE ROLE MAPPING IS RIGHT. The Figma ref
+   * measured h6's tracking as 0.325px at 13px. 0.025em × 13px = 0.325px, exactly. The
+   * design kit and upstream USWDS agree to the third decimal on a value neither of them
+   * labels — which is why `em` and not the ref's `px`: em keeps that relationship true if
+   * h6's size ever moves, whereas a frozen 0.325px would silently become wrong tracking. */
+  --letter-spacing-1: 0.025em;
 }
+
+/* ================================================================================
+ * Type role RULES — the half that cannot be a custom property
+ * ================================================================================
+ * Everything below sets a property OutSystems UI hard-codes rather than reads from a
+ * variable. There is no token to redefine, so these have to be real rules.
+ *
+ * HOW THEY WIN: dist/theme.css is stylesheet order 2, the compiled framework is order 1,
+ * and every selector below matches an OSUI selector at EQUAL specificity. Later-wins is
+ * the entire mechanism — no `!important`, no specificity trick, exactly as with the :root
+ * redefinitions above. Each rule names the OSUI rule it displaces, so the pairing can be
+ * re-verified after a framework bump. */
+
+/* The face. OSUI hard-codes a system stack on `html` (compiled framework line 949) and
+ * reads no variable, so a self-hosted family changes nothing until a rule like this one
+ * exists. tokens/typography.css says exactly that and defers here.
+ *
+ * `html`, not `body`: it is the element OSUI itself styles, so this is a straight
+ * displacement at equal specificity rather than a new, competing anchor for inheritance.
+ * The face itself is shipped by tokens/font-faces.css — this only points at it. */
+html {
+  font-family: var(--font-family-base);
+}
+
+/* Body text. Displaces OSUI's `body { font-size: var(--font-size-s); line-height: 1.5 }`
+ * (compiled framework line 963).
+ *
+ * 14px -> 16px, AND THAT IS THE POINT RATHER THAN A SIDE EFFECT. USWDS's typography
+ * guidance is explicit — "Use at least an effective size of 16px (font-size 5)" for most
+ * text — and $theme-body-font-size is the "sm" step, 16px. OSUI's default body is 14px,
+ * below that bar for running text.
+ *
+ * EXPECT VISIBLE CHANGE APP-WIDE, wherever text INHERITS from body rather than setting its
+ * own size: prose, container text, table cells, anything unstyled. Widgets that set their
+ * own `font-size: var(--font-size-base)` (16px, 22 rules) or `var(--font-size-s)` (14px,
+ * 25 rules) are untouched. This moves the inherited DEFAULT, not those roles.
+ *
+ * `--font-size-s` IS DELIBERATELY NOT REDEFINED to get here. Re-pointing it would drag all
+ * 25 of OSUI's small-variant rules up with it — a different and much larger change that no
+ * ref asks for. Move the default; leave the role alone.
+ *
+ * Line-height 1.5 -> 1.62 is USWDS's $theme-body-line-height (token 5), and also the value
+ * the Figma ref measured for body and intro. Both sources agree. */
+body {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base);
+}
+
+/* Headings h1-h5 + display. Displaces the weight and line-height of OSUI's combined
+ * heading rule (compiled framework ~line 1155), which sets
+ * `font-weight: var(--font-semi-bold); line-height: 1.25; margin: 0`.
+ *
+ * `margin: 0` IS NOT REPEATED, deliberately — OSUI's rule still applies it. A rule that
+ * restates a declaration it does not intend to change is a second place to maintain the
+ * same value.
+ *
+ * WEIGHT 700, NOT var(--font-semi-bold). --font-semi-bold is re-pointed to medium 500 at
+ * the top of this file, which is right for the 33 emphasis roles that read it and wrong
+ * for a heading: USWDS's h1..h5 mixins each say `font-weight: fw("bold")`, and the design
+ * ref measures 700 at h1, h2, h4 and h5. Reading the emphasis token here would silently
+ * couple headings to a decision that was made about buttons and labels.
+ *
+ * h3 IS THE ONE PLACE THIS DEPARTS FROM THE FIGMA REF, AND IT IS A DECISION, NOT A DRIFT.
+ * The ref measures h3 (node 12:115) at Regular 400 while every other heading step is Bold
+ * 700 — raised at build time as FND-008 on the suspicion that the two steps bound to no
+ * Figma variable were exactly the two that broke the pattern. Upstream now settles it:
+ * USWDS's @mixin h3 is `fw("bold")` like h1, h2, h4 and h5, so the kit's Regular h3 is a
+ * deviation IN THE COMMUNITY FIGMA KIT rather than an intent of the design system. The
+ * brand owner's 2026-08-26 instruction to follow the USWDS documents resolves it toward
+ * upstream. FND-008 records the resolution; project-context.md records the signature.
+ * TO REVERT: lift `h3, .heading3` out of this selector list into its own rule with
+ * `font-weight: var(--font-weight-regular)`. Nothing else in the theme depends on it.
+ *
+ * Line-height 1.25 -> 1.2 is USWDS's $theme-heading-line-height (token 2) and the value
+ * the ref measured at h1-h5. Both sources agree. */
+h1, .heading1,
+h2, .heading2,
+h3, .heading3,
+h4, .heading4,
+h5, .heading5,
+.font-size-display {
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading);
+}
+
+/* h6 — the one heading step that is not a heading. USWDS's @mixin h6 is the only one that
+ * typesets from the BODY role rather than the heading role, drops to `fw("normal")`, and
+ * adds tracking and uppercase. It is a label treatment, not a smaller h5. The Figma ref
+ * measured every part of it independently (node 12:119): Regular 400, uppercase, 0.325px
+ * tracking. Two sources, no conflict.
+ *
+ * LINE-HEIGHT 1.15 FOLLOWS THE REF, NOT USWDS'S DEFAULT of 1.2 ($theme-heading-line-height
+ * applies to h6 too). That is not a conflict with the USWDS RULES: the published guidance
+ * asks for 1-1.35 on headings and single- or double-line elements, and 1.15 sits inside
+ * that band. Where a measured design value is compatible with the documented rule, the
+ * measurement wins — and --line-height-heading-tight exists in the ramp for this one step.
+ *
+ * UPPERCASE IS A REAL TRADE-OFF, RECORDED. USWDS's own typography page warns that
+ * uppercase text degrades readability, and USWDS applies it here regardless. Both sources
+ * agree, so it is built; the mitigation is that h6 is a 13px label role and this design
+ * system never uses it for running text. `text-transform` is presentational only — screen
+ * readers announce the underlying characters — so nothing changes for assistive tech. */
+h6, .heading6 {
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-heading-tight);
+  letter-spacing: var(--letter-spacing-1);
+  text-transform: uppercase;
+}
+
+/* NOT OVERRIDDEN: OSUI's `.tablet` / `.phone` heading deltas (compiled framework
+ * ~lines 1226-1262), which subtract 2-4px from every heading slot on smaller devices.
+ *
+ * A DECISION, RECORDED, BECAUSE NEITHER SOURCE COVERS IT. USWDS's type scale states one
+ * value per step and has no device axis at all; the Figma ref (tok-font-sizes) observed
+ * none either and flagged that as "an ASSUMPTION TO RE-TEST", not as settled. So no design
+ * authority says headings must NOT shrink — there is only silence. Overriding fourteen
+ * framework selectors on silence would be inventing a mode axis; leaving them is building
+ * on the framework, which is this project's default posture. It also keeps this file clear
+ * of hand-rolled breakpoints (docs/LESSONS.md §1.6).
+ *
+ * WHAT THAT ACTUALLY RENDERS, so it is a measured decision and not a shrug:
+ *   desktop   h1 40  h2 32  h3 22  h4 16  h5 15  h6 13   display 48
+ *   .tablet   h1 38  h2 30  h3 20  h4 15  h5 14  h6 12   display 46
+ *   .phone    h1 36  h2 28  h3 18  h4 14  h5 13  h6 11   display 44
+ *
+ * The one value worth watching is h6 at 11px on phones — an uppercase, tracked label below
+ * USWDS's smallest published step (13px). Logged in the findings register rather than
+ * fixed here, because fixing it is a mode-axis decision for the designer to take across
+ * the whole ramp, not a patch on one selector. */

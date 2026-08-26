@@ -22,6 +22,92 @@ and what they have to re-paste.
 
 ## [Unreleased]
 
+### Added
+
+- **Public Sans is self-hosted** — the design system finally renders in its own face.
+  `tokens/font-faces.css` declares five `@font-face` rules (400 / 500 / 700 roman, 400 / 700
+  italic) against the Public Sans v2.001 `woff2` now vendored at `vendor/public-sans/`
+  (SIL OFL 1.1, so the binaries are committed). `dist/theme.css` gains a
+  **Typography / Font faces** section, listed in the Section Index as 3.1.
+
+  **What you have to do, and it is not only a paste:** upload five `woff2` files as
+  **Resources** on the app *before* pasting the theme, with exactly these names —
+  `PublicSans-Regular.woff2`, `PublicSans-Italic.woff2`, `PublicSans-Medium.woff2`,
+  `PublicSans-Bold.woff2`, `PublicSans-BoldItalic.woff2`. A misnamed Resource does not error;
+  the app just quietly keeps rendering in the system sans. Full steps in
+  `handover/public-sans-font-face.md`.
+
+  The declared family is **`"Public Sans Web"`**, upstream USWDS's own name for the
+  self-hosted face, ahead of a plain `"Public Sans"` that still catches a local install.
+
+- **`npm run gen:font-faces`** — generates `tokens/font-faces.css` and `preview/fonts.css`
+  from one table, so the theme and the local harness can never declare different faces. The
+  preview copy points at the vendored files and is linked after `dist/theme.css`, which is
+  what lets the harness render the real face even though the theme's ODC Resource paths
+  cannot resolve off-platform.
+
+- **`--letter-spacing-1: 0.025em`** — USWDS's `ls-1` token, minted because `h6` uses it.
+
+### Changed
+
+- **Headings and body now follow the USWDS type roles.** `tokens/outsystems-ui-overrides.css`
+  maps the nine-step ramp onto OutSystems UI's own heading slots and sets the weight,
+  line-height, tracking and case that OSUI hard-codes rather than reads from a variable.
+
+  **What you have to re-paste:** `dist/theme.css`. Nothing else.
+
+  **What changes in a screen you already built, without you touching it — all of it, app-wide:**
+
+  | Slot | Was | Now |
+  |---|---|---|
+  | display | 36px / 500 / 1.25 | **48px / 700 / 1.2** |
+  | `h1` | 32px / 500 / 1.25 | **40px / 700 / 1.2** |
+  | `h2` | 28px / 500 / 1.25 | **32px / 700 / 1.2** |
+  | `h3` | 26px / 500 / 1.25 | **22px / 700 / 1.2** |
+  | `h4` | 22px / 500 / 1.25 | **16px / 700 / 1.2** |
+  | `h5` | 20px / 500 / 1.25 | **15px / 700 / 1.2** |
+  | `h6` | 18px / 500 / 1.25 | **13px / 400 / 1.15, UPPERCASE, 0.025em tracking** |
+  | `body` | 14px / 1.5 | **16px / 1.62** |
+
+  Two things will surprise you. **`h4` and `h5` get smaller while `h1`/`h2`/display get
+  bigger** — USWDS's ramp is far more top-heavy than OutSystems UI's, because its lower
+  heading steps are section labels rather than titles; screens laid out against the flatter
+  OSUI ramp will re-proportion. And **`h6` is now an uppercase, letter-spaced 13px label**,
+  not a small heading — if a screen used `h6` as "a slightly smaller `h5`", use `h5` there.
+
+  Body 14px → 16px moves only the INHERITED default, so it reaches prose, container text and
+  table cells. `--font-size-s` is deliberately **not** redefined, so OutSystems UI's 25
+  small-variant rules keep their 14px.
+
+  Every number above was measured in headless Chrome on the real cascade, not read off the
+  source. Values come from upstream USWDS — `_settings-typography.scss`, `headings.scss`,
+  `line-height.scss` and the published token pages — which corroborate the frozen Figma refs
+  exactly: all nine `$theme-type-scale-*` pixel values are identical to the nine steps
+  measured out of Figma, and every role lands on the step the design's own role column states.
+
+- **`h3` builds Bold 700, departing from the Figma ref's Regular 400** — the one deliberate
+  departure, signed off by the brand owner on 2026-08-26 and recorded in `project-context.md`.
+  Upstream's `@mixin h3` is bold like `h1`/`h2`/`h4`/`h5`, and `h3` is one of only two steps
+  bound to no Figma variable, which is the drift **FND-008** suspected. `h6` is *not* changed
+  with it: upstream really does make `h6` Regular + uppercase + `ls-1`, and `ls-1` × 13px =
+  0.325px — the ref's own measured tracking, to the third decimal. FND-008 is now
+  `resolved (code changed)`.
+
+- **The Live Style Guide typeface test has flipped its expected result.** Its two rows were
+  expected to render *identically* while the face was unshipped. They should now **differ**;
+  identical rows mean a Resource is missing or misnamed. `build/gen-type-specimen.mjs` also
+  had to stop slicing exactly one entry off the font stack — with `"Public Sans Web"` ahead of
+  `"Public Sans"`, the control row would still have asked for the face it exists to prove
+  absent, making the test unable to fail.
+
+### Fixed
+
+- **`--font-family-base` had no effect at all before this release.** OutSystems UI hard-codes
+  a system stack on `html` and reads no variable, so naming a family changed nothing anywhere.
+  An `html { font-family: var(--font-family-base) }` rule is what actually switches the app
+  over; the token had been inert since it was introduced.
+
+
 ## [0.3.0] — 2026-08-26
 
 First `primitives`-tier release, and the first one that ships block CSS as well as tokens.

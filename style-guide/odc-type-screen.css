@@ -106,7 +106,7 @@
 
 /* ---- The typeface test ----
  * Two rows, same sentence, same size. The first asks for the declared stack; the second
- * asks for that stack with Public Sans removed. IDENTICAL RENDERING MEANS THE FACE IS NOT
+ * asks for that stack with Public Sans Web removed. IDENTICAL RENDERING MEANS THE FACE IS NOT
  * LOADING and everything on this page is really being drawn in the fallback. */
 .uswds-type__face {
   font-size: var(--font-size-lg, 1.375rem);
