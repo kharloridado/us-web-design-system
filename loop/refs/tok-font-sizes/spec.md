@@ -115,3 +115,42 @@ Properties of the ref, not instructions.
 6. **Sizes are stated in `px`.** The design says `13px`, not `0.8125rem`. Any conversion to a
    relative unit is a decision that changes behaviour under user font scaling, and must be
    declared and justified rather than done silently.
+
+---
+
+## Baseline re-judged 2026-08-26 — collateral from `cmp-buttons`
+
+`npm run gate:regression` failed on this item's baseline after
+[#16](https://github.com/kharloridado/us-web-design-system/pull/16) merged. Three probes moved
+(x2 viewports = 6 regressions). All three are the intended effect of the buttons item, judged
+here rather than silently re-recorded.
+
+### 1. `collateral / .btn (base)` — fontSize 14px → **16px**, height 40 → **38.39**
+
+**This probe was named `(base, must be unchanged)`, and that assertion is now retired.** It was
+a correct tripwire when this item shipped: nothing had licence to restyle the base button, and
+14px/40px was OutSystems UI's own inherited default. `cmp-buttons` is precisely the item that
+does have that licence — its ref states 16px Bold with height derived from padding
+(2 + 10 + 14.4 + 10 + 2 = 38.4). The tripwire fired correctly and its premise expired.
+
+The probe is **kept**, not deleted — `.btn` base geometry is still worth watching — but renamed
+so the record stops carrying a claim that is no longer true.
+
+### 2. `collateral / .btn.btn-small` — lineHeight 15px → **13.5px**
+
+`.btn` now declares `line-height: 0.9` from the buttons ref, and 15px x 0.9 = 13.5px.
+`.btn-small` keeps its own 15px `font-size` and its 32px `height` — both unchanged here — so the
+size this item owns is intact. Only the leading inside that fixed box moved.
+
+### 3. `overflow / .btn.btn-small` — clientHeight 30 → **28**
+
+Same cause, and the part that matters is unchanged: **`clips_x: false`, `clips_y: false`**. The
+probe exists to prove the 12px → 15px retint of `--font-size-xs` (register entry FND-007) does
+not clip real content in the framework's small widgets. It still does not. The inner box is 2px
+shorter because the line box is 1.5px shorter top and bottom; nothing overflows.
+
+### Not affected
+
+`.badge-small`, `.tag-small`, `.avatar-small`, `.validation-message`, `.breadcrumbs-item .icon`,
+`.form-control.input-small` and the `.font-size-xs` utility are all byte-identical. The buttons
+item reached the button and nothing else — which is what a scoped restyle should look like.

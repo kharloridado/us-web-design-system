@@ -22,6 +22,12 @@ and what they have to re-paste.
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-08-26
+
+First `primitives`-tier release, and the first one that ships block CSS as well as tokens.
+Paste `dist/theme.css` — it now carries a **Widget Overrides / Button** section below the
+consolidated `:root`.
+
 ### Added
 
 - **USWDS buttons** (item `cmp-buttons`, Figma node `1868-83`) — the first `primitives`-tier
@@ -135,3 +141,7 @@ palette and the type ramp disagreeing about which release they came from.
   else in Content. A layout-less screen looks identical in a cropped screenshot, which is how
   one shipped.
 
+
+[Unreleased]: https://github.com/kharloridado/us-web-design-system/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/kharloridado/us-web-design-system/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/kharloridado/us-web-design-system/releases/tag/v0.2.0

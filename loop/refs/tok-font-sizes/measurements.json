@@ -1,13 +1,13 @@
 {
   "schema": "measure-fidelity/1",
   "generatedBy": "build/gate/measure-fidelity.mjs",
-  "generatedAt": "2026-08-20T19:22:11.423Z",
+  "generatedAt": "2026-08-26T16:54:50.926Z",
   "playwright": "1.62.1",
   "browser": {
     "channel": "chrome",
-    "version": "151.0.7922.169"
+    "version": "151.0.7922.174"
   },
-  "url": "http://127.0.0.1:54574/preview/index.html",
+  "url": "http://127.0.0.1:59454/preview/index.html",
   "probesFile": "loop/refs/tok-font-sizes/probes.json",
   "viewports": [
     {
@@ -104,17 +104,17 @@
             "height": 32,
             "minHeight": "0px",
             "paddingTop": "0px",
-            "lineHeight": "15px"
+            "lineHeight": "13.5px"
           }
         },
         {
-          "name": "collateral / .btn (base, must be unchanged)",
+          "name": "collateral / .btn (base — RESTYLED by cmp-buttons 2026-08-26; this probe no longer asserts 'unchanged')",
           "status": "measured",
           "kind": "js",
           "expression": "(()=>{const b=document.createElement('button');b.className='btn';b.textContent='Base button';document.body.appendChild(b);const cs=getComputedStyle(b);const r=b.getBoundingClientRect();const o={fontSize:cs.fontSize,height:Math.round(r.height*100)/100};b.remove();return o;})()",
           "value": {
-            "fontSize": "14px",
-            "height": 40
+            "fontSize": "16px",
+            "height": 38.39
           }
         },
         {
@@ -278,7 +278,7 @@
             "clips_x": false,
             "clips_y": false,
             "fontSize": "15px",
-            "height": 30
+            "height": 28
           }
         },
         {
@@ -294,8 +294,7 @@
             "height": 24
           }
         }
-      ],
-      "screenshot": "loop/refs/tok-font-sizes/rendered.desktop.png"
+      ]
     },
     {
       "name": "mobile",
@@ -391,17 +390,17 @@
             "height": 32,
             "minHeight": "0px",
             "paddingTop": "0px",
-            "lineHeight": "15px"
+            "lineHeight": "13.5px"
           }
         },
         {
-          "name": "collateral / .btn (base, must be unchanged)",
+          "name": "collateral / .btn (base — RESTYLED by cmp-buttons 2026-08-26; this probe no longer asserts 'unchanged')",
           "status": "measured",
           "kind": "js",
           "expression": "(()=>{const b=document.createElement('button');b.className='btn';b.textContent='Base button';document.body.appendChild(b);const cs=getComputedStyle(b);const r=b.getBoundingClientRect();const o={fontSize:cs.fontSize,height:Math.round(r.height*100)/100};b.remove();return o;})()",
           "value": {
-            "fontSize": "14px",
-            "height": 40
+            "fontSize": "16px",
+            "height": 38.39
           }
         },
         {
@@ -565,7 +564,7 @@
             "clips_x": false,
             "clips_y": false,
             "fontSize": "15px",
-            "height": 30
+            "height": 28
           }
         },
         {
@@ -581,8 +580,7 @@
             "height": 24
           }
         }
-      ],
-      "screenshot": "loop/refs/tok-font-sizes/rendered.mobile.png"
+      ]
     }
   ],
   "summary": {

@@ -63,7 +63,7 @@
       "js": "(()=>{const b=document.createElement('button');b.className='btn btn-small';b.textContent='Small button';document.body.appendChild(b);const cs=getComputedStyle(b);const r=b.getBoundingClientRect();const o={fontSize:cs.fontSize,height:Math.round(r.height*100)/100,minHeight:cs.minHeight,paddingTop:cs.paddingTop,lineHeight:cs.lineHeight};b.remove();return o;})()"
     },
     {
-      "name": "collateral / .btn (base, must be unchanged)",
+      "name": "collateral / .btn (base — RESTYLED by cmp-buttons 2026-08-26; this probe no longer asserts 'unchanged')",
       "js": "(()=>{const b=document.createElement('button');b.className='btn';b.textContent='Base button';document.body.appendChild(b);const cs=getComputedStyle(b);const r=b.getBoundingClientRect();const o={fontSize:cs.fontSize,height:Math.round(r.height*100)/100};b.remove();return o;})()"
     },
     {

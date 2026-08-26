@@ -125,3 +125,38 @@ facts the maker saw.
 
 5. **`base-ink` is the darkest Base step and is named for its role, not its position.** It is
    `#1B1B1B`, the design's body-text colour. Keep the name.
+
+---
+
+## Baseline re-judged 2026-08-26 — collateral from `cmp-buttons`
+
+`npm run gate:regression` failed on this item's baseline after
+[#16](https://github.com/kharloridado/us-web-design-system/pull/16) merged. The comparator has
+no `--update` flag on purpose — a refreshed baseline is a *judged* artifact — so both changed
+probes are judged here and the record says why.
+
+**Neither is a defect. Both are the intended, traceable effect of the buttons item.**
+
+### 1. `themeRootColorCount` 52 → **53**
+
+`--color-white: #FFFFFF` was added to `tokens/colors.css`. This ref contains no white and
+correctly invented none; the buttons ref (node `1868-83`) binds `Base/white` as the foreground
+of 19 of its 38 states, so the blank was filled from evidence. See the AMENDED note in the
+header of `tokens/colors.css`.
+
+The cascade invariant this probe actually guards is **unchanged**:
+`themeOrderedAfterOsui: true`, `rootColorRedefinitionsAfterTheme: 0`, `offenders: []`. Only the
+count moved, and it moved for a reason recorded in the file it counts.
+
+### 2. `Button / success` — white → ink, contrast **3.14 → 5.49**
+
+This is the `.btn` half of **FND-001** (#1), and it landed as *fidelity*, not as a contrast
+repair: node `1868-83` binds `Base/ink` as the label of `Type=success, State=default`. The
+design specifies the dark foreground; we did not choose it to satisfy WCAG.
+
+**What did NOT change is the load-bearing part of this probe.** `Alert / info` is still
+**2.24:1** and `Alert / success` is still **3.14:1** — confirming the buttons item touched the
+button and left the Alert widget alone, which is exactly the boundary FND-001 draws between
+`cmp-buttons` and `cmp-alert` (row 7, not yet built). Issue #1 stays open for that half.
+
+Every other pair in the probe is byte-identical.

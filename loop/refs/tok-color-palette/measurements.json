@@ -1,13 +1,13 @@
 {
   "schema": "measure-fidelity/1",
   "generatedBy": "build/gate/measure-fidelity.mjs",
-  "generatedAt": "2026-08-20T17:26:26.312Z",
+  "generatedAt": "2026-08-26T16:54:49.435Z",
   "playwright": "1.62.1",
   "browser": {
     "channel": "chrome",
-    "version": "151.0.7922.169"
+    "version": "151.0.7922.174"
   },
-  "url": "http://127.0.0.1:57663/preview/index.html",
+  "url": "http://127.0.0.1:59852/preview/index.html",
   "probesFile": "loop/refs/tok-color-palette/probes.json",
   "viewports": [
     {
@@ -187,7 +187,7 @@
             "osuiRootColorCount": 112,
             "themeLoaded": true,
             "themeOrderedAfterOsui": true,
-            "themeRootColorCount": 52,
+            "themeRootColorCount": 53,
             "rootColorRedefinitionsAfterTheme": 0,
             "offenders": []
           }
@@ -224,9 +224,9 @@
               "contrast": 4.53
             },
             "Button / success": {
-              "fg": "rgb(255, 255, 255)",
+              "fg": "rgb(27, 27, 27)",
               "bg": "rgb(0, 169, 28)",
-              "contrast": 3.14
+              "contrast": 5.49
             },
             "Button / primary": {
               "fg": "rgb(255, 255, 255)",
@@ -308,8 +308,7 @@
             }
           }
         }
-      ],
-      "screenshot": "loop/refs/tok-color-palette/rendered.desktop.png"
+      ]
     },
     {
       "name": "mobile",
@@ -488,7 +487,7 @@
             "osuiRootColorCount": 112,
             "themeLoaded": true,
             "themeOrderedAfterOsui": true,
-            "themeRootColorCount": 52,
+            "themeRootColorCount": 53,
             "rootColorRedefinitionsAfterTheme": 0,
             "offenders": []
           }
@@ -525,9 +524,9 @@
               "contrast": 4.53
             },
             "Button / success": {
-              "fg": "rgb(255, 255, 255)",
+              "fg": "rgb(27, 27, 27)",
               "bg": "rgb(0, 169, 28)",
-              "contrast": 3.14
+              "contrast": 5.49
             },
             "Button / primary": {
               "fg": "rgb(255, 255, 255)",
@@ -609,8 +608,7 @@
             }
           }
         }
-      ],
-      "screenshot": "loop/refs/tok-color-palette/rendered.mobile.png"
+      ]
     }
   ],
   "summary": {
