@@ -1,0 +1,44 @@
+/* odc-button-screen.css — Style Sheet for the ODC `ButtonSpecimen` screen.
+ *
+ * Paste into the SCREEN's own Style Sheet in ODC (not the Theme). This is specimen chrome —
+ * the row layout and the dark band the inverse variants are judged against. Every button on
+ * that screen is a real OutSystems UI Button widget wearing the theme's own button styles;
+ * nothing here paints a button.
+ *
+ * Token-only. If a value is needed it comes from var(--token), so the specimen cannot drift
+ * from the theme it exists to demonstrate. */
+
+.uswds-btnspec__row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  margin-block-end: var(--space-s);
+}
+
+.uswds-btnspec__label {
+  /* Fixed column so the variant names line up and the buttons form real columns. */
+  flex: 0 0 9rem;
+  font-size: var(--font-size-3xs);
+  color: var(--color-base-dark);
+}
+
+.uswds-btnspec__note {
+  font-size: var(--font-size-3xs);
+  color: var(--color-base-dark);
+  margin-block-end: var(--space-s);
+}
+
+/* The dark band. The Figma ref paints #1B1B1B (`Base/ink`) behind both inverse rows, and
+ * inverse contrast is judged against ink rather than against the page. A specimen that showed
+ * these on white would be measuring the wrong thing. */
+.uswds-btnspec__inverse {
+  background-color: var(--color-base-ink);
+  border-radius: 4px;
+  padding: var(--space-m);
+  margin-block-end: var(--space-s);
+}
+
+.uswds-btnspec__inverse .uswds-btnspec__label {
+  color: var(--color-base-light);
+}
