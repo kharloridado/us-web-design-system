@@ -1,0 +1,102 @@
+{
+  "_meta": {
+    "item": "cmp-buttons",
+    "inventory_row": 4,
+    "figma_file_key": "tJnXUZbEL3fRWG7h1z0ij7",
+    "node": "1868-83",
+    "node_name": "Buttons",
+    "sublayers_deep_pulled": {
+      "1868-121": "component set `button` — Type x State, 34 symbols (standard + outline + outline-inverse)",
+      "1868-112": "component set `button-big` — State only, 4 symbols"
+    },
+    "frozen": "2026-08-26",
+    "pulled_with": [
+      "get_metadata (1868-83)",
+      "get_variable_defs (1868-83)",
+      "get_design_context (1868-121, 1868-112)",
+      "get_screenshot (1868-83, 688x1258)"
+    ],
+    "note": "Values below are the verbatim get_variable_defs output for node 1868-83. Every hex is a BOUND Figma variable — unlike tok-typography's h3/h6, no value on this node had to be read off a sample layer. The per-variant assignment of these values lives in spec.md, sourced from get_design_context on the two component sets, not from layer names."
+  },
+
+  "variables": {
+    "Base/ink": "#1B1B1B",
+    "Base/base-ink": "#1B1B1B",
+    "Base/white": "#FFFFFF",
+    "Base/base-lightest": "#F0F0F0",
+    "Base/base-lighter": "#DCDEE0",
+    "Base/base-light": "#A9AEB1",
+    "Base/base": "#71767A",
+    "Base/base-dark": "#565C65",
+    "Base/base-darker": "#3D4551",
+    "Primary/primary": "#005EA2",
+    "Primary/primary-dark": "#1A4480",
+    "Primary/primary-darker": "#162E51",
+    "Secondary/secondary": "#D83933",
+    "Secondary/secondary-dark": "#B51D09",
+    "Secondary/secondary-darker": "#8B1303",
+    "Accent cool/accent-cool": "#00BDE3",
+    "Accent cool/accent-cool-dark": "#28A0CB",
+    "Accent cool/accent-cool-darker": "#07648D",
+    "Accent warm/accent-warm": "#FA9441",
+    "Accent warm/accent-warm-dark": "#C05600",
+    "Accent warm/accent-warm-darker": "#775540",
+    "Error/error": "#D54309",
+    "Error/error-dark": "#B50909",
+    "Error/error-darker": "#6F3331",
+    "Success/success": "#00A91C",
+    "Success/success-dark": "#4D8055",
+    "Success/success-darker": "#446443",
+    "Disabled/disabled": "#C9C9C9"
+  },
+
+  "_token_mapping": {
+    "_comment": "Every colour on this node already exists in tokens/colors.css (built by tok-color-palette) under these names — EXCEPT Base/white. This node is the first ref in the engagement to state #FFFFFF as a bound variable; tok-color-palette deliberately invented no white. See spec.md, 'The white gap'.",
+    "#1B1B1B": "--color-base-ink",
+    "#FFFFFF": "NO TOKEN — see spec.md",
+    "#F0F0F0": "--color-base-lightest",
+    "#DCDEE0": "--color-base-lighter",
+    "#A9AEB1": "--color-base-light",
+    "#71767A": "--color-base",
+    "#565C65": "--color-base-dark",
+    "#3D4551": "--color-base-darker",
+    "#005EA2": "--color-primary",
+    "#1A4480": "--color-primary-dark",
+    "#162E51": "--color-primary-darker",
+    "#D83933": "--color-secondary",
+    "#B51D09": "--color-secondary-dark",
+    "#8B1303": "--color-secondary-darker",
+    "#00BDE3": "--color-accent-cool",
+    "#28A0CB": "--color-accent-cool-dark",
+    "#07648D": "--color-accent-cool-darker",
+    "#FA9441": "--color-accent-warm",
+    "#C05600": "--color-accent-warm-dark",
+    "#775540": "--color-accent-warm-darker",
+    "#D54309": "--color-error",
+    "#B50909": "--color-error-dark",
+    "#6F3331": "--color-error-darker",
+    "#00A91C": "--color-success",
+    "#4D8055": "--color-success-dark",
+    "#446443": "--color-success-darker",
+    "#C9C9C9": "--color-disabled"
+  },
+
+  "_design_annotations": {
+    "_comment": "PROVENANCE ONLY, never measurements. These are the printed row/column labels on the page (get_metadata text layers). tok-font-sizes shipped a wrong value in round 1 by sourcing from labels like these; they are recorded so the maker can see what the page CLAIMS, and the tables in spec.md are what it MEASURES.",
+    "section_headings": ["Standard buttons", "Outline buttons", "Big button"],
+    "row_labels_standard": ["primary", "secondary", "accent cool", "base", "accent warm", "error", "success", "inverse"],
+    "row_labels_outline": ["primary", "inverse"],
+    "column_labels": [":hover", ":active", ":disabled"],
+    "note_on_column_labels": "The first (unlabelled) column is the default state. The `:disabled` column is printed above both grids but is only POPULATED for primary and inverse in each — see spec.md, 'The disabled column is mostly empty'."
+  },
+
+  "_backdrop": {
+    "_comment": "The two inverse rows sit on a painted rectangle, not on the page ground. Contrast for inverse and outline-inverse is judged against this, not against white.",
+    "nodes": ["1868:84 (Rectangle 126, standard inverse row)", "1868:85 (Rectangle 127, outline inverse row)"],
+    "fill": "#1B1B1B",
+    "fill_variable": "Base/ink",
+    "fill_source": "get_design_context on 1868:84 — a bound variable, not eyeballed off the render",
+    "radius": "4px",
+    "size": "427x61"
+  }
+}

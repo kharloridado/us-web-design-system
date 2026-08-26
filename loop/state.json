@@ -4,9 +4,9 @@
   "figma_url": "https://www.figma.com/design/tJnXUZbEL3fRWG7h1z0ij7/U.S.-Web-Design-System--USWDS--UI-Design-Kit--Community-",
   "figma_file_key": "tJnXUZbEL3fRWG7h1z0ij7",
   "branch": "loop/2026-08-20-design-system",
-  "status": "pending",
+  "status": "running",
   "mode": "library",
-  "phase": "foundations",
+  "phase": "primitives",
   "repo": "kharloridado/us-web-design-system",
   "board_cache": {
     "_note": "Derived ids only, refreshed on a miss. An id that stops resolving means someone recreated a field, not that the card vanished. The board's owner/number live in project.config.json -> board.",
@@ -21,7 +21,7 @@
     "budget_note": "raise/lower for library-scale runs; a full library is hundreds of items"
   },
   "checkpoints": {
-    "after_tokens": "pause",
+    "after_tokens": "released:2026-08-26 Kharlo Ridado",
     "after_primitives": "pause",
     "after_composites": "continue"
   },
@@ -32,7 +32,7 @@
     "composites",
     "patterns"
   ],
-  "current_tier": "foundations",
+  "current_tier": "primitives",
   "items": [
     {
       "id": "tok-color-palette",
@@ -80,8 +80,12 @@
       "id": "cmp-buttons",
       "tier": "primitives",
       "node": "1868-83",
-      "status": "queued",
-      "rounds": 0
+      "status": "ref-frozen",
+      "rounds": 0,
+      "ref": "loop/refs/cmp-buttons",
+      "ref_frozen": "2026-08-26",
+      "risk_tier": "core",
+      "level": "L3"
     },
     {
       "id": "cmp-button-group",
@@ -195,6 +199,20 @@
       "visual": "pass",
       "confidence": "high",
       "decision_log": "Generated from tokens/colors.css rather than hand-written, because the harness rule keeps preview chrome token-only and class-only; a hand-maintained specimen drifts from the palette and a drifted specimen shows a colour the build no longer emits. Hex is text content, never a CSS value, so a chip disagreeing with its own label is visible. Generator exits non-zero on a token matching no ramp rather than silently omitting it."
+    },
+    {
+      "id": "sg-type-specimen",
+      "tier": "foundations",
+      "node": null,
+      "status": "built",
+      "rounds": 1,
+      "level": "L1",
+      "artifact": "style-guide/odc-type-screen.css",
+      "risk_tier": "trivial",
+      "det_gate": "pass",
+      "visual": "pass",
+      "confidence": "high",
+      "decision_log": "Reconciled into state 2026-08-26, after the fact: shipped in PR #11 (release v0.2.0 + typography specimen) and corrected in PR #13 (use the real widget per piece of content, not styled Containers). It was built and merged without ever having a row here, which is the gap this entry closes."
     }
   ],
   "findings": [
