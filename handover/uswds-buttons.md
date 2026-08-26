@@ -36,6 +36,55 @@ Only the variants OutSystems UI has no class for need an `ExtendedClass`:
 
 `ExtendedClass` only. Never reach into the widget's own classes — hard rule 7.
 
+### The `btn` base class is not automatic — this WILL bite you
+
+The Button widget's **Style** property is emitted as a **verbatim class string**. The platform
+does not prepend `btn` for you. Verified against the platform's own Login screen, which renders:
+
+```html
+<button class="btn btn-primary OSFillParent">Log in</button>
+```
+
+So the Style value is `btn btn-primary`, **not** `btn-primary`. For the six variants with no
+native OutSystems UI class, Style is plain `btn` and the modifier goes in ExtendedClass.
+
+| Variant | Style | ExtendedClass |
+|---|---|---|
+| primary | `btn btn-primary` | — |
+| error | `btn btn-error` | — |
+| success | `btn btn-success` | — |
+| outline | `btn` | — |
+| big | `btn btn-large` | — |
+| small | `btn btn-small` | — |
+| cancel | `btn btn-cancel` | — |
+| secondary | `btn` | `uswds-btn--secondary` |
+| accent-cool | `btn` | `uswds-btn--accent-cool` |
+| accent-warm | `btn` | `uswds-btn--accent-warm` |
+| base | `btn` | `uswds-btn--base` |
+| inverse | `btn` | `uswds-btn--inverse` |
+| outline-inverse | `btn` | `uswds-btn--outline-inverse` |
+
+**Why a missing `btn` is fatal rather than cosmetic here.** This CSS puts every visual property
+on `.btn` and only custom-property *assignments* on the variant classes. A button carrying
+`btn-primary` without `btn` therefore sets nine custom properties that **nothing reads**, and
+renders as a raw unstyled browser button. There is no partial result and no graceful
+degradation — it either has the base class or it has nothing.
+
+This is not hypothetical: the first build of the `ButtonSpecimen` screen shipped with the base
+class missing on 22 of 25 buttons, and every caption rendered twice (`ButtonButton`) because the
+caption was supplied by two mechanisms at once. The deterministic build gate passed and Mentor
+reported `change_applied: true`. **Neither defect is visible to any check except the rendered
+page.**
+
+Paste this in the browser console on your published screen — both counts must be `0`:
+
+```js
+const b = [...document.querySelectorAll('button[data-button]')];
+({ total: b.length,
+   missingBase: b.filter(x => !x.classList.contains('btn')).length,
+   dupCaption: b.filter(x => [...x.childNodes].filter(n => n.nodeType===3).length > 1).length })
+```
+
 ## Code to paste into ODC
 
 > Copy the code below straight into ODC. The canonical source is the repo path in the summary — these blocks are generated from it (`node build/embed-handover-code.mjs`), so re-run after editing the source to keep the ticket in sync.
