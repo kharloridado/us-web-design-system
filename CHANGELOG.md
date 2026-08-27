@@ -22,6 +22,33 @@ and what they have to re-paste.
 
 ## [Unreleased]
 
+## [0.3.1] — 2026-08-27
+
+### Fixed
+
+- **USWDS button variants no longer render as raw browser buttons.** The button base rule
+  matched only `.btn`, while every visual declaration (background, border, padding, radius,
+  type) lives on that base and the variants set nothing but `--uswds-button-*` custom
+  properties. An ODC Button whose Style property is `uswds-btn--secondary` **without** the
+  `btn` base therefore set nine custom properties that nothing read, and fell back to the
+  browser's own `2px outset` / `padding: 1px 6px` chrome. On the live `ButtonSpecimen`
+  screen that was 14 of 25 buttons.
+
+  The base selector is now `:is(.btn, [class*="uswds-btn--"])`, so a `uswds-btn--*` modifier
+  is self-sufficient whether or not whoever placed the widget remembered the base class.
+  `:is()` keeps specificity at 0,1,0 — identical to a bare `.btn` — so nothing else about the
+  cascade changes. The framework's own modifiers (`.btn-primary`, `.btn-error`, `.btn-large`)
+  still require `.btn`; making OutSystems UI's own classes standalone is not this file's job.
+
+  **Re-paste `dist/theme.css`.** No screen edits are needed — this fixes the existing
+  widgets in place.
+
+- **Specimen notes on the `ButtonSpecimen` screen ran into the next section heading.** ODC
+  emits a Text widget as an inline `<span>`, and inline boxes ignore block margins, so
+  `.uswds-btnspec__note`'s `margin-block-end` did nothing. It is now `display: block`.
+  **Re-paste `style-guide/odc-button-screen.css`** into that screen's own Style Sheet.
+
+
 ### Added
 
 - **Public Sans is self-hosted** — the design system finally renders in its own face.
@@ -228,6 +255,7 @@ palette and the type ramp disagreeing about which release they came from.
   one shipped.
 
 
-[Unreleased]: https://github.com/kharloridado/us-web-design-system/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/kharloridado/us-web-design-system/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/kharloridado/us-web-design-system/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/kharloridado/us-web-design-system/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/kharloridado/us-web-design-system/releases/tag/v0.2.0

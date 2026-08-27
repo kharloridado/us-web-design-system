@@ -41,6 +41,30 @@
  * `conventions.spacingBase` is TBD in project.config.json, so these are built exactly as
  * measured and are NOT a convention violation — hard rule #9.
  *
+ * ── WHY THE BASE SELECTOR IS `:is(.btn, [class*="uswds-btn--"])` ──────────────────────
+ * Every base rule below matches BOTH the framework's `.btn` and any element carrying a
+ * `uswds-btn--*` modifier on its own. That redundancy is deliberate and was paid for.
+ *
+ * The colour indirection above — all visual properties on the base, only custom-property
+ * ASSIGNMENTS on the variants — has one sharp edge: a button that somehow loses the base
+ * class sets nine custom properties that NOTHING READS, and renders as a raw browser
+ * button. Not degraded: blank. That is not a theoretical risk. The ODC Button widget's
+ * Style property is emitted as a verbatim class string — the platform does not prepend
+ * `btn` — so a screen configured with Style `uswds-btn--secondary` instead of
+ * `btn uswds-btn--secondary` renders completely unstyled. It happened on the
+ * ButtonSpecimen screen: 14 of 25 buttons, shipped, with a green build gate. (Measured in
+ * the browser on 2026-08-27: 11 of the 25 carry `btn`; the other 14 carry only a modifier.)
+ *
+ * Matching the modifier directly makes the class self-sufficient, so a USWDS button looks
+ * right whether or not whoever placed it remembered the base class. `:is()` keeps
+ * specificity at 0,1,0 — identical to a bare `.btn` — so nothing about the cascade below
+ * changes. (`:is()` is safe here: OutSystems UI's own compiled CSS already uses `:has()`,
+ * which is strictly newer.)
+ *
+ * The framework's own modifiers — `.btn-primary`, `.btn-error`, `.btn-large` — still
+ * require `.btn`, because those are OutSystems UI's classes and it is not this file's
+ * place to make them work standalone.
+ *
  * ── WHAT THIS FILE DELIBERATELY DOES NOT RESTYLE ──────────────────────────────────────
  * `.btn-small`, `.btn-loading`, `.btn-provider-login` and the `.phone .layout` full-width
  * behaviour. The ref draws none of them. They appear below only where the base rule would
@@ -55,7 +79,7 @@
    developer who drops in a Button with no Style therefore lands on a correct USWDS outline
    button rather than on something off-brand.
    ══════════════════════════════════════════════════════════════════════════════════════ */
-.btn {
+:is(.btn, [class*="uswds-btn--"]) {
   /* Component-level geometry. Derived above; not a primitive, so it lives here. */
   --uswds-button-border-width: 2px;
   --uswds-button-padding-block: 10px;   /* ref 12px, less the 2px border */
@@ -109,7 +133,7 @@
 /* Background is guarded so the framework's `.background-*` utility path still works.
    `.btn[class*=background-]` is 0,2,0 in OutSystems UI and would otherwise be beaten by a
    plain `.btn` rule loading later — silently breaking every utility-coloured button. */
-.btn:not([class*=background-]) {
+:is(.btn, [class*="uswds-btn--"]):not([class*=background-]) {
   background-color: var(--uswds-button-bg);
 }
 
@@ -118,18 +142,18 @@
    distinct colour for each state, so the filter has to be switched off — left on, it would
    multiply the ref's own hover colour and land on neither value. The selectors match OSUI's
    specificity exactly (`.desktop .btn:hover` is 0,3,0) and win on source order. */
-.desktop .btn:hover,
-.btn:hover:active {
+.desktop :is(.btn, [class*="uswds-btn--"]):hover,
+:is(.btn, [class*="uswds-btn--"]):hover:active {
   filter: none;
 }
 
-.btn:hover {
+:is(.btn, [class*="uswds-btn--"]):hover {
   background-color: var(--uswds-button-bg-hover);
   border-color: var(--uswds-button-border-hover);
   color: var(--uswds-button-fg-hover);
 }
 
-.btn:active {
+:is(.btn, [class*="uswds-btn--"]):active {
   background-color: var(--uswds-button-bg-active);
   border-color: var(--uswds-button-border-active);
   color: var(--uswds-button-fg-active);
@@ -337,8 +361,8 @@
  * a half-applied override that looks deliberate. The real properties are therefore restated
  * here at matching specificity; they still READ the custom properties, so the four disabled
  * appearances below continue to work by reassignment. */
-.btn[disabled],
-.btn:disabled {
+:is(.btn, [class*="uswds-btn--"])[disabled],
+:is(.btn, [class*="uswds-btn--"]):disabled {
   border-color: var(--uswds-button-border);
   border-width: var(--uswds-button-border-width);
   color: var(--uswds-button-fg);
@@ -408,12 +432,12 @@
    transparent, so the framework's indicator would appear as a stray dark outline fighting
    this ring. It is pinned back to the variant's own border colour at matching specificity.
    ══════════════════════════════════════════════════════════════════════════════════════ */
-.btn:focus-visible {
+:is(.btn, [class*="uswds-btn--"]):focus-visible {
   outline: var(--uswds-button-border-width) solid var(--uswds-button-focus-ring);
   outline-offset: var(--uswds-button-border-width);
 }
 
-.has-accessible-features .btn:focus {
+.has-accessible-features :is(.btn, [class*="uswds-btn--"]):focus {
   border-color: var(--uswds-button-border);
 }
 
@@ -462,8 +486,8 @@
  * specifies no responsive behaviour at all — one value per variant, no device modes — so
  * the faithful build is the same button at every width. Font-size is left to the framework
  * on those breakpoints only where it already agrees with the ref (16px). */
-.tablet .btn,
-.phone .btn {
+.tablet :is(.btn, [class*="uswds-btn--"]),
+.phone :is(.btn, [class*="uswds-btn--"]) {
   font-size: var(--font-size-sm);
   height: auto;
 }
@@ -483,7 +507,7 @@
    preference is implementation-level accessibility with no visual change at rest, so it is
    applied without a finding. */
 @media (prefers-reduced-motion: reduce) {
-  .btn {
+  :is(.btn, [class*="uswds-btn--"]) {
     transition: none;
   }
 }

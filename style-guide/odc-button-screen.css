@@ -24,6 +24,10 @@
 }
 
 .uswds-btnspec__note {
+  /* ODC emits a Text widget as an inline <span>. Inline boxes ignore block margins, so the
+   * note ran on into the next section heading and its margin-block-end did nothing. Making
+   * the note a block is what the margin was always assuming. */
+  display: block;
   font-size: var(--font-size-3xs);
   color: var(--color-base-dark);
   margin-block-end: var(--space-s);
